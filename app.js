@@ -28,7 +28,8 @@ pl:{
   data_list:`<li><strong>Nigdzie, wszystko działa lokalnie.</strong> Pomiary (czasy klawiszy, ruchy myszki) zbiera i liczy JavaScript w Twojej przeglądarce. Są tylko w pamięci tej karty i znikają po odświeżeniu lub zamknięciu strony.</li>
 <li><strong>Nic nie jest wysyłane na GitHub.</strong> Strona to statyczne pliki na GitHub Pages: GitHub tylko je dostarcza, nie ma tu serwera, który mógłby cokolwiek odebrać.</li>
 <li>Kod nie zawiera <code>fetch</code>, <code>XMLHttpRequest</code>, WebSocketów, formularzy, ciasteczek, <code>localStorage</code> ani analityki. Możesz to sprawdzić w <a href="${REPO}">kodzie źródłowym</a> albo w zakładce Sieć (Network) w narzędziach deweloperskich.</li>
-<li>Jak przy każdej stronie: przy wczytaniu GitHub (hosting) i Google (czcionki Google Fonts) widzą standardowe dane żądania, np. adres IP i typ przeglądarki. Nie widzą niczego z tego, co wpisujesz ani jak ruszasz myszką.</li>`,
+<li>Jak przy każdej stronie: przy wczytaniu GitHub (hosting, także czcionek) widzi standardowe dane żądania, np. adres IP i typ przeglądarki. Nie widzi niczego z tego, co wpisujesz ani jak ruszasz myszką. Innych serwerów strona nie używa.</li>
+<li><strong>Eksport profilu</strong> zapisuje plik tylko na Twoim dysku. Nic nie jest przy tym wysyłane.</li>`,
   tab_type:"Pisanie", tab_click:"Klikanie celów", tab_track:"Śledzenie punktu", tab_drag:"Przeciąganie", tab_draw:"Rysowanie po śladzie", tab_dbl:"Podwójne kliknięcie", tab_res:"Wyniki",
   type_h:"1. Pisanie", type_desc:"Przepisz tekst. Mierzę, jak długo trzymasz klawisze, ile trwają przerwy między nimi, gdzie się mylisz i jak poprawiasz.",
   type_label:"Pisz tutaj. Wklejanie jest zablokowane, kursor zawsze stoi na końcu.",
@@ -44,13 +45,16 @@ pl:{
   dbl_h:"6. Podwójne kliknięcie", dbl_desc:"Kliknij dwukrotnie każde z 8 kółek. Mierzę odstęp między kliknięciami, przytrzymanie i to, czy kursor przy tym drgnął.",
   next_click:"Dalej: klikanie celów →", next_track:"Dalej: śledzenie punktu →", next_drag:"Dalej: przeciąganie →", next_draw:"Dalej: rysowanie →", next_dbl:"Dalej: podwójne kliknięcie →", next_res:"Zobacz wyniki →",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
+  export_btn:"Eksportuj profil (JSON)",
+  export_info:"Eksport zapisuje do pliku JSON wszystkie ukończone etapy: ocenę, statystyki z kart i surowe pomiary (bez wpisanego tekstu). W Chrome i Edge okno zapisu otwiera się domyślnie na Pulpicie. Firefox i Safari nie pozwalają stronom wybrać folderu, więc tam plik trafi do folderu Pobrane.",
+  export_ok:"Zapisano: {f}", export_dl:"Pobrano {f} do folderu pobierania przeglądarki.", export_cancel:"Anulowano zapis.", export_err:"Nie udało się zapisać pliku: {e}",
   res_note:"Przypomnienie: to amatorski projekt. Wyniki są orientacyjne, nie sugeruj się nimi.",
   sum_empty:"Ocena pojawi się po wykonaniu zadania. Poniżej już teraz widać, co i jak będzie mierzone.",
   sum_fine:"Progi są orientacyjne. Wynik z jednego krótkiego testu to profil, a nie diagnoza.",
   how:"Jak to liczę",
   idle:"Kliknij „Start”",
   done_canvas:"Gotowe — wyniki poniżej",
-  footer_code:`Kod źródłowy: <a href="${REPO}">${REPO.replace("https://","")}</a>. Strona nie używa bibliotek i nie łączy się z żadnym serwerem.`,
+  footer_code:`Kod źródłowy: <a href="${REPO}">${REPO.replace("https://","")}</a>. Strona nie używa bibliotek, a czcionki (IBM Plex, licencja SIL OFL) są w repozytorium.`,
   author:"autor: Michał Stankiewicz · stworzone przy użyciu vibecodingu"
 },
 en:{
@@ -64,7 +68,8 @@ en:{
   data_list:`<li><strong>Nowhere, everything runs locally.</strong> The measurements (key timings, mouse movements) are collected and computed by JavaScript in your browser. They live only in this tab's memory and disappear when you refresh or close the page.</li>
 <li><strong>Nothing is sent to GitHub.</strong> The page is static files on GitHub Pages: GitHub only delivers them, and there is no server here that could receive anything.</li>
 <li>The code contains no <code>fetch</code>, <code>XMLHttpRequest</code>, WebSockets, forms, cookies, <code>localStorage</code> or analytics. You can check this in the <a href="${REPO}">source code</a> or in the Network tab of your browser's developer tools.</li>
-<li>As with any website: when the page loads, GitHub (hosting) and Google (Google Fonts) see standard request data such as your IP address and browser type. They see nothing of what you type or how you move the mouse.</li>`,
+<li>As with any website: when the page loads, GitHub (hosting, fonts included) sees standard request data such as your IP address and browser type. It sees nothing of what you type or how you move the mouse. The page uses no other servers.</li>
+<li><strong>Profile export</strong> saves a file only to your own disk. Nothing is sent.</li>`,
   tab_type:"Typing", tab_click:"Target clicking", tab_track:"Dot tracking", tab_drag:"Dragging", tab_draw:"Tracing shapes", tab_dbl:"Double click", tab_res:"Results",
   type_h:"1. Typing", type_desc:"Retype the text. I measure how long you hold keys, the gaps between them, where you make mistakes and how you correct them.",
   type_label:"Type here. Pasting is blocked and the caret always stays at the end.",
@@ -80,13 +85,16 @@ en:{
   dbl_h:"6. Double click", dbl_desc:"Double-click each of 8 circles. I measure the interval between clicks, hold time and whether the cursor moved in between.",
   next_click:"Next: target clicking →", next_track:"Next: dot tracking →", next_drag:"Next: dragging →", next_draw:"Next: tracing →", next_dbl:"Next: double click →", next_res:"See results →",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
+  export_btn:"Export profile (JSON)",
+  export_info:"Export saves all finished stages to a JSON file: the evaluation, the card statistics and the raw measurements (without the typed text). In Chrome and Edge the save dialog opens on your Desktop by default. Firefox and Safari don't let pages choose a folder, so there the file goes to Downloads.",
+  export_ok:"Saved: {f}", export_dl:"Downloaded {f} to your browser's download folder.", export_cancel:"Save cancelled.", export_err:"Couldn't save the file: {e}",
   res_note:"Reminder: this is an amateur project. The results are rough, don't take them seriously.",
   sum_empty:"The evaluation appears after you finish the task. Below you can already see what will be measured and how.",
   sum_fine:"Thresholds are rough. A result from one short test is a profile, not a diagnosis.",
   how:"How I calculate it",
   idle:"Click “Start”",
   done_canvas:"Done — results below",
-  footer_code:`Source code: <a href="${REPO}">${REPO.replace("https://","")}</a>. The page uses no libraries and connects to no server.`,
+  footer_code:`Source code: <a href="${REPO}">${REPO.replace("https://","")}</a>. The page uses no libraries, and the fonts (IBM Plex, SIL OFL licence) are hosted in the repository.`,
   author:"author: Michał Stankiewicz · made with vibe coding"
 }};
 
@@ -712,7 +720,61 @@ function renderResults(){
   $("results").innerHTML = done.length
     ? done.map(t=>`<article><h3>${L(t.title)}</h3>${t.summary(t.R)}</article>`).join("")
     : `<p class="lead">${D[LANG].res_empty}</p>`;
+  $("export").disabled = !done.length;
 }
+
+// Statystyki z kart dokładnie tak, jak są pokazane na stronie
+function cardStats(t){
+  const out = {};
+  for(const card of $(t.grid).querySelectorAll(".card")){
+    const title = card.querySelector("h3").textContent.trim();
+    const o = {};
+    const val = card.querySelector(".val"); if(val) o.value = val.textContent.replace(/\s+/g," ").trim();
+    card.querySelectorAll(".rows div").forEach(r => { const [a,b] = r.querySelectorAll("span"); if(b && b.textContent.trim()) o[a.textContent.trim()] = b.textContent.trim(); });
+    card.querySelectorAll(".chips").forEach(c => { const lbl = c.previousElementSibling && c.previousElementSibling.classList.contains("sub") ? c.previousElementSibling.textContent.trim() : "list";
+      o[lbl] = [...c.querySelectorAll(".chip")].map(x=>x.textContent.trim()); });
+    out[title] = o;
+  }
+  return out;
+}
+
+// ---------- eksport profilu (tylko zapis na dysk użytkownika) ----------
+async function exportProfile(){
+  const done = TASKS.filter(t=>t.R); if(!done.length) return;
+  const strip = h => { const d=document.createElement("div"); d.innerHTML=h; return d.textContent.replace(/\s+/g," ").trim(); };
+  const now = new Date(), pad = n => String(n).padStart(2,"0");
+  const stamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
+  const fname = (LANG==="pl" ? "profil-biometryczny-" : "biometric-profile-") + stamp + ".json";
+  const data = {
+    app: D[LANG].title, source: REPO, exported: now.toISOString(), language: LANG,
+    note: strip(D[LANG].amateur_p),
+    stages: Object.fromEntries(done.map(t => [t.tab, {
+      title: L(t.title),
+      result: strip(t.summary(t.R)),
+      stats: cardStats(t),
+      measurements: t.R }]))
+  };
+  const json = JSON.stringify(data, null, 2);
+  const st = $("export-status");
+  const download = () => {
+    const url = URL.createObjectURL(new Blob([json], {type:"application/json"}));
+    const a = document.createElement("a"); a.href = url; a.download = fname;
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(() => URL.revokeObjectURL(url), 2000);
+    st.textContent = D[LANG].export_dl.replace("{f}", fname);
+  };
+  if(window.showSaveFilePicker){
+    try{
+      const h = await window.showSaveFilePicker({ suggestedName:fname, startIn:"desktop",
+        types:[{ description:"JSON", accept:{"application/json":[".json"]} }] });
+      const w = await h.createWritable(); await w.write(json); await w.close();
+      st.textContent = D[LANG].export_ok.replace("{f}", h.name);
+    }catch(e){
+      if(e && e.name==="AbortError") st.textContent = D[LANG].export_cancel;
+      else { try{ download(); }catch(e2){ st.textContent = D[LANG].export_err.replace("{e}", e2.message); } }
+    }
+  } else download();
+}
+$("export").addEventListener("click", exportProfile);
 function showTab(){
   let h = location.hash.slice(1); if(!TABS.includes(h)) h = "pisanie";
   document.querySelectorAll("[data-panel]").forEach(p => p.hidden = p.dataset.panel !== h);
