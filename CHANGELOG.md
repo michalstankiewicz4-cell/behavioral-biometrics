@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.10.0] – 2026-10-30
+- Zakładki podzielone na grupy: biometria behawioralna, testy psychomotoryczne, ciekawostki zdrowotne, wyniki i narzędzia.
+- Grupa „Ciekawostki zdrowotne” (Litery i błędy, Wzrok) ma inny kolor i ostrzeżenie, że wynik może być nieprawdziwy.
+- Plik PLAN.md z planem dalszych prac.
+
 ## [0.9.0] – 2026-10-30
 - Nowa zakładka „Wzrok” z wyraźnym ostrzeżeniem, że to nie jest badanie wzroku ani widzenia barw.
 - Kalibracja ekranu kartą (85,6 × 54 mm) i odległością od ekranu.

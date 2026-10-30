@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.9.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.10.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -32,7 +32,7 @@ Kolejność sekcji w pliku:
 6. **`Arena`**: obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania ruchu).
 7. **`mouseTask(o)`**: wspólny szkielet zadań z myszką. Zadanie dostarcza `start`, `down`, `move`, `up`, `draw`, `analyse`, `render`, `summary`; szkielet obsługuje przycisk Start, przerwanie przy zmianie zakładki i zakończenie.
 8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`, `Pseudo`, `Search`, `SnA`, `SnB`, `Plates` (plus `Cal` – kalibracja, `SnRun` – przebieg tablicy Snellena).
-9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wzrok`, `#wyniki`).
+9. **Zakładki, wyniki, eksport, motyw, język**: zakładki są w grupach (`<div class="tgroup">` w `index.html`); grupa `warn` (ciekawostki zdrowotne) i jej panele (`panel warn`) mają kolor ostrzegawczy. Routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wzrok`, `#wyniki`).
 
 Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstają karty (`render`), ocena słowna (`summary`), zestawienie w „Wynikach” i eksport. Przy zmianie języka karty budowane są od nowa z tego samego `R`.
 
@@ -139,7 +139,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.9.0",
+  "version": "0.10.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

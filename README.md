@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.9.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.10.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -15,6 +15,8 @@ To hobbystyczne demo, a nie narzędzie naukowe ani medyczne. Progi w ocenach są
 This is a hobby demo, not a scientific or medical tool. Thresholds are rough and results depend on hardware, tiredness and practice. **Don't take the results seriously** or base any decisions on them.
 
 ## Zadania · Tasks
+
+Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ ciekawostki zdrowotne (inny kolor: wynik może być nieprawdziwy), wyniki i narzędzia. · Tabs are grouped; the health-curiosities group is highlighted because its results may be wrong.
 
 | # | Zadanie | Co mierzy |
 |---|---------|-----------|
@@ -67,6 +69,7 @@ img/                  favicon, ikony, miniatura do udostępniania (og-image.png)
 sitemap.xml           mapa strony dla wyszukiwarek
 docs/DOKUMENTACJA.md  dokumentacja techniczna
 CHANGELOG.md          historia wersji
+PLAN.md               plan dalszych prac
 .github/workflows/    automatyczne wdrożenie na GitHub Pages po pushu do main
 ```
 

@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.9.0",
+  "softwareVersion": "0.10.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -72,16 +72,35 @@
   </div>
 
   <nav class="tabs" aria-label="Etapy" id="tabs">
-    <a href="#pisanie" data-tab="pisanie"><span class="n">1</span><span data-i18n="tab_type"></span></a>
-    <a href="#klikanie" data-tab="klikanie"><span class="n">2</span><span data-i18n="tab_click"></span></a>
-    <a href="#sledzenie" data-tab="sledzenie"><span class="n">3</span><span data-i18n="tab_track"></span></a>
-    <a href="#przeciaganie" data-tab="przeciaganie"><span class="n">4</span><span data-i18n="tab_drag"></span></a>
-    <a href="#rysowanie" data-tab="rysowanie"><span class="n">5</span><span data-i18n="tab_draw"></span></a>
-    <a href="#dwuklik" data-tab="dwuklik"><span class="n">6</span><span data-i18n="tab_dbl"></span></a>
-    <a href="#haslo" data-tab="haslo"><span class="n">7</span><span data-i18n="tab_pass"></span></a>
-    <a href="#litery" data-tab="litery"><span class="n">8</span><span data-i18n="tab_let"></span></a>
-    <a href="#wzrok" data-tab="wzrok"><span class="n">9</span><span data-i18n="tab_vis"></span></a>
-    <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
+    <div class="tgroup" data-group="bio">
+      <span class="tglabel" data-i18n="grp_bio"></span>
+      <div class="tglinks">
+        <a href="#pisanie" data-tab="pisanie"><span data-i18n="tab_type"></span></a>
+        <a href="#klikanie" data-tab="klikanie"><span data-i18n="tab_click"></span></a>
+        <a href="#sledzenie" data-tab="sledzenie"><span data-i18n="tab_track"></span></a>
+        <a href="#przeciaganie" data-tab="przeciaganie"><span data-i18n="tab_drag"></span></a>
+        <a href="#rysowanie" data-tab="rysowanie"><span data-i18n="tab_draw"></span></a>
+        <a href="#dwuklik" data-tab="dwuklik"><span data-i18n="tab_dbl"></span></a>
+        <a href="#haslo" data-tab="haslo"><span data-i18n="tab_pass"></span></a>
+      </div>
+    </div>
+    <div class="tgroup" data-group="psy" hidden>
+      <span class="tglabel" data-i18n="grp_psy"></span>
+      <div class="tglinks"></div>
+    </div>
+    <div class="tgroup warn" data-group="health">
+      <span class="tglabel" data-i18n="grp_health"></span>
+      <div class="tglinks">
+        <a href="#litery" data-tab="litery"><span data-i18n="tab_let"></span></a>
+        <a href="#wzrok" data-tab="wzrok"><span data-i18n="tab_vis"></span></a>
+      </div>
+    </div>
+    <div class="tgroup" data-group="tools">
+      <span class="tglabel" data-i18n="grp_tools"></span>
+      <div class="tglinks">
+        <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
+      </div>
+    </div>
   </nav>
 
   <!-- 1. Pisanie -->
@@ -194,7 +213,7 @@
   </section>
 
   <!-- 8. Litery i błędy -->
-  <section class="panel" id="tab-litery" data-panel="litery" hidden>
+  <section class="panel warn" id="tab-litery" data-panel="litery" hidden>
     <h2 data-i18n="let_h"></h2>
     <div class="notice amateur" role="note">
       <h3 data-i18n="let_warn_h"></h3>
@@ -227,7 +246,7 @@
   </section>
 
   <!-- 9. Wzrok -->
-  <section class="panel" id="tab-wzrok" data-panel="wzrok" hidden>
+  <section class="panel warn" id="tab-wzrok" data-panel="wzrok" hidden>
     <h2 data-i18n="vis_h"></h2>
     <div class="notice amateur" role="note">
       <h3 data-i18n="vis_warn_h"></h3>

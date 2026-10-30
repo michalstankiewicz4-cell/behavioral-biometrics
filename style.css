@@ -188,3 +188,15 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .plate{width:min(380px,100%);aspect-ratio:1;height:auto;display:block}
 .ish-form{display:grid;gap:8px;align-content:start}
 .ish-form input.num{font-size:1.4rem;width:5em}
+
+/* Grupy zakładek; grupa "warn" = wynik może być nieprawdziwy */
+.tabs{display:grid;gap:10px}
+.tgroup{display:grid;gap:6px;padding:8px 10px;border-radius:6px;border:1px solid var(--line);background:var(--surface)}
+.tgroup[hidden]{display:none}
+.tglabel{font-family:var(--font-mono);font-size:.72rem;letter-spacing:.04em;text-transform:uppercase;color:var(--muted)}
+.tglinks{display:flex;flex-wrap:wrap;gap:6px}
+.tgroup.warn{border-color:color-mix(in srgb,var(--warn) 55%,var(--line));background:color-mix(in srgb,var(--warn) 8%,var(--surface))}
+.tgroup.warn .tglabel{color:var(--warn)}
+.tgroup.warn a{border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
+.tgroup.warn a[aria-current="page"]{background:var(--warn);border-color:var(--warn);color:var(--on-accent)}
+.panel.warn{border-top:4px solid var(--warn)}
