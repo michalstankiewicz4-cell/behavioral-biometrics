@@ -200,3 +200,11 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .tgroup.warn a{border-color:color-mix(in srgb,var(--warn) 45%,var(--line))}
 .tgroup.warn a[aria-current="page"]{background:var(--warn);border-color:var(--warn);color:var(--on-accent)}
 .panel.warn{border-top:4px solid var(--warn)}
+
+.tablewrap{overflow-x:auto}
+.tablewrap table{border-collapse:collapse;width:100%;font-size:.85rem}
+.tablewrap th,.tablewrap td{text-align:left;vertical-align:top;padding:6px 8px;border-bottom:1px solid var(--line)}
+.tablewrap th{font-weight:600;color:var(--muted);font-size:.78rem}
+.tablewrap td:first-child{white-space:nowrap;font-weight:500}
+.tablewrap td code{word-break:break-word;background:transparent;padding:0}
+.tablewrap td:last-child{color:var(--muted);min-width:220px}

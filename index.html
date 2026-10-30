@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.12.0",
+  "softwareVersion": "0.13.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -84,6 +84,7 @@
         <a href="#haslo" data-tab="haslo"><span data-i18n="tab_pass"></span></a>
         <a href="#podpis" data-tab="podpis"><span data-i18n="tab_sig"></span></a>
         <a href="#bot" data-tab="bot"><span data-i18n="tab_bot"></span></a>
+        <a href="#odcisk" data-tab="odcisk"><span data-i18n="tab_fp"></span></a>
       </div>
     </div>
     <div class="tgroup" data-group="psy" hidden>
@@ -314,6 +315,16 @@
     <canvas id="cv-bot" class="arena" aria-label="Pole zadania"></canvas>
     <div id="sum-bot" class="summary empty"></div>
     <div class="grid" id="cards-bot"></div>
+    <div class="next"><a class="btn" href="#odcisk" data-i18n="next_odcisk"></a></div>
+  </section>
+
+  <section class="panel" id="tab-odcisk" data-panel="odcisk" hidden>
+    <h2 data-i18n="fp_h"></h2>
+    <p class="lead" data-i18n="fp_desc"></p>
+    <div class="bar"><span class="status" data-i18n="fp_local"></span><div class="btns"><button id="fp-go" type="button" class="primary" data-i18n="fp_go"></button></div></div>
+    <div id="fp-table" class="tablewrap"></div>
+    <div id="sum-fp" class="summary empty"></div>
+    <div class="grid" id="cards-fp"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 

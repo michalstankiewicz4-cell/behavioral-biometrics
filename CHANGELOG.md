@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.13.0] – 2026-10-30
+- Nowa zakładka „Odcisk przeglądarki”: tabela 14 cech, które każda strona może odczytać bez pytania (m.in. strefa czasowa, ekran, karta graficzna, odcisk canvas, czcionki), z opisem, co każda zdradza.
+- Skrót odcisku liczony lokalnie i wyjaśnienie, jak działa śledzenie bez ciasteczek.
+
 ## [0.12.0] – 2026-10-30
 - Nowa zakładka „Człowiek czy bot”: 5 Twoich ruchów myszką, potem przycisk „Puść bota”, który robi to samo idealnie prosto i równo.
 - Porównanie pięciu cech (prostoliniowość, zmienność prędkości, drżenie, celność kliknięcia, przytrzymanie przycisku) i werdykt według liczby oznak bota.

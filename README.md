@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.12.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.13.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -31,6 +31,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 9 | Wzrok · Vision | kalibracja ekranu, tablica Snellena (litery lub obracane E), generowane tablice barwne w stylu Ishihary; **to nie jest badanie wzroku** |
 | 8 | Podpis myszką · Mouse signature | 3 podpisy jako wzorzec, weryfikacja kształtu (DTW), tempa i rytmu |
 | 9 | Człowiek czy bot · Human or bot | Twoje ruchy myszki kontra prosty bot: prostoliniowość, zmienność prędkości, drżenie, celność, przytrzymanie |
+| 10 | Odcisk przeglądarki · Browser fingerprint | co strona może odczytać bez pytania (14 cech) i skrót odcisku, liczone lokalnie |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 

@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.12.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.13.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -157,6 +157,12 @@ Użytkownik robi 5 ruchów (kliknięcie szarego kółka, potem niebieskiego celu
 
 Werdykt „bot” przy ≥ 3 oznakach (średnie z 5 ruchów). Progi są dobrane ręcznie na potrzeby pokazu; prawdziwe systemy łączą wiele cech i modele uczone na dużych danych.
 
+## 5f. Odcisk przeglądarki
+
+Po kliknięciu „Pokaż mój odcisk” strona odczytuje lokalnie 14 cech: User-Agent, platformę, języki, strefę czasową, ekran (rozdzielczość, głębia, skalowanie), rozmiar okna, liczbę wątków CPU, przybliżoną pamięć RAM, punkty dotyku, preferencje systemu (motyw, animacje, kontrast), ustawienia prywatności (ciasteczka, DNT, GPC), kartę graficzną (WebGL, `WEBGL_debug_renderer_info`), odcisk canvas (skrót obrazka z tekstem, emoji i kształtami) i wykryte czcionki (40 popularnych czcionek sprawdzanych przez porównanie szerokości tekstu z czcionkami bazowymi).
+
+Odcisk to 64-bitowy skrót `cyrb53` z połączonych wartości wszystkich cech. Strona nie zna innych odwiedzających, więc nie ocenia, jak rzadki jest odcisk. Nic nie jest wysyłane; jeśli wyeksportujesz profil, cechy trafią do pliku na Twoim dysku.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -164,7 +170,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.12.0",
+  "version": "0.13.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -181,7 +187,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
