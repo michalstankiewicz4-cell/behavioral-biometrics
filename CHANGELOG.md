@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.18.0] – 2026-10-30
+- Nowy test „Tapping”: 10 s stukania osobno lewą (F) i prawą (J) ręką.
+- Tempo, równomierność odstępów, przytrzymanie klawisza, zmęczenie pod koniec rundy, różnica między rękami i wykres odstępów w czasie.
+
 ## [0.17.0] – 2026-10-30
 - Nowy test „Prawo Fittsa”: 18 ruchów do celów o 3 szerokościach i 3 odległościach.
 - Dopasowanie MT = a + b · ID, przepustowość w bitach na sekundę i wykres punktowy z linią dopasowania.

@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.17.0";
+const VERSION = "0.18.0";
 const CHANGELOG = [
+  { v:"0.18.0", date:"2026-10-30",
+    pl:["Nowy test „Tapping”: 10 s stukania osobno lewą (F) i prawą (J) ręką.","Tempo, równomierność odstępów, przytrzymanie klawisza, zmęczenie pod koniec rundy, różnica między rękami i wykres odstępów w czasie."],
+    en:["New “Finger tapping” test: 10 s of tapping with the left (F) and right (J) hand separately.","Rate, interval regularity, key hold, end-of-round fatigue, difference between hands and a chart of intervals over time."] },
   { v:"0.17.0", date:"2026-10-30",
     pl:["Nowy test „Prawo Fittsa”: 18 ruchów do celów o 3 szerokościach i 3 odległościach.","Dopasowanie MT = a + b · ID, przepustowość w bitach na sekundę i wykres punktowy z linią dopasowania.","Poprawka wykresów: linia dopasowania nie wychodzi poza pole wykresu."],
     en:["New “Fitts's law” test: 18 movements to targets of 3 widths and 3 distances.","Fit MT = a + b · ID, throughput in bits per second and a scatter chart with the fitted line.","Chart fix: the fitted line no longer extends outside the plot area."] },
@@ -143,6 +146,9 @@ pl:{
   hick_h:"Czas reakcji i prawo Hicka", hick_desc:"Cztery bloki po 8 prób: z 1, 2, 4 i 8 możliwymi klawiszami. Gdy któryś kwadrat się podświetli, naciśnij jego klawisz jak najszybciej (F; F J; D F J K; A S D F J K L ;). Połóż palce na klawiszach przed startem. Możesz też klikać kwadraty, ale wtedy mierzysz też ruch myszki.",
   tab_fitts:"Prawo Fittsa", next_fitts:"Dalej: prawo Fittsa →",
   fitts_h:"Prawo Fittsa", fitts_desc:"18 ruchów: kliknij szary punkt startowy, a potem niebieski cel. Cele mają różną wielkość i odległość. Klikaj tak szybko, jak się da, ale celnie. Na końcu strona dopasuje do Twoich ruchów wzór używany w ergonomii do projektowania przycisków i menu.",
+  tab_tap:"Tapping", next_tapping:"Dalej: tapping →",
+  tap_h:"Tapping (stukanie palcem)", tap_desc:"Dwie rundy po 10 sekund: najpierw palcem wskazującym lewej ręki w klawisz F, potem prawej w klawisz J. Stukaj jak najszybciej, a czas ruszy od pierwszego uderzenia. Test stukania jest używany m.in. w badaniach motoryki; tutaj to tylko ciekawostka.",
+  tap_l:"Start: lewa ręka (F)", tap_r:"Start: prawa ręka (J)",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -227,6 +233,9 @@ en:{
   hick_h:"Reaction time and Hick's law", hick_desc:"Four blocks of 8 trials: with 1, 2, 4 and 8 possible keys. When a square lights up, press its key as fast as you can (F; F J; D F J K; A S D F J K L ;). Rest your fingers on the keys before starting. You can also click the squares, but then you also measure mouse movement.",
   tab_fitts:"Fitts's law", next_fitts:"Next: Fitts's law →",
   fitts_h:"Fitts's law", fitts_desc:"18 movements: click the grey start point, then the blue target. Targets vary in size and distance. Click as fast as you can, but accurately. At the end the page fits the formula used in ergonomics to design buttons and menus to your movements.",
+  tab_tap:"Tapping", next_tapping:"Next: tapping →",
+  tap_h:"Finger tapping", tap_desc:"Two 10-second rounds: first the left index finger on the F key, then the right one on J. Tap as fast as you can; timing starts at the first tap. The tapping test is used, among others, in motor-skill research; here it is just a curiosity.",
+  tap_l:"Start: left hand (F)", tap_r:"Start: right hand (J)",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -1824,11 +1833,61 @@ const Fitts = (() => { const WS=[16,32,64], DS=[120,240,400], REP=2, HOME=12;
 })();
 
 // =====================================================================
+// TAPPING — 10 s stukania osobno lewą (F) i prawą (J) ręką
+// =====================================================================
+const Tap = (() => { const DUR=10000, HANDS=[{k:"left",code:"KeyF",key:"F"},{k:"right",code:"KeyJ",key:"J"}];
+  const A = new Arena("cv-tap"); let S=null, st=null, res={};
+  const self = { tab:"tapping", key:"tapping", grid:"cards-tap", sumId:"sum-tap", R:null, title:{pl:"Tapping",en:"Tapping"}, specs:[
+    {id:"tp-rate", title:{pl:"Tempo",en:"Rate"}, unit:{pl:"uderzeń/s (lewa / prawa)",en:"taps/s (left / right)"}, rows:[["n",{pl:"uderzeń",en:"taps"}],["asym",{pl:"różnica prawa − lewa",en:"difference right − left"}]],
+     how:{pl:"Liczba wciśnięć w ciągu 10 s od pierwszego uderzenia, podzielona przez 10. Różnica rąk = (prawa − lewa) ÷ średnia obu, w procentach. U większości osób ręka dominująca jest szybsza o kilka do kilkunastu procent.",
+          en:"Number of presses within 10 s from the first tap, divided by 10. Hand difference = (right − left) ÷ mean of both, in percent. For most people the dominant hand is a few to over ten percent faster."}},
+    {id:"tp-cv", title:{pl:"Równomierność",en:"Regularity"}, unit:{pl:"CV odstępów (lewa / prawa)",en:"interval CV (left / right)"}, rows:[["int",{pl:"średni odstęp",en:"mean interval"}],["dw",{pl:"przytrzymanie klawisza",en:"key hold"}]],
+     how:{pl:"Współczynnik zmienności odstępów między kolejnymi wciśnięciami (odchylenie ÷ średnia). Mniej = równiej.",en:"Coefficient of variation of the gaps between presses (std ÷ mean). Lower = more even."}},
+    {id:"tp-fat", title:{pl:"Zmęczenie",en:"Fatigue"}, unit:{pl:"% zmiany tempa (lewa / prawa)",en:"% rate change (left / right)"},
+     how:{pl:"Tempo w ostatnich 3 sekundach w porównaniu z pierwszymi 3 sekundami. Wartość ujemna oznacza zwolnienie pod koniec.",en:"Rate in the last 3 seconds compared with the first 3 seconds. A negative value means slowing down towards the end."}}
+  ]};
+  const status = o => { st=o; $("st-tap").textContent = L(o)||""; };
+  function stats(t){ const d=t.map(x=>x.down), iv=d.slice(1).map((v,i)=>v-d[i]), dw=t.filter(x=>x.up!=null).map(x=>x.up-x.down);
+    const r=(a,b)=>d.filter(v=>v-d[0]>=a && v-d[0]<b).length/((b-a)/1000);
+    return { n:t.length, rate:t.length/(DUR/1000), cv:sd(iv)/mean(iv), interval:mean(iv), dwell:mean(dw), fatigue:(r(7000,10000)-r(0,3000))/r(0,3000), iv:iv.map((v,i)=>({t:(d[i+1]-d[0])/1000, v})) }; }
+  function draw(){ A.fit(); if(!A.w) return; A.clear(); const g=A.ctx;
+    if(S && S.run){ const left=Math.max(0,(DUR-(performance.now()-(S.t0||performance.now())))/1000);
+      g.fillStyle=css("--ink"); g.font=`600 64px ${css("--font-mono")}`; g.textAlign="center"; g.textBaseline="middle"; g.fillText(String(S.taps.length), A.w/2, A.h/2-20);
+      g.font=`15px ${css("--font-body")}`; g.fillStyle=css("--muted"); g.fillText(S.t0 ? (LANG==="pl"?`zostało ${nf(left,1)} s`:`${nf(left,1)} s left`) : (LANG==="pl"?`Stukaj w klawisz ${S.h.key}, czas ruszy od pierwszego uderzenia`:`Tap the ${S.h.key} key, timing starts at the first tap`), A.w/2, A.h/2+40); return; }
+    const pts=[]; HANDS.forEach(h=>{ if(res[h.k]) res[h.k].iv.forEach(p=>pts.push({x:p.t, y:p.v, c:h.k==="left"?css("--accent"):css("--warn"), r:2.5})); });
+    plotXY(A, { pts, xl:LANG==="pl"?"czas [s] · niebieskie: lewa ręka, pomarańczowe: prawa":"time [s] · blue: left hand, orange: right", yu:" ms", x0:0, xticks:[0,2,4,6,8,10], xfmt:v=>String(v),
+      empty:LANG==="pl"?"Kliknij „Start: lewa ręka”, potem „Start: prawa ręka”":"Click “Start: left hand”, then “Start: right hand”" }); }
+  function start(i){ if(S&&S.raf) cancelAnimationFrame(S.raf); S={h:HANDS[i], taps:[], run:true, t0:null}; if(document.activeElement) document.activeElement.blur();
+    status({pl:`Lewa ręka: ${HANDS[0].key}, prawa: ${HANDS[1].key}. Teraz ${i?"PRAWA":"LEWA"} ręka, klawisz ${S.h.key}, stukaj jak najszybciej.`,en:`Left hand: ${HANDS[0].key}, right: ${HANDS[1].key}. Now the ${i?"RIGHT":"LEFT"} hand, key ${S.h.key}, tap as fast as you can.`});
+    const loop=()=>{ if(!S||!S.run) return; if(S.t0 && performance.now()-S.t0>=DUR) return finish(); draw(); S.raf=requestAnimationFrame(loop); }; loop(); }
+  function finish(){ const h=S.h, taps=S.taps.filter(x=>x.down-S.t0<DUR); res[h.k]=stats(taps); S=null; draw();
+    status(res.left&&res.right ? {pl:"Gotowe.",en:"Done."} : {pl:"Teraz druga ręka.",en:"Now the other hand."});
+    if(res.left && res.right){ self.R={ left:res.left, right:res.right, asym:(res.right.rate-res.left.rate)/((res.right.rate+res.left.rate)/2) }; self.render(self.R); setSummary(self); markDone("tapping"); } }
+  document.addEventListener("keydown", e => { if(!S||!S.run||$("tab-tapping").hidden||e.code!==S.h.code) return; e.preventDefault(); if(e.repeat) return;
+    const t=performance.now(); if(!S.t0) S.t0=t; S.taps.push({down:t, up:null}); });
+  document.addEventListener("keyup", e => { if(!S||!S.run||e.code!==S.h.code) return; const x=S.taps[S.taps.length-1]; if(x && x.up==null) x.up=performance.now(); });
+  $("tap-l").addEventListener("click", () => start(0)); $("tap-r").addEventListener("click", () => start(1));
+  const two = (a,b,f) => `${f(a)} / ${f(b)}`;
+  self.render = R => { const l=R.left, r=R.right;
+    setMain("tp-rate", two(l.rate,r.rate,v=>nf(v,1))); setRow("tp-rate","n", two(l.n,r.n,v=>v)); setRow("tp-rate","asym", (R.asym>=0?"+":"")+pct(R.asym));
+    setMain("tp-cv", two(l.cv,r.cv,v=>nf(v,2))); setRow("tp-cv","int", two(l.interval,r.interval,v=>nf(v)+" ms")); setRow("tp-cv","dw", two(l.dwell,r.dwell,v=>nf(v)+" ms"));
+    setMain("tp-fat", two(l.fatigue,r.fatigue,v=>(v>=0?"+":"")+nf(100*v))); };
+  self.summary = R => { const faster = R.asym>=0 ? (LANG==="pl"?"prawa":"right") : (LANG==="pl"?"lewa":"left");
+    return LANG==="pl"
+      ? `<p>Lewa ręka: <strong>${nf(R.left.rate,1)}</strong> uderzeń na sekundę, prawa: <strong>${nf(R.right.rate,1)}</strong>. Szybsza była ${faster} ręka, o ${pct(Math.abs(R.asym))}. Pod koniec tempo zmieniło się o ${nf(100*R.left.fatigue)}% (lewa) i ${nf(100*R.right.fatigue)}% (prawa).</p>`
+      : `<p>Left hand: <strong>${nf(R.left.rate,1)}</strong> taps per second, right: <strong>${nf(R.right.rate,1)}</strong>. Your ${faster} hand was faster by ${pct(Math.abs(R.asym))}. Towards the end the rate changed by ${nf(100*R.left.fatigue)}% (left) and ${nf(100*R.right.fatigue)}% (right).</p>`; };
+  SHOW.tapping = draw;
+  LEAVE.tapping = () => { if(S){ cancelAnimationFrame(S.raf); S=null; status(null); } };
+  LANGHOOKS.push(() => { status(st); draw(); });
+  return self;
+})();
+
+// =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts, Tap];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","tapping","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){

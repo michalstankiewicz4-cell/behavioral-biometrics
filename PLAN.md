@@ -23,7 +23,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 6. ☑ **Test Stroopa** – kolor napisu kontra treść słowa (v0.15.0)
 7. ☑ **Czas reakcji i prawo Hicka** – reakcja na 1, 2, 4 i 8 możliwych bodźców, wykres (v0.16.0)
 8. ☑ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru (v0.17.0)
-9. ☐ **Tapping** – 10 s stukania osobno lewą i prawą ręką
+9. ☑ **Tapping** – 10 s stukania osobno lewą i prawą ręką (v0.18.0)
 10. ☐ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego
 11. ☐ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami)
 12. ☐ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie)

@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.17.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.18.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -183,6 +183,10 @@ Ruchy dyskretne: kliknięcie punktu startowego (promień 12 px), potem trafienie
 
 Dla każdego ruchu `ID = log₂(D/W + 1)` (wersja Shannona) i czas ruchu MT (od kliknięcia startu do trafienia, z pudłami). Dopasowanie `MT = a + b · ID` metodą najmniejszych kwadratów, R² i przepustowość = średnia `ID ÷ MT` (bit/s). Wykres punktowy z linią dopasowania.
 
+## 5j. Tapping
+
+Dwie rundy po 10 s: lewa ręka (klawisz F) i prawa (klawisz J); czas liczony od pierwszego uderzenia, automatyczne powtórzenia klawisza są ignorowane. Dla każdej ręki: liczba uderzeń, tempo (uderzenia/s), średni odstęp i jego CV, średnie przytrzymanie klawisza, zmęczenie = (tempo w 7–10 s − tempo w 0–3 s) ÷ tempo w 0–3 s. Różnica rąk = (prawa − lewa) ÷ średnia. Wykres odstępów w czasie dla obu rąk.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -190,7 +194,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -207,7 +211,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie

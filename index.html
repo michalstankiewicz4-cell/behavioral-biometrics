@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.17.0",
+  "softwareVersion": "0.18.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -93,6 +93,7 @@
         <a href="#stroop" data-tab="stroop"><span data-i18n="tab_stroop"></span></a>
         <a href="#reakcja" data-tab="reakcja"><span data-i18n="tab_hick"></span></a>
         <a href="#fitts" data-tab="fitts"><span data-i18n="tab_fitts"></span></a>
+        <a href="#tapping" data-tab="tapping"><span data-i18n="tab_tap"></span></a>
       </div>
     </div>
     <div class="tgroup warn" data-group="health">
@@ -370,6 +371,16 @@
     <canvas id="cv-fitts" class="arena" aria-label="Pole zadania"></canvas>
     <div id="sum-fitts" class="summary empty"></div>
     <div class="grid" id="cards-fitts"></div>
+    <div class="next"><a class="btn" href="#tapping" data-i18n="next_tapping"></a></div>
+  </section>
+
+  <section class="panel" id="tab-tapping" data-panel="tapping" hidden>
+    <h2 data-i18n="tap_h"></h2>
+    <p class="lead" data-i18n="tap_desc"></p>
+    <div class="bar"><span class="status" id="st-tap"></span><div class="btns"><button id="tap-l" type="button" class="primary" data-i18n="tap_l"></button><button id="tap-r" type="button" class="primary" data-i18n="tap_r"></button></div></div>
+    <canvas id="cv-tap" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-tap" class="summary empty"></div>
+    <div class="grid" id="cards-tap"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 
