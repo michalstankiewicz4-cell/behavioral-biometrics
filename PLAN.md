@@ -39,7 +39,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 20. ☑ **Ręczność** – kwestionariusz w stylu Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem (v0.28.0)
 21. ☑ **Oko dominujące** – test „okienka z dłoni” z instrukcją, w zakładce Wzrok (v0.29.0)
 22. ☑ **Chronotyp** – skowronek czy sowa: własne pytania o godziny snu, wynik metodą punktu środka snu w dni wolne (bez kopiowania kwestionariuszy MEQ/MCTQ, które wymagają zgody) (v0.30.0)
-23. ☐ **Rotacja umysłowa** – czy obrócona figura to ta sama, czy odbicie lustrzane; czas i trafność zależnie od kąta
+23. ☑ **Rotacja umysłowa** – czy obrócona figura to ta sama, czy odbicie lustrzane; czas i trafność zależnie od kąta (v0.31.0)
 
 ## Odrzucone
 

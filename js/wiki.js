@@ -22,6 +22,7 @@ export const WIKI = {
   osobowosc:    [W("pl","Wielka_piątka"), W("en","Big_Five_personality_traits"), W("en","International_Personality_Item_Pool")],
   recznosc:     [W("pl","Leworęczność"), W("pl","Lateralizacja"), W("en","Handedness"), W("en","Edinburgh_Handedness_Inventory")],
   chronotyp:    [W("pl","Rytm_dobowy"), W("en","Chronotype"), W("en","Circadian_rhythm")],
+  rotacja:      [W("en","Mental_rotation")],
   litery:       [W("pl","Dysleksja"), W("en","Dyslexia"), W("en","Pseudoword")],
   wzrok:        [W("pl","Tablica_Snellena"), W("pl","Visus"), W("pl","Tablice_Ishihary"), W("pl","Astygmatyzm_(wada_wzroku)"),
                  W("en","Snellen_chart"), W("en","Ishihara_test"), W("en","Astigmatism"), W("en","Contrast_(vision)"), W("en","Ocular_dominance")]

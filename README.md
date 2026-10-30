@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.30.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.31.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -40,6 +40,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 16 | Osobowość · Personality | Wielka Piątka, pełny IPIP-NEO (300 pytań): 5 cech i 30 pod-cech; bez norm, własne tłumaczenie PL |
 | 17 | Ręczność · Handedness | 10 czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem |
 | 18 | Chronotyp · Chronotype | godziny snu w dni robocze i wolne → środek snu w dni wolne (MSFsc, Roenneberg), społeczny jet lag |
+| 19 | Rotacja umysłowa · Mental rotation | 30 par figur: ta sama czy odbicie; trafność, czas, nachylenie czasu względem kąta (ms/°) |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 
@@ -91,7 +92,7 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype, mental-rotation)
   data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone

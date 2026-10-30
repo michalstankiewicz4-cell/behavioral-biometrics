@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.31.0] – 2026-10-31
+- Rotacja umysłowa: czy obrócona figura z kwadratów to ta sama, czy jej odbicie lustrzane (klawisze F/J albo przyciski). 30 prób przy kątach 0–180°; wynik to trafność, czas i tempo „obracania w wyobraźni” w ms na stopień, z wykresem.
+
 ## [0.30.0] – 2026-10-31
 - Chronotyp: skowronek czy sowa, z Twoich zwykłych godzin snu w dni robocze i wolne. Wynik to środek snu w dni wolne z korektą na odsypianie (metoda Roenneberga) oraz społeczny jet lag. Pytania są własne – bez kopiowania kwestionariuszy MEQ i MCTQ, które wymagają zgody autorów.
 

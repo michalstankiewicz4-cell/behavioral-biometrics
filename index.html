@@ -41,7 +41,7 @@
   "inLanguage": ["pl", "en"],
   "keywords": "biometria behawioralna, dynamika pisania, odcisk przeglądarki, fingerprinting, test szybkości pisania, test czasu reakcji, efekt Stroopa, prawo Fittsa, prawo Hicka, test pamięci, bloki Corsiego, tablica Snellena, tablice Ishihary, podpis myszką, człowiek czy bot, behavioral biometrics, keystroke dynamics, mouse dynamics, browser fingerprint, typing speed test, reaction time test, Stroop test, Fitts's law, Hick's law, memory span test, Corsi blocks, Snellen chart, Ishihara test, mouse signature, human or bot",
   "isAccessibleForFree": true,
-  "softwareVersion": "0.30.0",
+  "softwareVersion": "0.31.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/assets/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -111,6 +111,7 @@
         <a href="#osobowosc" data-tab="osobowosc"><span data-i18n="tab_b5"></span></a>
         <a href="#recznosc" data-tab="recznosc"><span data-i18n="tab_hand"></span></a>
         <a href="#chronotyp" data-tab="chronotyp"><span data-i18n="tab_chr"></span></a>
+        <a href="#rotacja" data-tab="rotacja"><span data-i18n="tab_rot"></span></a>
       </div>
     </div>
     <div class="tgroup" data-group="tools">
@@ -482,6 +483,17 @@
     <div class="bar"><span class="status" id="st-chr"></span><div class="btns"><button id="chr-go" type="button" class="primary" data-i18n="hand_go"></button></div></div>
     <div id="sum-chr" class="summary empty"></div>
     <div class="grid" id="cards-chr"></div>
+    <div class="next"><a class="btn" href="#rotacja" data-i18n="next_rotacja"></a></div>
+  </section>
+
+  <section class="panel" id="tab-rotacja" data-panel="rotacja" hidden>
+    <h2 data-i18n="rot_h"></h2>
+    <p class="lead" data-i18n="rot_desc"></p>
+    <div class="bar"><span class="status" id="st-rot"></span><div class="btns"><button id="rot-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-rot" class="arena" aria-label="Figury do porównania"></canvas>
+    <div class="answers rot-ans"><button id="rot-same" type="button" data-i18n="rot_same"></button><button id="rot-mirror" type="button" data-i18n="rot_mirror"></button></div>
+    <div id="sum-rot" class="summary empty"></div>
+    <div class="grid" id="cards-rot"></div>
     <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
   </section>
 

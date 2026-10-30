@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.30.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.31.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -28,7 +28,7 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype, mental-rotation)
   data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
@@ -266,6 +266,16 @@ Pytania własne (liczba dni pracy/nauki w tygodniu; godzina zaśnięcia i obudze
 - Przy 0 dniach pracy liczone są tylko dni wolne. Długość snu poza 3–14 h jest odrzucana jako błąd wpisu. Budzik w dni wolne – komunikat o mniejszej pewności.
 - Eksport (`chronotyp`): godziny, długości snu (h), MSW, MSF, MSFsc (h od północy), jet lag.
 
+## 5r. Rotacja umysłowa
+
+Para figur z 7 kwadratów (8 kształtów bez symetrii lustrzanej). Lewa prosto, prawa obrócona o 0°, 45°, 90°, 135° lub 180° (losowo w lewo lub w prawo) i w połowie prób odbita lustrzanie. Odpowiedź klawiszem F (ta sama) / J (odbicie) albo przyciskiem.
+
+- 2 próby rozgrzewkowe (nieliczone) + 30 liczonych: 5 kątów × ta sama/odbicie × 3, w losowej kolejności. Przerwa 600–1000 ms przed każdą parą, informacja ✓/✗ po odpowiedzi.
+- Czas = od pokazania pary do odpowiedzi (`performance.now()`).
+- Dla poprawnych prób „ta sama”: mediana czasu na kąt, prosta czas = a + b·kąt (co najmniej 3 kąty). b w ms/°, tempo = 1000 ÷ b w °/s (Shepard i Metzler 1971).
+- Trafność ogólna i osobno dla „ta sama” i „odbicie”; mediana czasu poprawnych odpowiedzi.
+- Eksport (`rotacja-umyslowa`): wyniki i lista prób (kąt, odbicie, poprawność, czas).
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -273,7 +283,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.30.0",
+  "version": "0.31.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
