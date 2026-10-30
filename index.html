@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.11.0",
+  "softwareVersion": "0.12.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -83,6 +83,7 @@
         <a href="#dwuklik" data-tab="dwuklik"><span data-i18n="tab_dbl"></span></a>
         <a href="#haslo" data-tab="haslo"><span data-i18n="tab_pass"></span></a>
         <a href="#podpis" data-tab="podpis"><span data-i18n="tab_sig"></span></a>
+        <a href="#bot" data-tab="bot"><span data-i18n="tab_bot"></span></a>
       </div>
     </div>
     <div class="tgroup" data-group="psy" hidden>
@@ -303,6 +304,16 @@
     <div id="sig-history" class="chips"></div>
     <div id="sum-sig" class="summary empty"></div>
     <div class="grid" id="cards-sig"></div>
+    <div class="next"><a class="btn" href="#bot" data-i18n="next_bot"></a></div>
+  </section>
+
+  <section class="panel" id="tab-bot" data-panel="bot" hidden>
+    <h2 data-i18n="bot_h"></h2>
+    <p class="lead" data-i18n="bot_desc"></p>
+    <div class="bar"><span class="status" id="st-bot"></span><div class="btns"><button id="bot-go" type="button" class="primary" data-i18n="start"></button><button id="bot-run" type="button" data-i18n="bot_run"></button></div></div>
+    <canvas id="cv-bot" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-bot" class="summary empty"></div>
+    <div class="grid" id="cards-bot"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 

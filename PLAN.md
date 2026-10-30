@@ -17,7 +17,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 
 1. ☑ **Grupy zakładek** z wyróżnieniem grupy „wynik może być nieprawdziwy” (v0.10.0)
 2. ☑ **Podpis myszką** – podpis 3 razy jako wzorzec, potem weryfikacja kolejnego podpisu (kształt, tempo, rytm) (v0.11.0)
-3. ☐ **Człowiek czy bot** – jak zabezpieczenia w stylu CAPTCHA odróżniają człowieka od bota po ruchu myszki; przycisk „puść bota” do porównania
+3. ☑ **Człowiek czy bot** – jak zabezpieczenia w stylu CAPTCHA odróżniają człowieka od bota po ruchu myszki; przycisk „puść bota” do porównania (v0.12.0)
 4. ☐ **Odcisk przeglądarki (jawny)** – co strona wie bez pytania o zgodę (ekran, strefa czasowa, języki, czcionki, karta graficzna…), z wyjaśnieniem śledzenia bez ciasteczek; wszystko lokalnie
 5. ☐ **Mapa cieplna klawiatury** w zakładce Pisanie – kolor klawisza według czasu przytrzymania lub liczby błędów
 6. ☐ **Test Stroopa** – kolor napisu kontra treść słowa
