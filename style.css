@@ -163,3 +163,12 @@ footer{font-size:.82rem;color:var(--muted);max-width:72ch}
 .arena.chart{height:260px;cursor:default}
 .chip.ok{border-color:var(--ok);color:var(--ok)}
 .chip.no{border-color:var(--err);color:var(--err)}
+
+.panel h3.sec{font-size:1.05rem;margin-top:10px;padding-top:14px;border-top:1px solid var(--line)}
+.panel .notice{background:var(--bg)}
+.lgrid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:4px;max-width:640px}
+.lgrid button{font-family:var(--font-mono);font-size:1.35rem;line-height:1;padding:8px 0;text-align:center;border-radius:4px}
+.lgrid button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.lgrid button.miss{box-shadow:inset 0 0 0 2px var(--warn)}
+.lgrid button.fa{box-shadow:inset 0 0 0 2px var(--err)}
+.lgrid button:disabled{cursor:default;opacity:1}

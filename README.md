@@ -1,12 +1,12 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.6.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.7.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
-Jawne demo **biometrii behawioralnej**. Robisz siedem krótkich zadań, a strona pokazuje, co zmierzyła i jak to policzyła. Zwykle taka biometria działa ukryta w tle (np. w bankowości); tutaj każdy może zobaczyć, jak działa.
+Jawne demo **biometrii behawioralnej**. Robisz kilka krótkich zadań, a strona pokazuje, co zmierzyła i jak to policzyła. Zwykle taka biometria działa ukryta w tle (np. w bankowości); tutaj każdy może zobaczyć, jak działa.
 
-An open demo of **behavioral biometrics**. You do seven short tasks and the page shows what it measured and how. This kind of biometrics usually runs hidden in the background (e.g. in banking); here anyone can see how it works.
+An open demo of **behavioral biometrics**. You do a few short tasks and the page shows what it measured and how. This kind of biometrics usually runs hidden in the background (e.g. in banking); here anyone can see how it works.
 
 ## ⚠️ Amatorski projekt · Amateur project
 
@@ -18,13 +18,14 @@ This is a hobby demo, not a scientific or medical tool. Thresholds are rough and
 
 | # | Zadanie | Co mierzy |
 |---|---------|-----------|
-| 1 | Pisanie · Typing | prędkość, czas przytrzymania i przelotu klawiszy, rytm, błędy, poprawki, pauzy, pary liter |
+| 1 | Pisanie · Typing | prędkość, czas przytrzymania i przelotu klawiszy, rytm, błędy i ich rodzaje, poprawki, pauzy, pary liter |
 | 2 | Klikanie celów · Target clicking | czas reakcji i ruchu, prostoliniowość, przestrzelenia, przytrzymanie przycisku, pudła |
 | 3 | Śledzenie punktu · Dot tracking | odległość od kropki, czas w strefie, opóźnienie, płynność |
 | 4 | Przeciąganie · Dragging | czas, precyzja upuszczenia, drżenie, zatrzymania, ponowne chwyty |
 | 5 | Rysowanie po śladzie · Tracing | odchylenie od wzoru, drżenie, pokrycie, tempo |
 | 6 | Podwójne kliknięcie · Double click | odstęp, przytrzymanie, drgnięcie kursora, za wolne pary |
 | 7 | Hasło · Password | profil rytmu wpisywania hasła (5 wpisań) i test zgodności z profilem |
+| 8 | Litery i błędy · Letters & errors | przepisywanie pseudosłów (tempo, czas na słowo, rodzaje błędów) i szukanie liter b wśród d/p/q; **to nie jest test na dysleksję** |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 

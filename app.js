@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.6.0";
+const VERSION = "0.7.0";
 const CHANGELOG = [
+  { v:"0.7.0", date:"2026-10-30",
+    pl:["Nowa zakładka „Litery i błędy” z wyraźną informacją, że to nie jest test na dysleksję i niczego nie diagnozuje.","Ramka „Co mówią badania” z linkami do prac o zapisie klawiszy i dysleksji (Inputlog, Dytective).","Zadanie „Przepisywanie pseudosłów”: tempo, czas na słowo, błędy i porównanie ze zwykłym tekstem z etapu 1.","Zadanie „Szukanie liter”: zaznaczanie liter b wśród d, p i q; czas, trafienia, pominięcia i pomyłki.","Nowa karta „Rodzaje błędów” w teście pisania i w pseudosłowach: spacje, wielkość liter, litery lustrzane, polska ortografia, ogonki, przestawienia, pominięcia, podwojenia i sąsiednie klawisze."],
+    en:["New “Letters & errors” tab with a clear note that it is not a dyslexia test and diagnoses nothing.","“What research says” box with links to work on keystroke logging and dyslexia (Inputlog, Dytective).","“Retyping pseudowords” task: pace, time per word, errors and comparison with the normal text from stage 1.","“Letter search” task: marking b among d, p and q; time, hits, misses and false marks.","New “Error types” card in the typing test and the pseudowords task: spaces, letter case, mirror letters, Polish spelling, diacritics, swaps, skips, doubles and neighbouring keys."] },
   { v:"0.6.0", date:"2026-10-30",
     pl:["Nowy dział „Hasło”: wpisujesz wymyślone hasło 5 razy, z rytmu powstaje profil, a w trybie testu każde wpisanie jest sprawdzane, czy zgadza się z profilem.","Wykres profilu (średnia ± odchylenie dla każdego klawisza i odstępu) z zaznaczonym ostatnim testem oraz historia testów.","Hasło jest tylko w pamięci karty i nie trafia do eksportu; eksportowane są wyłącznie czasy."],
     en:["New “Password” section: type a made-up password 5 times, its rhythm becomes a profile, and in test mode every entry is checked against the profile.","Profile chart (mean ± deviation for every key and interval) with the last test marked, plus a test history.","The password lives only in the tab's memory and is never exported; only timings are exported."] },
@@ -44,7 +47,7 @@ pl:{
   title:"Odcisk klawiatury i myszki",
   tag:"BIOMETRIA BEHAWIORALNA",
   lang_btn:"English", lang_label:"Przełącz na angielski",
-  lead:"Biometria behawioralna rozpoznaje ludzi po tym, <strong>jak</strong> coś robią: jak piszą, jak ruszają myszką, jak klikają. Zwykle działa ukryta w tle (np. w bankowości). Tutaj jest <strong>jawna</strong>: wykonujesz siedem krótkich zadań, a strona pokazuje, co zmierzyła i jak to policzyła.",
+  lead:"Biometria behawioralna rozpoznaje ludzi po tym, <strong>jak</strong> coś robią: jak piszą, jak ruszają myszką, jak klikają. Zwykle działa ukryta w tle (np. w bankowości). Tutaj jest <strong>jawna</strong>: wykonujesz krótkie zadania, a strona pokazuje, co zmierzyła i jak to policzyła.",
   amateur_h:"Amatorski projekt",
   amateur_p:"To hobbystyczne demo, które pokazuje, jak działa biometria behawioralna. <strong>Nie jest narzędziem naukowym ani medycznym.</strong> Progi w ocenach są orientacyjne, a wyniki mocno zależą od sprzętu (klawiatura, myszka czy touchpad), zmęczenia i wprawy. <strong>Nie sugeruj się wynikiem</strong>: nie wyciągaj z niego wniosków o sobie ani o innych i nie podejmuj na jego podstawie żadnych decyzji.",
   data_h:"Gdzie trafiają dane",
@@ -72,6 +75,15 @@ pl:{
   pass_warn:"Nie wpisuj prawdziwego hasła, wymyśl coś na potrzeby testu. Hasło jest tylko w pamięci tej karty, znika po jej zamknięciu i nie trafia do eksportu.",
   pass_reset:"Nowe hasło",
   pass_chart:"Pasmo to średnia ± odchylenie z profilu, szare kropki to wpisania próbne, kolorowa kropka to ostatni test (zielona w granicach 2 odchyleń, czerwona poza nimi). Na osi są numery klawiszy, a nie znaki hasła.",
+  tab_let:"Litery i błędy", next_let:"Dalej: litery i błędy →",
+  let_h:"8. Litery i błędy",
+  let_warn_h:"To nie jest test na dysleksję",
+  let_warn:"Strona nie ma żadnego modelu ani danych od osób z diagnozą, więc <strong>niczego nie wykrywa, nie diagnozuje i nie ocenia ryzyka</strong>. Pokazuje tylko, jakie błędy zrobiłeś i ile czasu ci to zajęło. Wyniki zależą od klawiatury, wprawy, zmęczenia i tego, czy piszesz w swoim języku. Jeśli masz obawy dotyczące czytania lub pisania (swoje albo dziecka), porozmawiaj ze specjalistą, np. w poradni psychologiczno-pedagogicznej.",
+  let_res_h:"Co mówią badania",
+  let_res:`Badacze pisania nagrywają każdy klawisz (tzw. keystroke logging) i analizują pauzy oraz poprawki; tą metodą bada się m.in. osoby z dysleksją (<a href="https://www.inputlog.net/research/">Inputlog</a>, <a href="https://journals.openedition.org/lidil/13303">badanie studentów z dysleksją</a>). Gra przeglądarkowa Dytective (Rello i in., 2016) mierzyła kliknięcia, czasy i błędy w zadaniach językowych; model uczony na 243 osobach, w tym 95 z diagnozą dysleksji, osiągnął 83% trafności (<a href="https://eudl.eu/doi/10.4108/eai.16-5-2016.2263338">publikacja</a>, <a href="https://repositori.upf.edu/items/0852171e-cb93-481e-a492-a490ddba578d">nowsza praca</a>). Zadania poniżej są tylko <strong>inspirowane</strong> takimi ćwiczeniami (pseudosłowa, rozróżnianie podobnych liter), nie są ich kopią i nie były sprawdzane naukowo.`,
+  ps_h:"Przepisywanie pseudosłów", ps_desc:"Przepisz słowa, które nic nie znaczą. Mierzę tempo, czas na każde słowo i rodzaje błędów, a jeśli zrobiłeś etap 1, porównuję to ze zwykłym tekstem.",
+  ls_h:"Szukanie liter", ls_desc:"Po kliknięciu „Start” pojawi się siatka liter b, d, p i q. Zaznacz wszystkie „b” i kliknij „Gotowe”. Mierzę czas, trafienia, pominięcia i to, które litery wziąłeś za „b”.",
+  ls_done:"Gotowe",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -90,7 +102,7 @@ en:{
   title:"Keyboard and mouse fingerprint",
   tag:"BEHAVIORAL BIOMETRICS",
   lang_btn:"Polski", lang_label:"Switch to Polish",
-  lead:"Behavioral biometrics recognises people by <strong>how</strong> they do things: how they type, move the mouse and click. It usually runs hidden in the background (e.g. in banking). Here it is <strong>out in the open</strong>: you do seven short tasks and the page shows what it measured and how it calculated it.",
+  lead:"Behavioral biometrics recognises people by <strong>how</strong> they do things: how they type, move the mouse and click. It usually runs hidden in the background (e.g. in banking). Here it is <strong>out in the open</strong>: you do a few short tasks and the page shows what it measured and how it calculated it.",
   amateur_h:"Amateur project",
   amateur_p:"This is a hobby demo showing how behavioral biometrics works. <strong>It is not a scientific or medical tool.</strong> The thresholds in the evaluations are rough, and the results depend heavily on your hardware (keyboard, mouse or touchpad), tiredness and practice. <strong>Don't take the results seriously</strong>: don't draw conclusions about yourself or others from them and don't base any decisions on them.",
   data_h:"Where your data goes",
@@ -118,6 +130,15 @@ en:{
   pass_warn:"Don't use a real password, make one up for the test. The password lives only in this tab's memory, disappears when you close it and is never exported.",
   pass_reset:"New password",
   pass_chart:"The band is the profile mean ± deviation, grey dots are enrollment entries and the coloured dot is the last test (green within 2 deviations, red outside). The axis shows key numbers, not the password's characters.",
+  tab_let:"Letters & errors", next_let:"Next: letters & errors →",
+  let_h:"8. Letters & errors",
+  let_warn_h:"This is not a dyslexia test",
+  let_warn:"The page has no model and no data from diagnosed people, so it <strong>detects nothing, diagnoses nothing and estimates no risk</strong>. It only shows which errors you made and how long it took. Results depend on your keyboard, practice, tiredness and whether you type in your own language. If you have concerns about reading or writing (your own or a child's), talk to a specialist such as an educational psychologist.",
+  let_res_h:"What research says",
+  let_res:`Writing researchers record every key press (keystroke logging) and analyse pauses and revisions; this method is also used to study people with dyslexia (<a href="https://www.inputlog.net/research/">Inputlog</a>, <a href="https://journals.openedition.org/lidil/13303">a study of dyslexic university students</a>). The browser game Dytective (Rello et al., 2016) measured clicks, times and errors in language tasks; a model trained on 243 people, 95 of them diagnosed with dyslexia, reached 83% accuracy (<a href="https://eudl.eu/doi/10.4108/eai.16-5-2016.2263338">paper</a>, <a href="https://repositori.upf.edu/items/0852171e-cb93-481e-a492-a490ddba578d">later work</a>). The tasks below are only <strong>inspired</strong> by such exercises (pseudowords, telling similar letters apart); they are not copies and have not been scientifically validated.`,
+  ps_h:"Retyping pseudowords", ps_desc:"Retype words that mean nothing. I measure your pace, time per word and error types, and if you did stage 1, I compare it with normal text.",
+  ls_h:"Letter search", ls_desc:"After clicking “Start”, a grid of the letters b, d, p and q appears. Mark every “b” and click “Done”. I measure time, hits, misses and which letters you took for “b”.",
+  ls_done:"Done",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -228,6 +249,62 @@ function mouseTask(o){
   return t;
 }
 
+// ---------- rodzaje błędów (opis, nie ocena) ----------
+const ERR_CATS = [
+  ["space", {pl:"spacje",en:"spaces"}],
+  ["case",  {pl:"wielka / mała litera",en:"upper / lower case"}],
+  ["mirror",{pl:"litery lustrzane (b/d/p/q)",en:"mirror letters (b/d/p/q)"}],
+  ["orth",  {pl:"ortografia (ó/u, rz/ż, ch/h, om/ą)",en:"Polish spelling (ó/u, rz/ż, ch/h, om/ą)"}],
+  ["diac",  {pl:"ogonki (ą→a, ł→l…)",en:"diacritics (ą→a, ł→l…)"}],
+  ["swap",  {pl:"przestawione litery",en:"swapped letters"}],
+  ["skip",  {pl:"pominięta litera",en:"skipped letter"}],
+  ["double",{pl:"podwojona litera",en:"doubled letter"}],
+  ["adj",   {pl:"sąsiedni klawisz",en:"neighbouring key"}],
+  ["other", {pl:"inne",en:"other"}]
+];
+const MIRROR = new Set(["bd","db","pq","qp","bp","pb","dq","qd"]);
+const ORTH = new Set(["óu","uó","żr","rż","ch","hc","oą","ąo"]);
+const BASE = {"ą":"a","ć":"c","ę":"e","ł":"l","ń":"n","ó":"o","ś":"s","ź":"z","ż":"z"};
+const base = c => BASE[c] || c;
+const KEYPOS = (() => { const m={}; [["1234567890",0],["qwertyuiop",0.5],["asdfghjkl",0.75],["zxcvbnm",1.25]]
+  .forEach(([row,off],y) => [...row].forEach((k,x) => m[k]={x:x+off,y})); return m; })();
+const adjacent = (a,b) => { const p=KEYPOS[base(a)], q=KEYPOS[base(b)]; return !!(p && q && p!==q && Math.hypot(p.x-q.x,p.y-q.y)<=1.3); };
+// ins: lista wstawionych znaków w kolejności {pos, ch}; T: tekst wzorcowy
+function classifyErrors(ins, T){
+  const counts={}; ERR_CATS.forEach(([k])=>counts[k]=0); const examples=[];
+  const sh = x => x===" " ? "␣" : x;
+  const add = (k,ex) => { counts[k]++; if(examples.length<10) examples.push({k, ex}); };
+  let prevErrPos = -9;
+  for(let i=0;i<ins.length;i++){
+    const {pos,ch}=ins[i], exp=T[pos];
+    if(exp===undefined || ch===exp){ prevErrPos=-9; continue; }
+    if(pos===prevErrPos+1){ prevErrPos=pos; continue; }   // kaskada po przesunięciu: liczę tylko pierwszy błąd w ciągu
+    prevErrPos=pos;
+    const e=exp.toLowerCase(), c=ch.toLowerCase(), nx=ins[i+1];
+    if(exp===" " || ch===" ") add("space", `${sh(exp)}→${sh(ch)}`);
+    else if(c===e) add("case", `${exp}→${ch}`);
+    else if(MIRROR.has(e+c)) add("mirror", `${exp}→${ch}`);
+    else if(ORTH.has(e+c)) add("orth", `${exp}→${ch}`);
+    else if(base(e)===base(c)) add("diac", `${exp}→${ch}`);
+    else if(ch===T[pos+1] && nx && nx.pos===pos+1 && nx.ch===exp){ add("swap", `${exp}${T[pos+1]}→${ch}${nx.ch}`); i++; prevErrPos=-9; }
+    else if(ch===T[pos+1]) add("skip", `−${exp}`);
+    else if(pos>0 && ch===T[pos-1]) add("double", `${T[pos-1]}${exp}→${T[pos-1]}${ch}`);
+    else if(adjacent(e,c)) add("adj", `${exp}→${ch}`);
+    else add("other", `${exp}→${ch}`);
+  }
+  return { counts, examples, total:Object.values(counts).reduce((a,b)=>a+b,0) };
+}
+const errTypesSpec = id => ({ id, title:{pl:"Rodzaje błędów",en:"Error types"}, unit:{pl:"sklasyfikowanych",en:"classified"},
+  rows: ERR_CATS.map(([k,l]) => [k,l]), chips:[["ex",{pl:"przykłady (oczekiwane → wpisane)",en:"examples (expected → typed)"}]],
+  how:{pl:"Każdy błędnie wpisany znak porównuję ze znakiem wzorca i sprawdzam po kolei: spacja, wielkość litery, litery lustrzane b/d/p/q, polska ortografia (ó/u, rz/ż, ch/h, om/ą), brak lub nadmiar ogonka, przestawienie dwóch liter, pominięcie litery, podwojenie poprzedniej litery, sąsiedni klawisz na klawiaturze QWERTY. Z ciągu kolejnych błędów liczę tylko pierwszy, bo następne są zwykle skutkiem przesunięcia. To opis, a nie ocena.",
+       en:"Each wrongly typed character is compared with the reference and checked in order: space, letter case, mirror letters b/d/p/q, Polish spelling (ó/u, rz/ż, ch/h, om/ą), missing or extra diacritic, two swapped letters, skipped letter, doubled previous letter, neighbouring key on a QWERTY keyboard. In a run of consecutive errors only the first counts, as the rest usually come from the shift. This is a description, not an assessment."} });
+function renderErrTypes(id, et){
+  setMain(id, et.total);
+  ERR_CATS.forEach(([k]) => setRow(id, k, et.counts[k]));
+  setHTML(id, "ex", et.examples.length ? et.examples.map(x=>`<span class="chip">${esc(x.ex)}</span>`).join("") : `<span class="chip">${LANG==="pl"?"brak błędów":"no errors"}</span>`);
+}
+const topErr = et => { let best=null; for(const [k,l] of ERR_CATS) if(et.counts[k] && (!best || et.counts[k]>et.counts[best[0]])) best=[k,l]; return best ? L(best[1]) : null; };
+
 // =====================================================================
 // 1. PISANIE
 // =====================================================================
@@ -265,10 +342,11 @@ const Typing = (() => {
           en:"A pause is a <code>keydown → keydown</code> gap longer than 1 s. For each one I show the word it happened before (or inside)."}},
     {id:"t-pairs", title:{pl:"Pary liter",en:"Letter pairs"}, chips:[["slow",{pl:"najwolniejsze",en:"slowest"}],["fast",{pl:"najszybsze",en:"fastest"}]],
      how:{pl:"Dla dwóch kolejnych, poprawnie wpisanych liter mierzę odstęp <code>keydown → keydown</code> i grupuję po parze (np. „sz”). Pokazuję średnią dla par, które wystąpiły co najmniej 2 razy; w nawiasie liczba wystąpień.",
-          en:"For two consecutive correctly typed letters I measure the <code>keydown → keydown</code> gap and group by pair (e.g. “th”). I show the mean for pairs that occurred at least twice; the number in brackets is the count."}}
+          en:"For two consecutive correctly typed letters I measure the <code>keydown → keydown</code> gap and group by pair (e.g. “th”). I show the mean for pairs that occurred at least twice; the number in brackets is the count."}},
+    errTypesSpec("t-types")
   ]};
 
-  const fresh = () => ({ strokes:[], startT:null, lastT:null, errTyped:0, typed:0, deletions:0, inDelete:false,
+  const fresh = () => ({ strokes:[], ins:[], startT:null, lastT:null, errTyped:0, typed:0, deletions:0, inDelete:false,
     corr:{imm:0, late:0, lags:[], none:0}, done:false, timer:null, prevLen:0 });
   const firstMismatch = v => { for(let i=0;i<v.length;i++) if(v[i]!==TARGET[i]) return i; return -1; };
   const isCharKey = e => e.key.length === 1;
@@ -346,7 +424,7 @@ const Typing = (() => {
     const v = ta.value;
     if(e.inputType && e.inputType.startsWith("insert") && e.data){
       const start = v.length - e.data.length;
-      for(let i=0;i<e.data.length;i++){ S.typed++; if(e.data[i] !== TARGET[start+i]) S.errTyped++; }
+      for(let i=0;i<e.data.length;i++){ S.typed++; S.ins.push({pos:start+i, ch:e.data[i]}); if(e.data[i] !== TARGET[start+i]) S.errTyped++; }
     } else if(e.inputType && e.inputType.startsWith("delete")){
       S.deletions += Math.max(0, S.prevLen - v.length);
     }
@@ -389,7 +467,7 @@ const Typing = (() => {
     }
     const ranked = Object.entries(pairs).filter(([,a])=>a.length>=2).map(([p,a])=>({p,m:mean(a),n:a.length})).sort((x,y)=>y.m-x.m);
     return { wpm:(v.length/5)/(dur/60), cpm:v.length/(dur/60), dur, dwell, flight, dd, pauses, ranked,
-      errTyped:S.errTyped, errRate:S.typed?S.errTyped/S.typed:NaN,
+      errTyped:S.errTyped, errRate:S.typed?S.errTyped/S.typed:NaN, errTypes:classifyErrors(S.ins, TARGET),
       left:[...v].filter((c,i)=>c!==TARGET[i]).length, missing:Math.max(0,TARGET.length-v.length),
       deletions:S.deletions, corr:{...S.corr} };
   }
@@ -411,6 +489,7 @@ const Typing = (() => {
     const none = `<span class="chip">${LANG==="pl"?"za mało danych":"not enough data"}</span>`;
     setHTML("t-pairs","slow", R.ranked.length ? R.ranked.slice(0,5).map(r=>chip(r,"slow")).join("") : none);
     setHTML("t-pairs","fast", R.ranked.length ? R.ranked.slice(-5).reverse().map(r=>chip(r,"fast")).join("") : none);
+    renderErrTypes("t-types", R.errTypes);
   };
   self.summary = R => {
     const cv = sd(R.dd)/mean(R.dd), w = R.wpm;
@@ -886,11 +965,138 @@ const Pass = (() => { const N=5, MINLEN=6, FLOOR=10;
 })();
 
 // =====================================================================
+// 8a. PSEUDOSŁOWA — przepisywanie słów bez znaczenia
+// =====================================================================
+const PSEUDO = {
+  pl:"brodwiel klepsa żumoch dryzgot szawiłka pąbro chrzęsk dziwolik bezgrot ółmica",
+  en:"blorft drimple quazzle snepto grawlish thrumb ploddit vexrin bidquor fendrel"
+};
+const Pseudo = (() => {
+  const ta=$("ps-input"), tgt=$("ps-target"); let S, T;
+  const self = { tab:"litery", key:"pseudoslowa", grid:"cards-ps", sumId:"sum-ps", R:null, title:{pl:"Pseudosłowa",en:"Pseudowords"}, specs:[
+    {id:"ps-speed", title:{pl:"Tempo",en:"Pace"}, unit:{pl:"znaków/min",en:"chars/min"},
+     rows:[["real",{pl:"zwykły tekst (etap 1)",en:"normal text (stage 1)"}],["ratio",{pl:"pseudosłowa ÷ zwykły tekst",en:"pseudowords ÷ normal text"}],["dur",{pl:"czas całkowity",en:"total time"}]],
+     how:{pl:"<code>znaki ÷ minuty</code>, od pierwszego znaku do ostatniej zmiany tekstu. Jeśli zrobiłeś etap 1, porównuję z tempem zwykłego tekstu. Znane słowa piszemy z pamięci całymi kawałkami, a pseudosłowa trzeba składać litera po literze, więc zwykle idą wolniej. Badacze pisania porównują właśnie takie zadania o różnym stopniu „słowności”.",
+          en:"<code>characters ÷ minutes</code>, from the first character to the last change of the text. If you did stage 1, I compare with your normal-text pace. Familiar words are typed from memory in whole chunks, while pseudowords must be built letter by letter, so they are usually slower. Writing researchers compare exactly such tasks with different levels of “wordness”."}},
+    {id:"ps-word", title:{pl:"Czas na słowo",en:"Time per word"}, unit:U.ms_med,
+     rows:[["slow",{pl:"najwolniejsze",en:"slowest"}],["fast",{pl:"najszybsze",en:"fastest"}]],
+     how:{pl:"Od wpisania pierwszej litery słowa do wpisania jego ostatniej litery (pierwsze podejście, bez poprawek).",
+          en:"From typing a word's first letter to typing its last letter (first attempt, before corrections)."}},
+    {id:"ps-err", title:{pl:"Błędy",en:"Errors"}, unit:{pl:"wpisanych błędnie",en:"typed wrong"},
+     rows:[["rate",{pl:"odsetek błędnych znaków",en:"share of wrong characters"}],["left",{pl:"niepoprawione na końcu",en:"left uncorrected"}]],
+     how:{pl:"Jak w etapie 1: każdy wstawiony znak porównuję ze znakiem wzorca na tej samej pozycji.",
+          en:"As in stage 1: every inserted character is compared with the reference character at the same position."}},
+    errTypesSpec("ps-types")
+  ]};
+  const fresh = () => ({ ins:[], startT:null, lastT:null, typed:0, err:0, prevLen:0, done:false, timer:null });
+  function renderTarget(){ const v=ta.value; let h="";
+    for(let i=0;i<T.length;i++){ const cls = i<v.length ? (v[i]===T[i]?"done":"bad") : (i===v.length?"cur":"");
+      h += `<span class="${cls}">${T[i]===" "?"&nbsp;":esc(T[i])}</span>` + (T[i]===" "?"<wbr>":""); }
+    tgt.innerHTML=h; }
+  function renderLive(){ const t = S.startT==null ? 0 : ((S.done?S.lastT:performance.now())-S.startT)/1000;
+    $("ps-time").textContent = nf(t,1)+" s"; $("ps-err").textContent = S.err; }
+  ta.addEventListener("keydown", e => { if(S.done) return;
+    if(["ArrowLeft","ArrowRight","ArrowUp","ArrowDown","Home","End","PageUp","PageDown","Enter"].includes(e.key)){ e.preventDefault(); return; }
+    if(S.startT==null && e.key.length===1){ S.startT=performance.now(); $("ps-finish").disabled=false; S.timer=setInterval(renderLive,100); } });
+  ta.addEventListener("beforeinput", e => { if(S.done || ["insertFromPaste","insertFromDrop","insertLineBreak","insertParagraph"].includes(e.inputType)) e.preventDefault(); });
+  ta.addEventListener("input", e => { const v=ta.value, t=performance.now(); S.lastT=t;
+    if(e.inputType && e.inputType.startsWith("insert") && e.data){ const st=v.length-e.data.length;
+      for(let i=0;i<e.data.length;i++){ S.typed++; S.ins.push({pos:st+i, ch:e.data[i], t}); if(e.data[i]!==T[st+i]) S.err++; } }
+    S.prevLen=v.length; renderTarget(); renderLive(); if(v===T) finish(); });
+  const toEnd = () => { const n=ta.value.length; ta.setSelectionRange(n,n); };
+  ["click","focus","select","mouseup"].forEach(ev => ta.addEventListener(ev, toEnd));
+  ta.addEventListener("paste", e => e.preventDefault()); ta.addEventListener("drop", e => e.preventDefault());
+  $("ps-finish").addEventListener("click", () => { if(S.startT!=null) finish(); });
+  $("ps-reset").addEventListener("click", reset);
+  function finish(){ if(S.done) return; S.done=true; clearInterval(S.timer); if(S.lastT==null) S.lastT=performance.now();
+    ta.disabled=true; $("ps-finish").disabled=true; renderLive();
+    const v=ta.value, dur=(S.lastT-S.startT)/1000;
+    const first={}; for(const x of S.ins) if(!(x.pos in first)) first[x.pos]=x.t;
+    const words=[]; let a=0;
+    for(const w of T.split(" ")){ const b=a+w.length-1; if(first[a]!=null && first[b]!=null) words.push({w, ms:first[b]-first[a]}); a=b+2; }
+    self.R = { cpm:v.length/(dur/60), dur, realCpm: Typing.R ? Typing.R.cpm : null,
+      words, err:S.err, errRate:S.typed?S.err/S.typed:NaN, left:[...v].filter((c,i)=>c!==T[i]).length+Math.max(0,T.length-v.length),
+      errTypes:classifyErrors(S.ins, T) };
+    self.render(self.R); setSummary(self); markDone("litery"); }
+  self.render = R => {
+    setMain("ps-speed", nf(R.cpm)); setRow("ps-speed","real", R.realCpm ? nf(R.realCpm) : (LANG==="pl"?"brak (zrób etap 1)":"none (do stage 1)"));
+    setRow("ps-speed","ratio", R.realCpm ? nf(R.cpm/R.realCpm,2)+"×" : "—"); setRow("ps-speed","dur", nf(R.dur,1)+" s");
+    const ws=[...R.words].sort((x,y)=>y.ms-x.ms);
+    setMain("ps-word", nf(median(R.words.map(w=>w.ms))));
+    setRow("ps-word","slow", ws.length ? `${ws[0].w} · ${ms(ws[0].ms)}` : "—"); setRow("ps-word","fast", ws.length ? `${ws[ws.length-1].w} · ${ms(ws[ws.length-1].ms)}` : "—");
+    setMain("ps-err", R.err); setRow("ps-err","rate", pct(R.errRate,1)); setRow("ps-err","left", R.left);
+    renderErrTypes("ps-types", R.errTypes); };
+  self.summary = R => { const ws=[...R.words].sort((x,y)=>y.ms-x.ms), top=topErr(R.errTypes);
+    if(LANG==="pl") return `<p>Pseudosłowa przepisałeś w tempie <strong>${nf(R.cpm)} znaków/min</strong>`
+      + (R.realCpm ? `, a zwykły tekst z etapu 1 w tempie ${nf(R.realCpm)} znaków/min (stosunek ${nf(R.cpm/R.realCpm,2)}).` : ". Zrób etap 1, żeby porównać to ze zwykłym tekstem.")
+      + (ws.length ? ` Najdłużej pisałeś słowo „${esc(ws[0].w)}” (${ms(ws[0].ms)}).` : "") + `</p>`
+      + `<p>Błędnie wpisanych znaków: ${R.err}` + (top ? `, najczęstszy rodzaj błędu: ${top}.` : ".") + ` To opis tego, co zrobiłeś, a nie ocena.</p>`;
+    return `<p>You retyped the pseudowords at <strong>${nf(R.cpm)} chars/min</strong>`
+      + (R.realCpm ? `, and the normal text from stage 1 at ${nf(R.realCpm)} chars/min (ratio ${nf(R.cpm/R.realCpm,2)}).` : ". Do stage 1 to compare it with normal text.")
+      + (ws.length ? ` The word that took longest was “${esc(ws[0].w)}” (${ms(ws[0].ms)}).` : "") + `</p>`
+      + `<p>Characters typed wrong: ${R.err}` + (top ? `, most common error type: ${top}.` : ".") + ` This describes what you did; it is not an assessment.</p>`; };
+  function reset(){ if(S && S.timer) clearInterval(S.timer); S=fresh(); T=PSEUDO[LANG];
+    ta.maxLength=T.length; ta.value=""; ta.disabled=false; $("ps-finish").disabled=true; renderTarget(); renderLive(); }
+  self.reset=reset; self.onLang = () => { if(!S.done) reset(); else renderLive(); };
+  S=fresh(); T=PSEUDO[LANG];
+  return self;
+})();
+
+// =====================================================================
+// 8b. SZUKANIE LITER — zaznacz wszystkie „b” wśród d/p/q
+// =====================================================================
+const Search = (() => { const ROWS=7, COLS=12, NT=21, TGT="b", OTH=["d","p","q"];
+  const grid=$("ls-grid"); let S=null, st=null;
+  const self = { tab:"litery", key:"szukanie-liter", grid:"cards-ls", sumId:"sum-ls", R:null, title:{pl:"Szukanie liter",en:"Letter search"}, specs:[
+    {id:"ls-time", title:{pl:"Czas",en:"Time"}, unit:{pl:"s",en:"s"}, rows:[["per",{pl:"na znak siatki",en:"per grid character"}]],
+     how:{pl:`Od kliknięcia „Start” do „Gotowe”. Siatka ma ${ROWS*COLS} znaków, w tym ${NT} liter „${TGT}”.`,
+          en:`From clicking “Start” to “Done”. The grid has ${ROWS*COLS} characters, ${NT} of them “${TGT}”.`}},
+    {id:"ls-hit", title:{pl:"Trafienia",en:"Hits"}, unit:{pl:`z ${NT}`,en:`of ${NT}`}, rows:[["miss",{pl:"pominięte",en:"missed"}]],
+     how:{pl:`Ile liter „${TGT}” zaznaczyłeś i ile przeoczyłeś. Po zakończeniu przeoczone mają pomarańczową ramkę.`,
+          en:`How many “${TGT}” letters you marked and how many you missed. After finishing, missed ones get an orange outline.`}},
+    {id:"ls-fa", title:{pl:"Pomyłki",en:"False marks"}, unit:{pl:"innych liter",en:"other letters"},
+     rows:OTH.map(o=>[o,{pl:`„${o}” zamiast „${TGT}”`,en:`“${o}” instead of “${TGT}”`}]),
+     how:{pl:`Zaznaczone litery inne niż „${TGT}”, z podziałem na to, którą literę wzięto za „${TGT}”. Litery b, d, p i q są swoimi odbiciami lustrzanymi lub obrotami. Po zakończeniu mają czerwoną ramkę.`,
+          en:`Marked letters other than “${TGT}”, split by which letter was taken for “${TGT}”. The letters b, d, p and q are mirror images or rotations of each other. After finishing they get a red outline.`}}
+  ]};
+  const status = o => { st=o; $("st-ls").textContent = L(o)||""; };
+  function idle(){ grid.innerHTML = Array.from({length:ROWS*COLS},()=>`<button type="button" disabled>·</button>`).join(""); }
+  function start(){
+    const pos=new Set(); while(pos.size<NT) pos.add(Math.floor(Math.random()*ROWS*COLS));
+    const letters=Array.from({length:ROWS*COLS},(_,i)=>pos.has(i)?TGT:OTH[Math.floor(Math.random()*OTH.length)]);
+    S={letters, marked:new Set(), t0:performance.now(), done:false};
+    grid.innerHTML = letters.map((l,i)=>`<button type="button" data-i="${i}" aria-pressed="false">${l}</button>`).join("");
+    $("ls-done").disabled=false;
+    status({pl:`Zaznacz wszystkie litery „${TGT}”, potem kliknij „Gotowe”.`,en:`Mark every “${TGT}”, then click “Done”.`});
+  }
+  grid.addEventListener("click", e => { const b=e.target.closest("button[data-i]"); if(!b || !S || S.done) return;
+    const i=+b.dataset.i; if(S.marked.has(i)) S.marked.delete(i); else S.marked.add(i);
+    b.classList.toggle("on", S.marked.has(i)); b.setAttribute("aria-pressed", S.marked.has(i)); });
+  function finish(){ if(!S || S.done) return; S.done=true; const t=(performance.now()-S.t0)/1000;
+    let hits=0; const fa={}; OTH.forEach(o=>fa[o]=0);
+    S.letters.forEach((l,i)=>{ const m=S.marked.has(i), b=grid.querySelector(`[data-i="${i}"]`);
+      if(l===TGT){ if(m) hits++; else b.classList.add("miss"); } else if(m){ fa[l]++; b.classList.add("fa"); } b.disabled=true; });
+    $("ls-done").disabled=true;
+    self.R = { time:t, n:ROWS*COLS, targets:NT, hits, missed:NT-hits, falseMarks:fa, falseTotal:Object.values(fa).reduce((a,b)=>a+b,0) };
+    self.render(self.R); setSummary(self); markDone("litery"); status({pl:"Gotowe.",en:"Done."}); }
+  $("ls-go").addEventListener("click", start); $("ls-done").addEventListener("click", finish);
+  self.render = R => { setMain("ls-time", nf(R.time,1)); setRow("ls-time","per", ms(1000*R.time/R.n));
+    setMain("ls-hit", R.hits); setRow("ls-hit","miss", R.missed);
+    setMain("ls-fa", R.falseTotal); OTH.forEach(o=>setRow("ls-fa",o,R.falseMarks[o])); };
+  self.summary = R => LANG==="pl"
+    ? `<p>Przejrzenie siatki zajęło ci <strong>${nf(R.time,1)} s</strong>. Zaznaczyłeś ${R.hits} z ${R.targets} liter „${TGT}”, pominąłeś ${R.missed}, a innych liter zaznaczyłeś ${R.falseTotal} (${OTH.map(o=>`${o}: ${R.falseMarks[o]}`).join(", ")}).</p><p>To opis tego, co zrobiłeś, a nie ocena.</p>`
+    : `<p>Scanning the grid took you <strong>${nf(R.time,1)} s</strong>. You marked ${R.hits} of ${R.targets} “${TGT}” letters, missed ${R.missed} and marked ${R.falseTotal} other letters (${OTH.map(o=>`${o}: ${R.falseMarks[o]}`).join(", ")}).</p><p>This describes what you did; it is not an assessment.</p>`;
+  self.onLang = () => status(st);
+  idle();
+  return self;
+})();
+
+// =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){
@@ -926,7 +1132,7 @@ async function exportProfile(){
   const data = {
     app: D[LANG].title, version: VERSION, source: REPO, exported: now.toISOString(), language: LANG,
     note: strip(D[LANG].amateur_p),
-    stages: Object.fromEntries(done.map(t => [t.tab, {
+    stages: Object.fromEntries(done.map(t => [t.key || t.tab, {
       title: L(t.title),
       result: strip(t.summary(t.R)),
       stats: cardStats(t),
@@ -972,6 +1178,8 @@ function applyLang(){
   MOUSE.forEach(t => { t.status(t.st); if(t.A.w) t.redraw(); });
   Typing.onLang();
   Pass.onLang();
+  Pseudo.onLang();
+  Search.onLang();
   renderResults();
   renderNews();
   renderTheme();

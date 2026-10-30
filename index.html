@@ -36,6 +36,7 @@
     <a href="#rysowanie" data-tab="rysowanie"><span class="n">5</span><span data-i18n="tab_draw"></span></a>
     <a href="#dwuklik" data-tab="dwuklik"><span class="n">6</span><span data-i18n="tab_dbl"></span></a>
     <a href="#haslo" data-tab="haslo"><span class="n">7</span><span data-i18n="tab_pass"></span></a>
+    <a href="#litery" data-tab="litery"><span class="n">8</span><span data-i18n="tab_let"></span></a>
     <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
   </nav>
 
@@ -145,6 +146,39 @@
     <div id="pass-history" class="chips"></div>
     <div id="sum-pass" class="summary empty"></div>
     <div class="grid" id="cards-pass"></div>
+    <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
+  </section>
+
+  <!-- 8. Litery i błędy -->
+  <section class="panel" id="tab-litery" data-panel="litery" hidden>
+    <h2 data-i18n="let_h"></h2>
+    <div class="notice amateur" role="note">
+      <h3 data-i18n="let_warn_h"></h3>
+      <p data-i18n="let_warn"></p>
+    </div>
+    <div class="notice data">
+      <h3 data-i18n="let_res_h"></h3>
+      <p data-i18n="let_res"></p>
+    </div>
+
+    <h3 class="sec" data-i18n="ps_h"></h3>
+    <p class="lead" data-i18n="ps_desc"></p>
+    <div id="ps-target" class="target"></div>
+    <label for="ps-input" data-i18n="type_label"></label>
+    <textarea id="ps-input" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off" style="min-height:80px"></textarea>
+    <div class="bar">
+      <div class="live"><span><span data-i18n="live_time"></span> <b id="ps-time">0,0 s</b></span><span><span data-i18n="live_err"></span> <b id="ps-err">0</b></span></div>
+      <div class="btns"><button id="ps-finish" type="button" disabled data-i18n="finish"></button><button id="ps-reset" type="button" class="primary" data-i18n="restart"></button></div>
+    </div>
+    <div id="sum-ps" class="summary empty"></div>
+    <div class="grid" id="cards-ps"></div>
+
+    <h3 class="sec" data-i18n="ls_h"></h3>
+    <p class="lead" data-i18n="ls_desc"></p>
+    <div class="bar"><span class="status" id="st-ls"></span><div class="btns"><button id="ls-done" type="button" disabled data-i18n="ls_done"></button><button id="ls-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <div id="ls-grid" class="lgrid" aria-label="Siatka liter"></div>
+    <div id="sum-ls" class="summary empty"></div>
+    <div class="grid" id="cards-ls"></div>
     <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
   </section>
 

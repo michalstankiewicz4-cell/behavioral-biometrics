@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.6.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.7.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -29,8 +29,8 @@ Kolejność sekcji w pliku:
 5. **Karty miar**: `buildCards(grid, specs)` buduje karty z definicji. Każda definicja ma `id`, `title`, `unit`, `rows`, `chips` i `how` (opis metody). Wartości wpisują `setMain`, `setRow` i `setHTML`.
 6. **`Arena`**: obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania ruchu).
 7. **`mouseTask(o)`**: wspólny szkielet zadań z myszką. Zadanie dostarcza `start`, `down`, `move`, `up`, `draw`, `analyse`, `render`, `summary`; szkielet obsługuje przycisk Start, przerwanie przy zmianie zakładki i zakończenie.
-8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`.
-9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#wyniki`).
+8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`, `Pseudo`, `Search`.
+9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wyniki`).
 
 Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstają karty (`render`), ocena słowna (`summary`), zestawienie w „Wynikach” i eksport. Przy zmianie języka karty budowane są od nowa z tego samego `R`.
 
@@ -91,6 +91,31 @@ To klasyczne uwierzytelnianie dynamiką pisania: system sprawdza nie tylko, *czy
 
 Hasło jest przechowywane wyłącznie w zmiennej w pamięci karty, żeby porównać tekst. Nie trafia do wyniku `R`, eksportu ani na ekran: pole maskuje znaki, a oś wykresu pokazuje numery klawiszy. Eksport zawiera tylko czasy, profil, próg i wyniki testów.
 
+## 5b. Litery i błędy
+
+Zakładka **nie jest testem na dysleksję** i mówi o tym na samej górze. Nie ma modelu ani danych porównawczych od osób z diagnozą, więc wyniki są wyłącznie opisem. Ramka „Co mówią badania” odsyła do prac o zapisie klawiszy i dysleksji (Inputlog, Dytective).
+
+**Rodzaje błędów** (funkcja `classifyErrors`, używana w teście pisania i w pseudosłowach). Każdy błędnie wstawiony znak porównywany jest ze znakiem wzorca na tej samej pozycji, a kategorie sprawdzane są w tej kolejności:
+
+| Kategoria | Warunek |
+|-----------|---------|
+| spacje | oczekiwana lub wpisana jest spacja |
+| wielka / mała litera | te same litery, inna wielkość |
+| litery lustrzane | para z b, d, p, q |
+| ortografia | ó↔u, rz↔ż (r↔ż), ch↔h (c↔h), om↔ą (o↔ą) |
+| ogonki | ta sama litera bazowa (ą→a, ł→l, a→ą…) |
+| przestawione litery | wpisano następną literę wzorca, a zaraz potem oczekiwaną |
+| pominięta litera | wpisano następną literę wzorca |
+| podwojona litera | wpisano poprzednią literę wzorca |
+| sąsiedni klawisz | klawisze odległe o ≤ 1,3 szerokości klawisza na układzie QWERTY |
+| inne | pozostałe |
+
+Z ciągu kolejnych błędów na sąsiednich pozycjach liczony jest tylko pierwszy, bo następne zwykle są skutkiem przesunięcia.
+
+**Pseudosłowa:** 10 słów bez znaczenia (PL lub EN). Tempo `znaki ÷ minuty`, czas na słowo od pierwszego wpisania jego pierwszej litery do pierwszego wpisania ostatniej, porównanie z tempem z etapu 1 (`pseudosłowa ÷ zwykły tekst`).
+
+**Szukanie liter:** siatka 7 × 12 = 84 znaki, w tym 21 liter „b”, reszta losowo z d, p, q. Mierzony jest czas od „Start” do „Gotowe”, trafienia, pominięcia i pomyłki z podziałem na literę wziętą za „b”.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -98,7 +123,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.6.0",
+  "version": "0.7.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -115,7 +140,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
