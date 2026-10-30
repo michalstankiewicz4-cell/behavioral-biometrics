@@ -22,7 +22,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 5. ☑ **Mapa cieplna klawiatury** w zakładce Pisanie – kolor klawisza według czasu przytrzymania lub liczby błędów (v0.14.0)
 6. ☑ **Test Stroopa** – kolor napisu kontra treść słowa (v0.15.0)
 7. ☑ **Czas reakcji i prawo Hicka** – reakcja na 1, 2, 4 i 8 możliwych bodźców, wykres (v0.16.0)
-8. ☐ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru
+8. ☑ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru (v0.17.0)
 9. ☐ **Tapping** – 10 s stukania osobno lewą i prawą ręką
 10. ☐ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego
 11. ☐ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami)

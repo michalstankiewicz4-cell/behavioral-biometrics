@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.17.0] – 2026-10-30
+- Nowy test „Prawo Fittsa”: 18 ruchów do celów o 3 szerokościach i 3 odległościach.
+- Dopasowanie MT = a + b · ID, przepustowość w bitach na sekundę i wykres punktowy z linią dopasowania.
+- Poprawka wykresów: linia dopasowania nie wychodzi poza pole wykresu.
+
 ## [0.16.0] – 2026-10-30
 - Nowy test „Czas reakcji i prawo Hicka”: 4 bloki z 1, 2, 4 i 8 możliwymi klawiszami, losowa przerwa przed bodźcem, wykrywanie falstartów.
 - Wykres median z dopasowaną prostą RT = a + b · log₂(n + 1), nachylenie w ms na bit i przepustowość.

@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.16.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.17.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -177,6 +177,12 @@ Cztery bloki po 8 prób z n = 1, 2, 4 i 8 możliwymi klawiszami (F; F J; D F J K
 
 Dla każdego bloku mediana czasu poprawnych odpowiedzi. Do median dopasowana jest prosta metodą najmniejszych kwadratów: `RT = a + b · log₂(n + 1)` (prawo Hicka–Hymana). Pokazywane są a, b (ms/bit), R² i przepustowość `1000 / b` (bit/s) oraz wykres.
 
+## 5i. Prawo Fittsa
+
+Ruchy dyskretne: kliknięcie punktu startowego (promień 12 px), potem trafienie w cel. 3 szerokości celu (16, 32, 64 px) × 3 odległości (120, 240, 400 px, zmniejszane proporcjonalnie na wąskich ekranach), każda kombinacja 2 razy, w losowej kolejności. Start i cel są losowo obracane wokół środka pola.
+
+Dla każdego ruchu `ID = log₂(D/W + 1)` (wersja Shannona) i czas ruchu MT (od kliknięcia startu do trafienia, z pudłami). Dopasowanie `MT = a + b · ID` metodą najmniejszych kwadratów, R² i przepustowość = średnia `ID ÷ MT` (bit/s). Wykres punktowy z linią dopasowania.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -184,7 +190,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.16.0",
+  "version": "0.17.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -201,7 +207,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
