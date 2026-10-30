@@ -37,13 +37,18 @@ const Card = (() => { let blob=null, url=null;
     g.fillStyle=C.acc; g.font=`500 18px ${FM}`; g.fillText(D[LANG].tag, 60, 66);
     g.fillStyle=C.ink; g.font=`600 46px ${FB}`; g.fillText(D[LANG].title, 60, 120);
     g.fillStyle=C.muted; g.font=`18px ${FM}`; g.fillText(`v${VERSION} · ${new Date().toLocaleDateString(LANG==="pl"?"pl-PL":"en-GB")}`, 60, 156);
-    const rows=done.map(t=>{ const st=cardStats(t), first=Object.values(st)[0]||{}, k=Object.keys(st)[0]||"";
-      return [L(t.title), first.value ? `${first.value}` : (Object.entries(first)[0]||["",""]).join(": "), k]; }).slice(0,12);
-    const colW=(W-120)/2, perCol=Math.ceil(rows.length/2);
-    rows.forEach((r,i)=>{ const x=60+(i>=perCol?colW+20:0), y=215+(i%perCol)*56;
-      g.fillStyle=C.muted; g.font=`15px ${FB}`; g.fillText(`${r[0]} · ${r[2]}`.slice(0,60), x, y);
-      g.fillStyle=C.ink; g.font=`500 22px ${FM}`; g.fillText(String(r[1]).slice(0,38), x, y+26);
+    const MAX=28, rows=done.map(t=>{ if(t.card){ const [k,v]=t.card(t.R); return [L(t.title), v, k]; }
+      const st=cardStats(t), first=Object.values(st)[0]||{}, k=Object.keys(st)[0]||"";
+      return [L(t.title), first.value ? `${first.value}` : (Object.entries(first)[0]||["",""]).join(": "), k]; });
+    const extra=Math.max(0, rows.length-MAX), shown=rows.slice(0, extra ? MAX-1 : MAX);
+    const cols=shown.length>21?4:shown.length>12?3:2, colW=(W-120-(cols-1)*20)/cols, perCol=Math.ceil(shown.length/cols), RH=perCol>6?48:56;
+    const fit=(s,w)=>{ s=String(s); if(g.measureText(s).width<=w) return s; while(s.length>1 && g.measureText(s+"…").width>w) s=s.slice(0,-1); return s+"…"; };
+    shown.forEach((r,i)=>{ const c=Math.floor(i/perCol), x=60+c*(colW+20), y=215+(i%perCol)*RH;
+      g.fillStyle=C.muted; g.font=`${cols===4?13:15}px ${FB}`; g.fillText(fit(r[0]===r[2] ? r[0] : `${r[0]} · ${r[2]}`, colW-20), x, y);
+      g.fillStyle=C.ink; g.font=`500 ${cols===4?16:cols===3?19:22}px ${FM}`; g.fillText(fit(r[1], colW-20), x, y+26);
       g.fillStyle=C.line; g.fillRect(x,y+36,colW-20,1); });
+    if(extra){ const i=shown.length, c=Math.floor(i/perCol), x=60+c*(colW+20), y=215+(i%perCol)*RH;
+      g.fillStyle=C.muted; g.font=`15px ${FB}`; g.fillText(LANG==="pl"?`+ ${extra+1} kolejnych testów w eksporcie JSON`:`+ ${extra+1} more tests in the JSON export`, x, y+14); }
     g.fillStyle=C.warn; g.font=`15px ${FB}`; g.fillText(LANG==="pl"?"Amatorski projekt: wyniki orientacyjne, to nie jest diagnoza.":"Amateur project: results are rough, this is not a diagnosis.", 60, H-56);
     g.fillStyle=C.muted; g.font=`15px ${FM}`; g.fillText(REPO.replace("https://github.com/","").replace("/behavioral-biometrics","")+".github.io/behavioral-biometrics", 60, H-30);
     cv.toBlob(b=>{ blob=b; if(url) URL.revokeObjectURL(url); url=URL.createObjectURL(b); $("png-prev").src=url; $("png-prev").hidden=false; $("png-dl").disabled=false;

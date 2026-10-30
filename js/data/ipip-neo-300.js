@@ -1,6 +1,8 @@
 // IPIP-NEO-300: 300 pozycji z International Personality Item Pool (domena publiczna, https://ipip.ori.org/),
 // klucz pod-cech jak w IPIP-NEO (Goldberg; Johnson). Tekst angielski za pakietem
 // @alheimsins/b5-costa-mccrae-300-ipip-neo-pi-r (licencja MIT). Tłumaczenie polskie: własne, niewystandaryzowane.
+// SHORT120: numery pozycji (indeksy w ITEMS) tworzących IPIP-NEO-120 (Johnson 2014), po 4 na pod-cechę;
+// lista za pakietem @alheimsins/b5-johnson-120-ipip-neo-pi-r (MIT).
 // Format: [pod-cecha, klucz (+1 / −1), tekst EN, tekst PL]
 export const ITEMS = [
   ["N1",1,"Worry about things","Martwię się różnymi sprawami"],
@@ -304,3 +306,5 @@ export const ITEMS = [
   ["C6",-1,"Act without thinking","Działam bez zastanowienia"],
   ["C6",-1,"Often make last-minute plans","Często planuję w ostatniej chwili"]
 ];
+
+export const SHORT120 = [0,1,2,3,10,11,14,17,20,21,22,28,32,33,34,38,43,45,46,47,50,51,52,55,60,62,67,69,70,71,75,78,80,81,84,85,90,91,92,95,100,101,104,105,110,111,114,115,120,121,122,123,130,132,136,137,140,141,147,149,150,154,155,159,161,166,167,168,170,171,174,178,180,181,182,186,193,195,198,199,202,203,206,209,215,216,217,218,224,225,226,228,230,231,234,237,240,241,242,245,251,255,256,257,261,263,265,266,271,274,278,279,281,284,286,288,293,294,296,298];

@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.32.0] – 2026-10-31
+- Osobowość: do wyboru wersja skrócona IPIP-NEO-120 (120 pytań, ok. 15 min, nadal 5 cech i 30 pod-cech) obok pełnej IPIP-NEO-300.
+- Nowe interpretacje łączone: „Lateralizacja: ręka i oko” (ręczność, oko dominujące i tapping – jednorodna czy skrzyżowana) oraz „Osobowość i rytm dnia” (sumienność i ugodowość a chronotyp, na podstawie metaanalizy Tsaousisa 2010). Rotacja umysłowa dołączyła do zestawienia „Uwaga, pamięć i wyobraźnia przestrzenna”.
+- Karta PNG mieści teraz do 28 testów (do 4 kolumn), osobowość pokazuje na niej wszystkie 5 cech, a długie teksty są przycinane do szerokości.
+
 ## [0.31.1] – 2026-10-31
 - Opis strony i frazy kluczowe dla wyszukiwarek (PL i EN) obejmują teraz testy z grupy „Cechy stałe” i oko dominujące; odświeżona miniatura linku; uzupełnione README i dokumentacja (klucze eksportu).
 

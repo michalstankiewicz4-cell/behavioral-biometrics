@@ -12,6 +12,11 @@ import { Tap } from "../tests/tapping.js";
 import { Stroop } from "../tests/stroop.js";
 import { Search } from "../tests/letter-search.js";
 import { Digits, Corsi } from "../tests/memory.js";
+import { Hand } from "../tests/handedness.js";
+import { Eye } from "../tests/dominant-eye.js";
+import { Big5 } from "../tests/personality.js";
+import { Chrono, hhmm, signed, band } from "../tests/chronotype.js";
+import { Rot } from "../tests/mental-rotation.js";
 
 const pl = () => LANG === "pl";
 const name = t => L(t.title);
@@ -74,7 +79,7 @@ function steadiness(){
 }
 
 function attentionMemory(){
-  const [used, missing] = split([Stroop, Search, Digits, Corsi]); const it = []; const parts = [];
+  const [used, missing] = split([Stroop, Search, Digits, Corsi, Rot]); const it = []; const parts = [];
   if (Stroop.R){ it.push(item(pl() ? "efekt Stroopa" : "Stroop effect", (Stroop.R.effect >= 0 ? "+" : "") + nf(Stroop.R.effect) + " ms", pl() ? "zwykle od kilkudziesięciu do ponad 100 ms" : "usually tens to over 100 ms"));
     parts.push(Stroop.R.effect > 150 ? (pl() ? "czytanie słów mocno przeszkadzało Ci w nazywaniu kolorów" : "reading the words interfered strongly with naming colours")
              : Stroop.R.effect < 20 ? (pl() ? "słowa prawie nie przeszkadzały Ci w nazywaniu kolorów" : "the words barely interfered with naming colours")
@@ -86,11 +91,54 @@ function attentionMemory(){
     parts.push(d > 0 ? (pl() ? `zakres cyfr masz o ${d} większy niż przestrzenny, jak większość osób` : `your digit span is ${d} larger than your spatial span, as for most people`)
              : d < 0 ? (pl() ? "pamięć przestrzenna wypadła u Ciebie lepiej niż słowna, co zdarza się rzadziej" : "your spatial memory scored better than verbal, which is less common")
              : (pl() ? "oba zakresy pamięci masz równe" : "both memory spans are equal")); }
+  if (Rot.R){ const ok = Number.isFinite(Rot.R.fit.b) && Rot.R.fit.b > 0;
+    it.push(item(pl() ? "rotacja umysłowa: trafność / tempo" : "mental rotation: accuracy / speed", `${nf(100 * Rot.R.acc)} % / ${ok ? nf(1000 / Rot.R.fit.b) + " °/s" : "—"}`));
+    if (Corsi.R) parts.push(pl() ? "bloki Corsiego i rotacja umysłowa razem opisują wyobraźnię przestrzenną: pierwsze – ile miejsc pamiętasz, druga – jak sprawnie obracasz obraz w głowie"
+                                  : "Corsi blocks and mental rotation together describe spatial imagery: the first – how many places you remember, the second – how well you rotate an image in your head"); }
   const txt = parts.length ? (pl() ? "Krótko: " : "In short: ") + parts.join(", ") + "." : (pl() ? "Liczby obok pokazują Twoje wyniki." : "The numbers above show your results.");
-  return block(pl() ? "Uwaga i pamięć" : "Attention and memory", used, missing, it, txt);
+  return block(pl() ? "Uwaga, pamięć i wyobraźnia przestrzenna" : "Attention, memory and spatial imagery", used, missing, it, txt);
+}
+
+function laterality(){
+  const [used, missing] = split([Hand, Eye, Tap]); const it = [];
+  const side = { right:pl() ? "prawa" : "right", left:pl() ? "lewa" : "left" };
+  if (Hand.R) it.push(item(pl() ? "ręka (kwestionariusz)" : "hand (questionnaire)", `${Hand.R.lq > 0 ? "+" : ""}${nf(Hand.R.lq)}`,
+    Hand.R.cls === "mixed" ? (pl() ? "ręczność mieszana" : "mixed-handed") : side[Hand.R.cls]));
+  if (Eye.R) it.push(item(pl() ? "oko dominujące" : "dominant eye", Eye.R.dominant === "unclear" ? (pl() ? "niejasne" : "unclear") : (pl() ? (Eye.R.dominant === "right" ? "prawe" : "lewe") : Eye.R.dominant)));
+  let tapSide = null;
+  if (Tap.R){ const a = Tap.R.asym * 100; tapSide = Math.abs(a) < 3 ? null : a > 0 ? "right" : "left";
+    it.push(item(pl() ? "szybsza ręka w tappingu" : "faster hand in tapping", tapSide ? side[tapSide] : (pl() ? "remis" : "tie"), `${a > 0 ? "+" : ""}${nf(a, 1)} %`)); }
+  const hand = Hand.R && Hand.R.cls !== "mixed" ? Hand.R.cls : (!Hand.R && tapSide) || null;
+  const eye = Eye.R && Eye.R.dominant !== "unclear" ? Eye.R.dominant : null;
+  let txt;
+  if (hand && eye) txt = hand === eye
+    ? (pl() ? `Ręka i oko dominują <strong>po tej samej stronie</strong> (${side[hand]}) – to tzw. lateralizacja jednorodna.` : `Your dominant hand and eye are <strong>on the same side</strong> (${side[hand]}) – so-called uniform laterality.`)
+    : (pl() ? `Ręka dominuje po stronie ${hand === "right" ? "prawej" : "lewej"}, a oko po ${eye === "right" ? "prawej" : "lewej"} – to <strong>lateralizacja skrzyżowana</strong>. Nie jest rzadka: ok. 88% ludzi woli prawą rękę, ale tylko ok. 71% prawe oko. Może mieć znaczenie np. przy celowaniu (oko „prowadzi” po innej stronie niż ręka).`
+            : `Your dominant hand is on the ${hand} side and your dominant eye on the ${eye} side – this is <strong>crossed laterality</strong>. It isn't rare: about 88% of people favour the right hand but only about 71% the right eye. It can matter e.g. when aiming (the leading eye is on a different side from the hand).`);
+  else txt = pl() ? "Nie da się porównać ręki z okiem: potrzebna jest wyraźna ręka (kwestionariusz albo tapping) i wyraźne oko dominujące." : "Hand and eye can't be compared: a clear hand (questionnaire or tapping) and a clear dominant eye are needed.";
+  if (Hand.R && tapSide && Hand.R.cls !== "mixed") txt += " " + (Hand.R.cls === tapSide
+    ? (pl() ? "Tapping potwierdza rękę z kwestionariusza." : "Tapping confirms the hand from the questionnaire.")
+    : (pl() ? "Tapping wskazał drugą rękę niż kwestionariusz – przy krótkim teście to możliwe." : "Tapping pointed to the other hand than the questionnaire – possible with a short test."));
+  txt += pl() ? " <small>Odsetki: Wikipedia, hasło „Laterality”.</small>" : " <small>Percentages: Wikipedia, article “Laterality”.</small>";
+  return block(pl() ? "Lateralizacja: ręka i oko" : "Laterality: hand and eye", used, missing, it, txt);
+}
+
+function personalityRhythm(){
+  const [used, missing] = split([Big5, Chrono]); const it = [];
+  if (Big5.R){ it.push(item(pl() ? "sumienność" : "conscientiousness", nf(Big5.R.domains.C, 2), "1–5"));
+    it.push(item(pl() ? "ugodowość" : "agreeableness", nf(Big5.R.domains.A, 2), "1–5")); }
+  if (Chrono.R) it.push(item(pl() ? "chronotyp (środek snu w dni wolne)" : "chronotype (mid-sleep on free days)", hhmm(Chrono.R.msfsc), L(band(Chrono.R.msfsc))));
+  let txt = pl() ? "W metaanalizie badań (Tsaousis 2010) osoby poranne miały przeciętnie nieco wyższą <strong>sumienność</strong> (r ≈ 0,29) i trochę wyższą ugodowość (r ≈ 0,13). To słabe związki – wiele osób do nich nie pasuje."
+                 : "In a meta-analysis (Tsaousis 2010) morning types had on average slightly higher <strong>conscientiousness</strong> (r ≈ 0.29) and a little higher agreeableness (r ≈ 0.13). These are weak links – many people don't fit them.";
+  if (Big5.R && Chrono.R){ const t = signed(Chrono.R.msfsc), c = Big5.R.domains.C;
+    const early = t < 4, late = t >= 5, hi = c > 3.5, lo = c < 2.5;
+    txt += " " + ((early && hi) || (late && lo) ? (pl() ? "Twój wynik pasuje do tego wzorca." : "Your result fits this pattern.")
+               : (early && lo) || (late && hi) ? (pl() ? "Twój wynik idzie wbrew temu wzorcowi – przy tak słabym związku to nic dziwnego." : "Your result goes against this pattern – not surprising with such a weak link.")
+               : (pl() ? "Twój wynik jest pośrodku, więc wzorzec niewiele o nim mówi." : "Your result is in the middle, so the pattern says little about it.")); }
+  return block(pl() ? "Osobowość i rytm dnia" : "Personality and daily rhythm", used, missing, it, txt);
 }
 
 export function renderCombined(){
   const el = $("results-comb"); if (!el) return;
-  el.innerHTML = [speed(), speedAccuracy(), steadiness(), attentionMemory()].join("");
+  el.innerHTML = [speed(), speedAccuracy(), steadiness(), attentionMemory(), laterality(), personalityRhythm()].join("");
 }

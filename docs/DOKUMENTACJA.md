@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.31.1**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.32.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -29,7 +29,7 @@ js/
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype, mental-rotation)
-  data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
+  data/ipip-neo-300.js     300 pozycji IPIP-NEO + lista 120 pozycji wersji skróconej (EN z pakietów MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
   wiki.js                  linki do Wikipedii przy testach
@@ -226,16 +226,17 @@ W obu: poprawna odpowiedź wydłuża ciąg o 1, na każdej długości są 2 szan
 
 `js/wiki.js` zawiera mapę `WIKI` (zakładka → lista artykułów) i wstawia pod nagłówkiem każdej zakładki linijkę „Więcej w Wikipedii”, z oznaczeniem języka (PL/EN). Linki są tylko tam, gdzie artykuł istnieje (sprawdzone ręcznie); polskich artykułów brakuje m.in. dla prawa Hicka, CAPTCHA i tappingu. Linki otwierają się w nowej karcie, a strona nic nie wysyła przy ich wyświetleniu.
 
-## 5n. Osobowość: Wielka Piątka (IPIP-NEO-300)
+## 5n. Osobowość: Wielka Piątka (IPIP-NEO-300 i IPIP-NEO-120)
 
 Grupa zakładek „Cechy stałe”. Pełny kwestionariusz IPIP-NEO: 300 pozycji z International Personality Item Pool (domena publiczna, ipip.ori.org), po 10 na każdą z 30 pod-cech (6 na każdą z 5 cech). Tekst angielski za pakietem `@alheimsins/b5-costa-mccrae-300-ipip-neo-pi-r` (MIT), polskie tłumaczenie własne – niewystandaryzowane. Dane: `js/data/ipip-neo-300.js`, wiersz = `[pod-cecha, klucz ±1, EN, PL]`.
 
+- **Wersja skrócona** do wyboru przed startem: IPIP-NEO-120 (Johnson 2014) – 120 z tych samych 300 pozycji, po 4 na pod-cechę (lista `SHORT120` w pliku danych, za pakietem `@alheimsins/b5-johnson-120-ipip-neo-pi-r`, MIT). Tłumaczenia te same co w pełnej wersji. 12 stron zamiast 30.
 - Kolejność pokazywania jak w IPIP-NEO: k-ta pozycja kolejnych 30 pod-cech na przemian, 10 pozycji na stronę, 30 stron. Przejście dalej wymaga odpowiedzi na całej stronie.
 - Skala 1–5 („zupełnie nie pasuje” … „bardzo pasuje”); pozycje z kluczem ujemnym odwracane: 6 − odpowiedź.
-- Pod-cecha = średnia 10 pozycji; cecha = średnia 6 pod-cech (czyli 60 pozycji). Opis: < 2,5 niski, > 3,5 wysoki, pomiędzy średni.
+- Pod-cecha = średnia 10 pozycji; cecha = średnia 6 pod-cech (60 pozycji w pełnej, 24 w skróconej). Opis: < 2,5 niski, > 3,5 wysoki, pomiędzy średni.
 - **Brak norm populacyjnych**: wynik to położenie na skali odpowiedzi, nie centyl.
 - Odpowiedzi są tylko w pamięci karty (przejście do innej zakładki ich nie kasuje, zamknięcie karty – tak). Ponowny „Start” w trakcie wymaga drugiego kliknięcia w ciągu 4 s.
-- Eksport (`osobowosc`): średnie cech i pod-cech, czas wypełniania w minutach i wszystkie 300 odpowiedzi.
+- Eksport (`osobowosc`): wersja (`IPIP-NEO-300` / `IPIP-NEO-120`), liczba pytań, średnie cech i pod-cech, czas wypełniania w minutach i odpowiedzi jako lista `{item, answer}` (numer pozycji 1–300 w pliku danych).
 
 ## 5o. Ręczność
 
@@ -283,7 +284,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.31.1",
+  "version": "0.32.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -307,17 +308,19 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 
 **Porównanie:** dwa pola wyboru pliku w zakładce Wyniki. Pliki są czytane przez `FileReader` i `JSON.parse` lokalnie. Tabela pokazuje, dla każdego etapu obecnego w którymkolwiek pliku, wszystkie wartości z `stats` (A i B obok siebie); różniące się wartości są wyróżnione. Plik bez pola `stages` jest odrzucany z komunikatem.
 
-**Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (maks. 12, w dwóch kolumnach), z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
+**Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (test może podać własny skrót przez `task.card(R)` – np. osobowość pokazuje wszystkie 5 cech); do 12 testów w 2 kolumnach, do 21 w 3, do 28 w 4 (7 wierszy), a ewentualny nadmiar jako dopisek „+ N kolejnych testów”; zbyt długie teksty są przycinane do szerokości kolumny, z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
 
 ## 6b. Zakładka Wyniki: liczby, interpretacja, interpretacje łączone
 
 1. **Wyniki (liczby):** tabela z główną wartością każdej karty każdego ukończonego testu (z `cardStats`), bez komentarza.
 2. **Interpretacja testów:** ocena słowna każdego testu osobno (`task.summary`).
-3. **Interpretacje łączone** (`js/results/combined.js`): cztery opisowe zestawienia z kilku testów. Każde pokazuje, na jakich testach się opiera i których brakuje; potrzebuje co najmniej dwóch ukończonych testów.
+3. **Interpretacje łączone** (`js/results/combined.js`): sześć opisowych zestawień z kilku testów. Każde pokazuje, na jakich testach się opiera i których brakuje; potrzebuje co najmniej dwóch ukończonych testów.
    - *Szybkość ogólna:* prosta reakcja (Hick, n = 1), reakcja przy klikaniu, tempo pisania, tapping. Porównanie z orientacyjnymi wartościami: prosta reakcja ok. 200–300 ms, pisanie ok. 35–45 słów/min.
    - *Szybkość kontra precyzja:* pisanie (tempo, odsetek błędów), Fitts (przepustowość, pudła), klikanie (pudła, przestrzelenia), przeciąganie (precyzja). Szybko = ≥ 45 słów/min lub ≥ 5 bit/s; dużo błędów = ≥ 5% znaków, ≥ 15% pudeł lub ≥ 40% przestrzeleń. Progi ustalone na potrzeby strony.
    - *Stabilność ręki i rytmu:* drżenie (przeciąganie, rysowanie), CV tappingu (< 0,15 = równo), CV rytmu pisania (< 0,35 = równo).
-   - *Uwaga i pamięć:* efekt Stroopa (> 150 ms silny, < 20 ms słaby), szukanie liter, zakres cyfr kontra Corsi.
+   - *Uwaga, pamięć i wyobraźnia przestrzenna:* efekt Stroopa (> 150 ms silny, < 20 ms słaby), szukanie liter, zakres cyfr kontra Corsi, rotacja umysłowa (trafność, tempo w °/s).
+   - *Lateralizacja: ręka i oko:* ręczność (LQ), oko dominujące, szybsza ręka w tappingu (remis < 3%). Ręka i oko po tej samej stronie = jednorodna, po różnych = skrzyżowana (odsetki 88% prawa ręka / 71% prawe oko z Wikipedii, hasło „Laterality”). Bez kwestionariusza ręka jest brana z tappingu.
+   - *Osobowość i rytm dnia:* sumienność, ugodowość, chronotyp (MSFsc). Odniesienie: metaanaliza Tsaousis (2010) – poranność a sumienność r ≈ 0,29, ugodowość r ≈ 0,13. „Pasuje do wzorca”: MSFsc < 4:00 i sumienność > 3,5 albo MSFsc ≥ 5:00 i sumienność < 2,5; odwrotnie – „wbrew wzorcowi”; pozostałe – pośrodku.
 
 ## 7. Wersjonowanie
 

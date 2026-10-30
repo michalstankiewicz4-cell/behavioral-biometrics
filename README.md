@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.31.1** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.32.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -37,7 +37,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 13 | Prawo Fittsa · Fitts's law | 18 ruchów do celów różnej wielkości i odległości, dopasowanie MT = a + b·ID, przepustowość |
 | 14 | Tapping · Finger tapping | 10 s stukania lewą i prawą ręką: tempo, równomierność, zmęczenie, różnica rąk |
 | 15 | Pamięć · Memory | zakres pamięci cyfr i bloki Corsiego |
-| 16 | Osobowość · Personality | Wielka Piątka, pełny IPIP-NEO (300 pytań): 5 cech i 30 pod-cech; bez norm, własne tłumaczenie PL |
+| 16 | Osobowość · Personality | Wielka Piątka: pełny IPIP-NEO-300 albo skrócony IPIP-NEO-120; 5 cech i 30 pod-cech; bez norm, własne tłumaczenie PL |
 | 17 | Ręczność · Handedness | 10 czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem |
 | 18 | Chronotyp · Chronotype | godziny snu w dni robocze i wolne → środek snu w dni wolne (MSFsc, Roenneberg), społeczny jet lag |
 | 19 | Rotacja umysłowa · Mental rotation | 30 par figur: ta sama czy odbicie; trafność, czas, nachylenie czasu względem kąta (ms/°) |
@@ -53,7 +53,7 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 - Tekst do przepisania nad polem, jako podkładka lub pod polem · Reference text above, under or below the field
 - Hasło: wymyślone hasło nigdy nie jest zapisywane ani eksportowane · Password: the made-up password is never stored or exported
 - Linki do polskiej i angielskiej Wikipedii przy testach · Links to Polish and English Wikipedia next to the tests
-- Wyniki osobno od interpretacji oraz interpretacje łączone z kilku testów · Results separate from interpretation, plus combined interpretations
+- Wyniki osobno od interpretacji oraz 6 interpretacji łączonych z kilku testów (m.in. lateralizacja ręka–oko, osobowość i rytm dnia) · Results separate from interpretation, plus 6 combined interpretations
 - Porównanie dwóch eksportów i karta wyniku PNG (lokalnie) · Comparing two exports and a PNG result card (locally)
 - Eksport profilu (ocena + statystyki + surowe pomiary) do JSON; w Chrome/Edge domyślnie na Pulpit · Profile export to JSON; Desktop by default in Chrome/Edge
 
@@ -93,7 +93,7 @@ js/
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype, mental-rotation)
-  data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
+  data/ipip-neo-300.js     300 pozycji IPIP-NEO + lista 120 pozycji wersji skróconej (EN z pakietów MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
   wiki.js                  linki do Wikipedii przy testach

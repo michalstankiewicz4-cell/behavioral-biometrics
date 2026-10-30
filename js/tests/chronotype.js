@@ -73,4 +73,4 @@ const Chrono = (() => { let st=null;
   return self;
 })();
 
-export { Chrono, hhmm, signed };
+export { Chrono, hhmm, signed, band };

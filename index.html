@@ -41,7 +41,7 @@
   "inLanguage": ["pl", "en"],
   "keywords": "biometria behawioralna, dynamika pisania, odcisk przeglądarki, fingerprinting, test szybkości pisania, test czasu reakcji, efekt Stroopa, prawo Fittsa, prawo Hicka, test pamięci, bloki Corsiego, tablica Snellena, tablice Ishihary, podpis myszką, człowiek czy bot, test osobowości, Wielka Piątka, IPIP-NEO, ręczność, leworęczność, oko dominujące, chronotyp, skowronek czy sowa, rotacja umysłowa, behavioral biometrics, keystroke dynamics, mouse dynamics, browser fingerprint, typing speed test, Big Five personality test, IPIP-NEO, handedness test, dominant eye test, chronotype, mental rotation, reaction time test, Stroop test, Fitts's law, Hick's law, memory span test, Corsi blocks, Snellen chart, Ishihara test, mouse signature, human or bot",
   "isAccessibleForFree": true,
-  "softwareVersion": "0.31.1",
+  "softwareVersion": "0.32.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/assets/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -445,6 +445,10 @@
       <p data-i18n="b5_warn"></p>
     </div>
     <p class="lead" data-i18n="b5_desc"></p>
+    <fieldset class="seg b5-ver"><legend data-i18n="b5_ver"></legend>
+      <label><input type="radio" name="b5-ver" value="full" checked><span data-i18n="b5_full"></span></label>
+      <label><input type="radio" name="b5-ver" value="short"><span data-i18n="b5_short"></span></label>
+    </fieldset>
     <div class="bar"><span class="status" id="st-b5"></span><div class="btns"><button id="b5-go" type="button" class="primary" data-i18n="start"></button></div></div>
     <progress id="b5-prog" class="b5-prog" value="0" max="300"></progress>
     <div id="b5-items" class="q-list"></div>

@@ -266,3 +266,4 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .chr-form input[type=time]{font-family:var(--font-mono);font-size:1rem;padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink)}
 .chr-form .sec{margin-top:6px}
 .rot-ans{justify-content:center;margin-top:8px}.rot-ans button{font-family:var(--font-body);font-size:1rem;min-width:9em}
+.b5-ver{margin:6px 0 4px}

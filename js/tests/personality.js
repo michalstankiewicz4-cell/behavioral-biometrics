@@ -4,11 +4,12 @@ import { LANGHOOKS } from "../core/registry.js";
 import { $, esc, nf } from "../core/utils.js";
 import { L, LANG } from "../i18n/index.js";
 import { markDone } from "../main.js";
-import { ITEMS } from "../data/ipip-neo-300.js";
+import { ITEMS, SHORT120 } from "../data/ipip-neo-300.js";
 
 // =====================================================================
 // 5 cech × 6 pod-cech × 10 pozycji. Kolejność pokazywania jak w IPIP-NEO:
 // pozycje kolejnych pod-cech na przemian (1. z N1, 1. z E1, …, 1. z C6, 2. z N1, …).
+// Wersja skrócona IPIP-NEO-120 (Johnson 2014): podzbiór 4 pozycji na pod-cechę, ta sama kolejność na przemian.
 // Wynik pod-cechy = średnia odpowiedzi (1–5) po odwróceniu pozycji z kluczem ujemnym.
 // Brak norm populacyjnych: wynik to położenie na skali odpowiedzi, nie centyl.
 // =====================================================================
@@ -39,6 +40,9 @@ const SCALE = [
 const PER_PAGE = 10, N = ITEMS.length;
 // kolejność pokazywania: pozycja k każdej z 30 pod-cech po kolei
 const ORDER = []; for(let k=0;k<10;k++) for(let f=0;f<30;f++) ORDER.push(f*10+k);
+const SHORT_SET = new Set(SHORT120);
+const ORDER120 = []; for(let k=0;k<4;k++) for(let f=0;f<30;f++) ORDER120.push(SHORT120.filter(i => Math.floor(i/10)===f)[k]);
+const VERSIONS = { full:{ order:ORDER, name:"IPIP-NEO-300" }, short:{ order:ORDER120, name:"IPIP-NEO-120" } };
 const level = m => m < 2.5 ? "lo" : m > 3.5 ? "hi" : "mid";
 const LV = { lo:{pl:"niski",en:"low"}, mid:{pl:"średni",en:"average"}, hi:{pl:"wysoki",en:"high"} };
 const facetsOf = d => [1,2,3,4,5,6].map(i => d+i);
@@ -53,44 +57,46 @@ function score(ans){
 }
 
 const Big5 = (() => {
-  let ans = new Array(N).fill(null), page = 0, t0 = null, st = null;
-  const self = { tab:"osobowosc", key:"osobowosc", grid:"cards-b5", sumId:"sum-b5", R:null, title:{pl:"Osobowość (Wielka Piątka, IPIP-NEO-300)",en:"Personality (Big Five, IPIP-NEO-300)"},
+  let ans = new Array(N).fill(null), page = 0, t0 = null, st = null, ver = "full";
+  const list = () => VERSIONS[ver].order, total = () => list().length;
+  const self = { tab:"osobowosc", key:"osobowosc", grid:"cards-b5", sumId:"sum-b5", R:null, title:{pl:"Osobowość (Wielka Piątka, IPIP-NEO)",en:"Personality (Big Five, IPIP-NEO)"},
     specs: DOM.map(d => ({ id:"b5-"+d, title:DNAME[d], unit:{pl:"średnia odpowiedź (1–5)",en:"mean answer (1–5)"},
       rows: facetsOf(d).map(f => [f, FNAME[f]]),
-      how:{pl:`Średnia z 60 pozycji tej cechy (po 10 na każdą z 6 pod-cech), na skali 1–5; pozycje sformułowane odwrotnie są odwracane (1↔5). Poniżej 2,5 = niski, powyżej 3,5 = wysoki – to tylko położenie na skali odpowiedzi, bez porównania z normami populacji.`,
-           en:`Mean of the 60 items of this trait (10 for each of 6 facets), on a 1–5 scale; reverse-keyed items are flipped (1↔5). Below 2.5 = low, above 3.5 = high – this is only the position on the answer scale, with no comparison to population norms.`} })) };
+      how:{pl:`Średnia z pozycji tej cechy: 60 w wersji pełnej (po 10 na każdą z 6 pod-cech) albo 24 w skróconej (po 4), na skali 1–5; pozycje sformułowane odwrotnie są odwracane (1↔5). Poniżej 2,5 = niski, powyżej 3,5 = wysoki – to tylko położenie na skali odpowiedzi, bez porównania z normami populacji.`,
+           en:`Mean of this trait's items: 60 in the full version (10 for each of 6 facets) or 24 in the short one (4 each), on a 1–5 scale; reverse-keyed items are flipped (1↔5). Below 2.5 = low, above 3.5 = high – this is only the position on the answer scale, with no comparison to population norms.`} })) };
   const status = o => { st=o; $("st-b5").textContent = L(o)||""; };
-  const answered = () => ans.filter(v=>v!=null).length;
+  const answered = () => list().filter(i => ans[i]!=null).length;
 
   function renderPage(){
     const box = $("b5-items"); if(!t0){ box.innerHTML=""; $("b5-nav").hidden = true; return; }
-    const ids = ORDER.slice(page*PER_PAGE, (page+1)*PER_PAGE);
+    const ids = list().slice(page*PER_PAGE, (page+1)*PER_PAGE);
     box.innerHTML = ids.map((i,k) => { const n = page*PER_PAGE+k+1, txt = LANG==="pl" ? ITEMS[i][3] : ITEMS[i][2];
       return `<fieldset class="q-item" data-i="${i}"><legend><span class="q-n">${n}.</span> ${esc(txt)}</legend><div class="q-scale">`
         + SCALE.map((s,v) => `<label><input type="radio" name="q${i}" value="${v+1}"${ans[i]===v+1?" checked":""}><span>${esc(L(s))}</span></label>`).join("")
         + `</div></fieldset>`; }).join("");
     $("b5-nav").hidden = false;
     $("b5-prev").disabled = page===0;
-    const last = (page+1)*PER_PAGE >= N;
+    const last = (page+1)*PER_PAGE >= total();
     $("b5-next").textContent = last ? (LANG==="pl"?"Zakończ i pokaż wynik":"Finish and show result") : (LANG==="pl"?"Dalej →":"Next →");
     progress();
   }
   function progress(){ const a = answered();
-    $("b5-prog").value = a; $("b5-prog").max = N;
-    status(t0 ? {pl:`Strona ${page+1} z ${N/PER_PAGE} · odpowiedzi: ${a} z ${N}`, en:`Page ${page+1} of ${N/PER_PAGE} · answered: ${a} of ${N}`} : null); }
+    $("b5-prog").value = a; $("b5-prog").max = total();
+    status(t0 ? {pl:`Strona ${page+1} z ${total()/PER_PAGE} · odpowiedzi: ${a} z ${total()}`, en:`Page ${page+1} of ${total()/PER_PAGE} · answered: ${a} of ${total()}`} : null); }
   $("b5-items").addEventListener("change", e => { const r = e.target; if(r.type!=="radio") return;
     const i = +r.closest(".q-item").dataset.i; ans[i] = +r.value; r.closest(".q-item").classList.remove("miss"); progress(); });
   $("b5-prev").addEventListener("click", () => { if(page>0){ page--; renderPage(); $("b5-items").scrollIntoView({block:"start"}); } });
   $("b5-next").addEventListener("click", () => {
-    const ids = ORDER.slice(page*PER_PAGE, (page+1)*PER_PAGE), miss = ids.filter(i => ans[i]==null);
+    const ids = list().slice(page*PER_PAGE, (page+1)*PER_PAGE), miss = ids.filter(i => ans[i]==null);
     if(miss.length){ miss.forEach(i => $("b5-items").querySelector(`[data-i="${i}"]`).classList.add("miss"));
       $("b5-items").querySelector(".miss").scrollIntoView({block:"center"});
       status({pl:`Odpowiedz na wszystkie pytania na tej stronie (brakuje: ${miss.length}).`,en:`Answer all questions on this page (missing: ${miss.length}).`}); return; }
-    if((page+1)*PER_PAGE < N){ page++; renderPage(); $("b5-items").scrollIntoView({block:"start"}); return; }
+    if((page+1)*PER_PAGE < total()){ page++; renderPage(); $("b5-items").scrollIntoView({block:"start"}); return; }
     finish();
   });
   $("b5-go").addEventListener("click", () => {
     if(t0 && answered() && !confirm0()) return;
+    ver = document.querySelector('input[name="b5-ver"]:checked').value;
     ans = new Array(N).fill(null); page = 0; t0 = performance.now(); renderPage(); $("b5-items").scrollIntoView({block:"start"}); });
   // ponowny start czyści odpowiedzi – drugi klik w ciągu 4 s potwierdza (bez okien dialogowych)
   let armed = 0;
@@ -99,7 +105,7 @@ const Big5 = (() => {
 
   function finish(){
     const { fac, dom } = score(ans);
-    self.R = { items:N, minutes: (performance.now()-t0)/60000, domains:dom, facets:fac, answers:[...ans] };
+    self.R = { version:VERSIONS[ver].name, items:total(), minutes: (performance.now()-t0)/60000, domains:dom, facets:fac, answers:list().map(i => ({ item:i+1, answer:ans[i] })) };
     t0 = null; renderPage(); status({pl:"Gotowe – wynik poniżej.",en:"Done – result below."});
     self.render(self.R); setSummary(self); markDone("osobowosc"); $("sum-b5").scrollIntoView({block:"start"});
   }
@@ -113,15 +119,18 @@ const Big5 = (() => {
       return `<li><strong>${L(DNAME[d])}</strong> ${bar(m)} ${nf(m,2)} (${L(LV[lv])}) – ${t}.</li>`; }).join("");
     const ext = []; for(const f in R.facets){ const v=R.facets[f]; if(v<=2 || v>=4) ext.push(`${L(FNAME[f])} ${nf(v,1)}`); }
     return LANG==="pl"
-      ? `<p>Twój profil w pięciu cechach (średnia odpowiedź 1–5, ${R.items} pytań, ${nf(R.minutes,0)} min):</p><ul class="b5-list">${rows}</ul>`
+      ? `<p>Twój profil w pięciu cechach (${R.version || "IPIP-NEO-300"}, średnia odpowiedź 1–5, ${R.items} pytań, ${nf(R.minutes,0)} min):</p><ul class="b5-list">${rows}</ul>`
         + (ext.length ? `<p>Najbardziej wyraziste pod-cechy (≤ 2 lub ≥ 4): ${ext.join(", ")}.</p>` : "")
         + `<p>Żadna cecha nie jest „lepsza” – każdy biegun ma swoje mocne strony. Wynik opisuje, jak dziś sam(a) siebie oceniasz, i może się różnić od oceny innych osób.</p>`
-      : `<p>Your profile on the five traits (mean answer 1–5, ${R.items} questions, ${nf(R.minutes,0)} min):</p><ul class="b5-list">${rows}</ul>`
+      : `<p>Your profile on the five traits (${R.version || "IPIP-NEO-300"}, mean answer 1–5, ${R.items} questions, ${nf(R.minutes,0)} min):</p><ul class="b5-list">${rows}</ul>`
         + (ext.length ? `<p>Most pronounced facets (≤ 2 or ≥ 4): ${ext.join(", ")}.</p>` : "")
         + `<p>No trait is “better” – each pole has its strengths. The result describes how you rate yourself today and may differ from how others see you.</p>`;
   };
+  // jedna linijka na kartę PNG: wszystkie 5 cech zamiast pierwszej karty
+  self.card = R => [LANG==="pl" ? "5 cech, średnia 1–5" : "5 traits, mean 1–5",
+    DOM.map(d => `${LANG==="pl" ? {N:"N",E:"E",O:"O",A:"U",C:"S"}[d] : d}${nf(R.domains[d],1)}`).join(" ")];
   LANGHOOKS.push(() => { if(t0) renderPage(); else status(st); });
   return self;
 })();
 
-export { Big5, ITEMS, ORDER, score, DNAME, FNAME };
+export { Big5, ITEMS, ORDER, ORDER120, score, DNAME, FNAME };

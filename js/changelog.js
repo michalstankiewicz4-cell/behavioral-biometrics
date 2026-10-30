@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.31.1";
+const VERSION = "0.32.0";
 const CHANGELOG = [
+  { v:"0.32.0", date:"2026-10-31",
+    pl:["Osobowość: do wyboru wersja skrócona IPIP-NEO-120 (120 pytań, ok. 15 min, nadal 5 cech i 30 pod-cech) obok pełnej IPIP-NEO-300.","Nowe interpretacje łączone: „Lateralizacja: ręka i oko” (ręczność, oko dominujące i tapping – jednorodna czy skrzyżowana) oraz „Osobowość i rytm dnia” (sumienność i ugodowość a chronotyp, na podstawie metaanalizy Tsaousisa 2010). Rotacja umysłowa dołączyła do zestawienia „Uwaga, pamięć i wyobraźnia przestrzenna”.","Karta PNG mieści teraz do 28 testów (do 4 kolumn), osobowość pokazuje na niej wszystkie 5 cech, a długie teksty są przycinane do szerokości."],
+    en:["Personality: a short version, IPIP-NEO-120 (120 questions, about 15 min, still 5 traits and 30 facets), can be chosen besides the full IPIP-NEO-300.","New combined interpretations: “Laterality: hand and eye” (handedness, dominant eye and tapping – uniform or crossed) and “Personality and daily rhythm” (conscientiousness and agreeableness vs chronotype, based on Tsaousis's 2010 meta-analysis). Mental rotation joined the “Attention, memory and spatial imagery” summary.","The PNG card now fits up to 28 tests (up to 4 columns), shows all 5 personality traits, and long texts are cut to fit."] },
   { v:"0.31.1", date:"2026-10-31",
     pl:["Opis strony i frazy kluczowe dla wyszukiwarek (PL i EN) obejmują teraz testy z grupy „Cechy stałe” i oko dominujące; odświeżona miniatura linku; uzupełnione README i dokumentacja (klucze eksportu)."],
     en:["The page description and search keywords (PL and EN) now cover the “Stable traits” tests and the dominant eye; refreshed link thumbnail; README and documentation updated (export keys)."] },
