@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.22.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.23.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -48,6 +48,7 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 - Motyw dzień/noc, domyślnie według systemu · Day/night theme, follows the system by default
 - Tekst do przepisania nad polem, jako podkładka lub pod polem · Reference text above, under or below the field
 - Hasło: wymyślone hasło nigdy nie jest zapisywane ani eksportowane · Password: the made-up password is never stored or exported
+- Linki do polskiej i angielskiej Wikipedii przy testach · Links to Polish and English Wikipedia next to the tests
 - Porównanie dwóch eksportów i karta wyniku PNG (lokalnie) · Comparing two exports and a PNG result card (locally)
 - Eksport profilu (ocena + statystyki + surowe pomiary) do JSON; w Chrome/Edge domyślnie na Pulpit · Profile export to JSON; Desktop by default in Chrome/Edge
 
@@ -88,6 +89,7 @@ js/
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
   results/tools.js         porównanie eksportów, karta PNG
+  wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku
 tests/smoke.mjs            test dymny (Playwright)

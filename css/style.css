@@ -228,3 +228,7 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .tablewrap tr.diff td:not(:first-child){color:var(--accent);font-weight:500}
 .png-prev{max-width:100%;border:1px solid var(--line);border-radius:6px}
 .png-prev[hidden]{display:none}
+.wiki{font-size:.82rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:4px 8px;align-items:baseline}
+.wiki a{text-decoration:none}
+.wiki a:hover{text-decoration:underline}
+.wiki abbr{font-family:var(--font-mono);font-size:.7rem;text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:0 3px;color:var(--muted)}

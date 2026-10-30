@@ -28,7 +28,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 11. ☑ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami) (v0.20.0)
 12. ☑ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie) (v0.21.0)
 13. ☑ **Karta wyniku jako obrazek PNG** generowana lokalnie (v0.21.0)
-14. ☐ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł
+14. ☑ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł (v0.23.0)
 15. ☐ **Nowa nazwa strony** zamiast „Odcisk klawiatury i myszki” (do wyboru przez autora)
 16. ☐ **Rozdzielenie wyników od interpretacji** w zakładce Wyniki oraz **interpretacje łączone** (wnioski z kilku testów naraz)
 17. ☐ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek

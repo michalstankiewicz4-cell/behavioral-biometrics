@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.22.0";
+const VERSION = "0.23.0";
 const CHANGELOG = [
+  { v:"0.23.0", date:"2026-10-30",
+    pl:["Linki do polskiej i angielskiej Wikipedii pod nagłówkiem każdego testu, tam gdzie artykuł istnieje (np. efekt Stroopa, prawo Fittsa, tablica Snellena, dynamika pisania)."],
+    en:["Links to Polish and English Wikipedia under each test's heading, where an article exists (e.g. Stroop effect, Fitts's law, Snellen chart, keystroke dynamics)."] },
   { v:"0.22.0", date:"2026-10-30",
     pl:["Projekt podzielony na pliki i foldery: moduły ES w js/ (core, i18n, tests, results), style w css/, czcionki i obrazy w assets/.","Teksty interfejsu w osobnych plikach js/i18n/pl.js i en.js.","Narzędzia deweloperskie: lokalny serwer (npm start), test dymny przechodzący przez wszystkie zakładki (npm test), generator ikon i miniatury (npm run images).","Zaktualizowane README i dokumentacja (struktura, uruchamianie lokalne przez serwer)."],
     en:["Project split into files and folders: ES modules in js/ (core, i18n, tests, results), styles in css/, fonts and images in assets/.","Interface texts in separate files js/i18n/pl.js and en.js.","Developer tools: local server (npm start), a smoke test that goes through every tab (npm test), an icon and preview image generator (npm run images).","Updated README and documentation (structure, running locally through a server)."] },

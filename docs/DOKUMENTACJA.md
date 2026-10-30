@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.22.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.23.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -30,6 +30,7 @@ js/
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
   results/tools.js         porównanie eksportów, karta PNG
+  wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku
 tests/smoke.mjs            test dymny (Playwright)
@@ -219,6 +220,10 @@ W obu: poprawna odpowiedź wydłuża ciąg o 1, na każdej długości są 2 szan
 
 **Wrażliwość na kontrast:** litery Sloan o stałej wysokości (do 180 px), szare na białym tle. Poziomy kontrastu Webera `10^(−0,15·i)`, i = 0…14 (100% do ok. 0,8%), jak na tablicy Pelli-Robsona. Odcień szarości `round(255·(1 − C))`; rzeczywisty kontrast po zaokrągleniu jest zapisywany w wyniku. Na poziomie 3 litery, zaliczony przy 2 poprawnych. Wynik `log CS = log₁₀(1 ÷ najniższy zaliczony kontrast)`.
 
+## 5m. Linki do Wikipedii
+
+`js/wiki.js` zawiera mapę `WIKI` (zakładka → lista artykułów) i wstawia pod nagłówkiem każdej zakładki linijkę „Więcej w Wikipedii”, z oznaczeniem języka (PL/EN). Linki są tylko tam, gdzie artykuł istnieje (sprawdzone ręcznie); polskich artykułów brakuje m.in. dla prawa Hicka, CAPTCHA i tappingu. Linki otwierają się w nowej karcie, a strona nic nie wysyła przy ich wyświetleniu.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -226,7 +231,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.22.0",
+  "version": "0.23.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

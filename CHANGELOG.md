@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.23.0] – 2026-10-30
+- Linki do polskiej i angielskiej Wikipedii pod nagłówkiem każdego testu, tam gdzie artykuł istnieje (np. efekt Stroopa, prawo Fittsa, tablica Snellena, dynamika pisania).
+
 ## [0.22.0] – 2026-10-30
 - Projekt podzielony na pliki i foldery: moduły ES w js/ (core, i18n, tests, results), style w css/, czcionki i obrazy w assets/.
 - Teksty interfejsu w osobnych plikach js/i18n/pl.js i en.js.

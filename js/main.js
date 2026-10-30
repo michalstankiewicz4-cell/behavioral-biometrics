@@ -1,5 +1,6 @@
 // Punkt wejścia: lista testów, zakładki, eksport, motyw, język, inicjalizacja
 import { CHANGELOG, VERSION } from "./changelog.js";
+import { renderWiki } from "./wiki.js";
 import { REPO } from "./config.js";
 import { buildCards, setSummary } from "./core/cards.js";
 import { LANGHOOKS, LEAVE, SHOW } from "./core/registry.js";
