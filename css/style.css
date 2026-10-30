@@ -272,3 +272,4 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .png-pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 14px;font-size:.88rem}
 .png-pick-list label{display:flex;gap:6px;align-items:center;cursor:pointer}
 .png-pick-list input{accent-color:var(--accent)}
+.png-pick-btns{margin-top:8px}.png-pick-btns button{font-size:.85rem}

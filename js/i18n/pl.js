@@ -84,6 +84,7 @@ export default {
   cmp_a:"Plik A", cmp_b:"Plik B",
   png_h:"Karta wyniku (PNG)", png_desc:"Obrazek z najważniejszą wartością z każdego ukończonego testu, do pokazania znajomym. Tworzony lokalnie w przeglądarce.",
   png_pick:"Testy na karcie (odznacz te, których nie chcesz pokazywać; odcisk przeglądarki jest domyślnie odznaczony):",
+  png_all:"Zaznacz wszystkie", png_none:"Odznacz wszystkie",
   png_go:"Utwórz kartę", png_dl:"Pobierz PNG",
   res_num_h:"Wyniki (liczby)", res_num_desc:"Główne wartości ze wszystkich ukończonych testów, bez komentarza.",
   res_int_h:"Interpretacja testów", res_int_desc:"Słowny opis wyniku każdego testu osobno.",

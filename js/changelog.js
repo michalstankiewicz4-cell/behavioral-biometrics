@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.33.0";
+const VERSION = "0.33.1";
 const CHANGELOG = [
+  { v:"0.33.1", date:"2026-10-31",
+    pl:["Karta PNG: przyciski „Zaznacz wszystkie” i „Odznacz wszystkie” przy wyborze testów."],
+    en:["PNG card: “Tick all” and “Untick all” buttons for the test selection."] },
   { v:"0.33.0", date:"2026-10-31",
     pl:["Karta PNG: wybór, które ukończone testy mają się na niej znaleźć. Wszystkie są domyślnie zaznaczone poza odciskiem przeglądarki."],
     en:["PNG card: choose which completed tests appear on it. All are ticked by default except the browser fingerprint."] },

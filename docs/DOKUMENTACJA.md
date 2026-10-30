@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.33.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.33.1**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -284,7 +284,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.33.0",
+  "version": "0.33.1",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -308,7 +308,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 
 **Porównanie:** dwa pola wyboru pliku w zakładce Wyniki. Pliki są czytane przez `FileReader` i `JSON.parse` lokalnie. Tabela pokazuje, dla każdego etapu obecnego w którymkolwiek pliku, wszystkie wartości z `stats` (A i B obok siebie); różniące się wartości są wyróżnione. Plik bez pola `stages` jest odrzucany z komunikatem.
 
-**Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (test może podać własny skrót przez `task.card(R)` – np. osobowość pokazuje wszystkie 5 cech); do 12 testów w 2 kolumnach, do 21 w 3, do 28 w 4 (7 wierszy), a ewentualny nadmiar jako dopisek „+ N kolejnych testów”; zbyt długie teksty są przycinane do szerokości kolumny. Nad przyciskiem jest lista ukończonych testów z polami wyboru – na kartę trafiają tylko zaznaczone. Odcisk przeglądarki (`odcisk-przegladarki`) jest domyślnie odznaczony. Wybór jest tylko w pamięci karty (nie znika przy zmianie języka, znika po zamknięciu karty), z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
+**Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (test może podać własny skrót przez `task.card(R)` – np. osobowość pokazuje wszystkie 5 cech); do 12 testów w 2 kolumnach, do 21 w 3, do 28 w 4 (7 wierszy), a ewentualny nadmiar jako dopisek „+ N kolejnych testów”; zbyt długie teksty są przycinane do szerokości kolumny. Nad przyciskiem jest lista ukończonych testów z polami wyboru – na kartę trafiają tylko zaznaczone. Odcisk przeglądarki (`odcisk-przegladarki`) jest domyślnie odznaczony. Przyciski „Zaznacz wszystkie” / „Odznacz wszystkie” zmieniają wszystkie ukończone testy naraz. Wybór jest tylko w pamięci karty (nie znika przy zmianie języka, znika po zamknięciu karty), z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
 
 ## 6b. Zakładka Wyniki: liczby, interpretacja, interpretacje łączone
 

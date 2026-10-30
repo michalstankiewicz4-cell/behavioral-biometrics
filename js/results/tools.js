@@ -34,6 +34,8 @@ const Card = (() => { let blob=null, url=null;
   function pick(){ const done=TASKS.filter(t=>t.R), box=$("png-pick"); if(!box) return; box.hidden = !done.length;
     $("png-pick-list").innerHTML = done.map(t => `<label><input type="checkbox" value="${esc(keyOf(t))}"${off.has(keyOf(t))?"":" checked"}> <span>${esc(L(t.title))}</span></label>`).join(""); }
   $("png-pick-list").addEventListener("change", e => { const c=e.target; if(c.type!=="checkbox") return; if(c.checked) off.delete(c.value); else off.add(c.value); });
+  const setAll = on => { TASKS.filter(t=>t.R).forEach(t => on ? off.delete(keyOf(t)) : off.add(keyOf(t))); pick(); };
+  $("png-all").addEventListener("click", () => setAll(true)); $("png-none").addEventListener("click", () => setAll(false));
   function make(){ const all=TASKS.filter(t=>t.R); if(!all.length){ $("png-status").textContent = LANG==="pl"?"Najpierw ukończ co najmniej jeden test.":"Finish at least one test first."; return; }
     const done=all.filter(t=>!off.has(keyOf(t))); if(!done.length){ $("png-status").textContent = LANG==="pl"?"Zaznacz co najmniej jeden test.":"Tick at least one test."; return; }
     $("png-status").textContent = LANG==="pl" ? "Tworzę kartę…" : "Creating the card…";

@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.33.1] – 2026-10-31
+- Karta PNG: przyciski „Zaznacz wszystkie” i „Odznacz wszystkie” przy wyborze testów.
+
 ## [0.33.0] – 2026-10-31
 - Karta PNG: wybór, które ukończone testy mają się na niej znaleźć. Wszystkie są domyślnie zaznaczone poza odciskiem przeglądarki.
 
