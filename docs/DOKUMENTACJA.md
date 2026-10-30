@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.20.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.21.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -208,7 +208,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.20.0",
+  "version": "0.21.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -227,6 +227,12 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
 - Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `astygmatyzm`, `kontrast`, `pamiec-cyfry`, `pamiec-corsi`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
+
+## 6a. Porównanie eksportów i karta PNG
+
+**Porównanie:** dwa pola wyboru pliku w zakładce Wyniki. Pliki są czytane przez `FileReader` i `JSON.parse` lokalnie. Tabela pokazuje, dla każdego etapu obecnego w którymkolwiek pliku, wszystkie wartości z `stats` (A i B obok siebie); różniące się wartości są wyróżnione. Plik bez pola `stages` jest odrzucany z komunikatem.
+
+**Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (maks. 12, w dwóch kolumnach), z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
 
 ## 7. Wersjonowanie
 

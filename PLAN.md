@@ -26,8 +26,8 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 9. ☑ **Tapping** – 10 s stukania osobno lewą i prawą ręką (v0.18.0)
 10. ☑ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego (v0.19.0)
 11. ☑ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami) (v0.20.0)
-12. ☐ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie)
-13. ☐ **Karta wyniku jako obrazek PNG** generowana lokalnie
+12. ☑ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie) (v0.21.0)
+13. ☑ **Karta wyniku jako obrazek PNG** generowana lokalnie (v0.21.0)
 14. ☐ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł
 15. ☐ **Nowa nazwa strony** zamiast „Odcisk klawiatury i myszki” (do wyboru przez autora)
 16. ☐ **Rozdzielenie wyników od interpretacji** w zakładce Wyniki oraz **interpretacje łączone** (wnioski z kilku testów naraz)

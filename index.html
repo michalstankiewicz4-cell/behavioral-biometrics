@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.20.0",
+  "softwareVersion": "0.21.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -429,6 +429,18 @@
       <button id="export" type="button" class="primary" data-i18n="export_btn" disabled></button>
     </div>
     <p class="status" id="export-status" aria-live="polite"></p>
+
+    <h3 class="sec" data-i18n="cmp_h"></h3>
+    <p class="lead" data-i18n="cmp_desc"></p>
+    <div class="cal-row"><label for="cmp-a" data-i18n="cmp_a"></label><input type="file" id="cmp-a" accept=".json,application/json"></div>
+    <div class="cal-row"><label for="cmp-b" data-i18n="cmp_b"></label><input type="file" id="cmp-b" accept=".json,application/json"></div>
+    <div id="cmp-out" class="tablewrap"></div>
+
+    <h3 class="sec" data-i18n="png_h"></h3>
+    <p class="lead" data-i18n="png_desc"></p>
+    <div class="btns"><button id="png-go" type="button" class="primary" data-i18n="png_go"></button><button id="png-dl" type="button" disabled data-i18n="png_dl"></button></div>
+    <p class="status" id="png-status" aria-live="polite"></p>
+    <img id="png-prev" class="png-prev" alt="" hidden>
     <p class="note" data-i18n="res_note"></p>
   </section>
 

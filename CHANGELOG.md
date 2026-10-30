@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.21.0] – 2026-10-30
+- Zakładka „Wyniki”: porównanie dwóch wyeksportowanych plików JSON obok siebie, z wyróżnieniem różnic; pliki czytane tylko lokalnie.
+- Zakładka „Wyniki”: karta wyniku jako obrazek PNG (1200 × 630) z najważniejszą wartością z każdego ukończonego testu, z podglądem i pobieraniem.
+
 ## [0.20.0] – 2026-10-30
 - Zakładka „Wzrok”: nowa tarcza astygmatyczna (osobno lewe i prawe oko, zaznaczanie kierunków, które wyglądają inaczej).
 - Zakładka „Wzrok”: nowy test wrażliwości na kontrast (litery o malejącym kontraście, wynik w log CS jak na tablicy Pelli-Robsona).

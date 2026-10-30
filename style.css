@@ -224,3 +224,7 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .answers .sw{display:inline-block;width:1.1em;height:1.1em;border-radius:3px;margin-right:6px;vertical-align:-2px}
 .stim.light{background:var(--bg);color:var(--ink);border:1px solid var(--line);font-family:var(--font-mono);font-size:4rem}
 .answers button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.tablewrap tr.grp td{font-weight:600;color:var(--ink);background:var(--bg);padding-top:10px}
+.tablewrap tr.diff td:not(:first-child){color:var(--accent);font-weight:500}
+.png-prev{max-width:100%;border:1px solid var(--line);border-radius:6px}
+.png-prev[hidden]{display:none}
