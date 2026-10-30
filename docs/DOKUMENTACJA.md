@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.5.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.6.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -29,8 +29,8 @@ Kolejność sekcji w pliku:
 5. **Karty miar**: `buildCards(grid, specs)` buduje karty z definicji. Każda definicja ma `id`, `title`, `unit`, `rows`, `chips` i `how` (opis metody). Wartości wpisują `setMain`, `setRow` i `setHTML`.
 6. **`Arena`**: obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania ruchu).
 7. **`mouseTask(o)`**: wspólny szkielet zadań z myszką. Zadanie dostarcza `start`, `down`, `move`, `up`, `draw`, `analyse`, `render`, `summary`; szkielet obsługuje przycisk Start, przerwanie przy zmianie zakładki i zakończenie.
-8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`.
-9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#wyniki`).
+8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`.
+9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#wyniki`).
 
 Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstają karty (`render`), ocena słowna (`summary`), zestawienie w „Wynikach” i eksport. Przy zmianie języka karty budowane są od nowa z tego samego `R`.
 
@@ -78,6 +78,19 @@ Pole tekstowe blokuje wklejanie, upuszczanie, Enter i przesuwanie kursora, żeby
 
 Ruch kursora śledzony jest przez Pointer Events. Na ekranach dotykowych strona wyświetla ostrzeżenie, bo mierzyłaby palec, a nie rękę na myszce.
 
+## 5a. Hasło: profil i test zgodności
+
+To klasyczne uwierzytelnianie dynamiką pisania: system sprawdza nie tylko, *czy* hasło jest poprawne, ale też, *jak* zostało wpisane.
+
+1. **Wpisania próbne (5).** Pierwsze wpisanie ustala hasło (min. 6 znaków), kolejne muszą być identyczne. Wpisanie z Backspace, strzałkami, wklejeniem lub tekstem innym niż hasło jest odrzucane.
+2. **Wektor cech.** Dla hasła o *n* znakach: *n* czasów przytrzymania (`keyup − keydown`) i *n*−1 odstępów (`keydown → keydown`), razem 2*n*−1 liczb.
+3. **Profil.** Dla każdej cechy: średnia μᵢ i średnie odchylenie bezwzględne aᵢ (minimum 10 ms).
+4. **Odległość** (skalowana odległość Manhattan): `d = (1/m) · Σ |xᵢ − μᵢ| / aᵢ`.
+5. **Próg.** Każde wpisanie próbne porównuję z profilem zbudowanym z pozostałych czterech (leave-one-out). Próg = max(największa z tych odległości, średnia + 2 odchylenia).
+6. **Test.** Wpisanie zgadza się z profilem, gdy `d ≤ próg`.
+
+Hasło jest przechowywane wyłącznie w zmiennej w pamięci karty, żeby porównać tekst. Nie trafia do wyniku `R`, eksportu ani na ekran: pole maskuje znaki, a oś wykresu pokazuje numery klawiszy. Eksport zawiera tylko czasy, profil, próg i wyniki testów.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -85,7 +98,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -102,7 +115,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie

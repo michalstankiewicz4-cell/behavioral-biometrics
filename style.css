@@ -152,3 +152,14 @@ footer{font-size:.82rem;color:var(--muted);max-width:72ch}
 .news h3{display:flex;gap:10px;align-items:baseline;font-family:var(--font-mono);font-size:.95rem}
 .news time{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);font-weight:400}
 .news ul{color:var(--muted);font-size:.9rem}
+
+.pass-input{flex:1 1 280px;font-family:var(--font-mono);font-size:1.1rem;padding:10px 12px;border:1px solid var(--line);border-radius:4px;
+  background:var(--bg);color:var(--ink);-webkit-text-security:disc;text-security:disc;letter-spacing:.15em}
+.pass-input:focus{outline:2px solid var(--accent);outline-offset:1px}
+.pass-steps{display:flex;gap:6px;flex-wrap:wrap}
+.pass-steps span{font-family:var(--font-mono);font-size:.78rem;padding:2px 9px;border-radius:999px;border:1px solid var(--line);color:var(--muted)}
+.pass-steps span.ok{border-color:var(--ok);color:var(--ok)}
+.pass-steps span.now{border-color:var(--accent);color:var(--accent)}
+.arena.chart{height:260px;cursor:default}
+.chip.ok{border-color:var(--ok);color:var(--ok)}
+.chip.no{border-color:var(--err);color:var(--err)}

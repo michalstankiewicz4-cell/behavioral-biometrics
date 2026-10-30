@@ -35,6 +35,7 @@
     <a href="#przeciaganie" data-tab="przeciaganie"><span class="n">4</span><span data-i18n="tab_drag"></span></a>
     <a href="#rysowanie" data-tab="rysowanie"><span class="n">5</span><span data-i18n="tab_draw"></span></a>
     <a href="#dwuklik" data-tab="dwuklik"><span class="n">6</span><span data-i18n="tab_dbl"></span></a>
+    <a href="#haslo" data-tab="haslo"><span class="n">7</span><span data-i18n="tab_pass"></span></a>
     <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
   </nav>
 
@@ -124,6 +125,26 @@
     <canvas id="cv-dbl" class="arena" aria-label="Pole zadania"></canvas>
     <div id="sum-dbl" class="summary empty"></div>
     <div class="grid" id="cards-dbl"></div>
+    <div class="next"><a class="btn" href="#haslo" data-i18n="next_pass"></a></div>
+  </section>
+
+  <!-- 7. Hasło -->
+  <section class="panel" id="tab-haslo" data-panel="haslo" hidden>
+    <h2 data-i18n="pass_h"></h2>
+    <p class="lead" data-i18n="pass_desc"></p>
+    <p class="note" data-i18n="pass_warn"></p>
+    <div class="pass-steps" id="pass-steps"></div>
+    <label for="pass-input" id="pass-label"></label>
+    <div class="bar">
+      <input id="pass-input" class="pass-input" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" data-lpignore="true" data-1p-ignore>
+      <div class="btns"><button id="pass-reset" type="button" data-i18n="pass_reset"></button></div>
+    </div>
+    <p class="status" id="pass-status" aria-live="polite"></p>
+    <canvas id="cv-pass" class="arena chart" aria-label="Wykres profilu"></canvas>
+    <p class="sub" data-i18n="pass_chart"></p>
+    <div id="pass-history" class="chips"></div>
+    <div id="sum-pass" class="summary empty"></div>
+    <div class="grid" id="cards-pass"></div>
     <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
   </section>
 

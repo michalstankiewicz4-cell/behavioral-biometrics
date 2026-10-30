@@ -3,6 +3,11 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.6.0] – 2026-10-30
+- Nowy dział „Hasło”: wpisujesz wymyślone hasło 5 razy, z rytmu powstaje profil, a w trybie testu każde wpisanie jest sprawdzane, czy zgadza się z profilem.
+- Wykres profilu (średnia ± odchylenie dla każdego klawisza i odstępu) z zaznaczonym ostatnim testem oraz historia testów.
+- Hasło jest tylko w pamięci karty i nie trafia do eksportu; eksportowane są wyłącznie czasy.
+
 ## [0.5.0] – 2026-10-30
 - Numer wersji przy nazwie strony.
 - Dział „Co nowego” z listą zmian w każdej wersji.
