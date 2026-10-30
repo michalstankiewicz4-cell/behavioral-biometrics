@@ -45,7 +45,12 @@
   <section class="panel" id="tab-pisanie" data-panel="pisanie">
     <h2 data-i18n="type_h"></h2>
     <p class="lead" data-i18n="type_desc"></p>
-    <label class="toggle"><input type="checkbox" id="underlay"> <span data-i18n="underlay"></span></label>
+    <fieldset class="seg" id="txtpos">
+      <legend data-i18n="pos_legend"></legend>
+      <label><input type="radio" name="txtpos" value="above" checked> <span data-i18n="pos_above"></span></label>
+      <label><input type="radio" name="txtpos" value="under"> <span data-i18n="pos_under"></span></label>
+      <label><input type="radio" name="txtpos" value="below"> <span data-i18n="pos_below"></span></label>
+    </fieldset>
     <div id="target" class="target"></div>
     <label for="input" data-i18n="type_label"></label>
     <div class="typebox" id="typebox">

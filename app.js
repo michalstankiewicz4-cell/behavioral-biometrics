@@ -32,7 +32,7 @@ pl:{
   tab_type:"Pisanie", tab_click:"Klikanie celów", tab_track:"Śledzenie punktu", tab_drag:"Przeciąganie", tab_draw:"Rysowanie po śladzie", tab_dbl:"Podwójne kliknięcie", tab_res:"Wyniki",
   type_h:"1. Pisanie", type_desc:"Przepisz tekst. Mierzę, jak długo trzymasz klawisze, ile trwają przerwy między nimi, gdzie się mylisz i jak poprawiasz.",
   type_label:"Pisz tutaj. Wklejanie jest zablokowane, kursor zawsze stoi na końcu.",
-  underlay:"Tekst jako podkładka (wzorzec w tle pola, piszesz po nim)",
+  pos_legend:"Tekst wzorcowy:", pos_above:"nad polem", pos_under:"jako podkładka", pos_below:"pod polem",
   mobile:"Wygląda na to, że używasz ekranu dotykowego. Klawiatury ekranowe podają niedokładne czasy klawiszy, a zadania z myszką mierzą palec zamiast ręki na myszce. Najlepiej użyć komputera.",
   live_time:"czas", live_chars:"znaki", live_err:"błędy",
   finish:"Zakończ teraz", restart:"Od nowa", start:"Start",
@@ -68,7 +68,7 @@ en:{
   tab_type:"Typing", tab_click:"Target clicking", tab_track:"Dot tracking", tab_drag:"Dragging", tab_draw:"Tracing shapes", tab_dbl:"Double click", tab_res:"Results",
   type_h:"1. Typing", type_desc:"Retype the text. I measure how long you hold keys, the gaps between them, where you make mistakes and how you correct them.",
   type_label:"Type here. Pasting is blocked and the caret always stays at the end.",
-  underlay:"Text as underlay (reference shown behind the field, you type over it)",
+  pos_legend:"Reference text:", pos_above:"above the field", pos_under:"as underlay", pos_below:"below the field",
   mobile:"It looks like you're using a touch screen. On-screen keyboards report inaccurate key timings, and the mouse tasks would measure a finger instead of a hand on a mouse. A computer works best.",
   live_time:"time", live_chars:"chars", live_err:"errors",
   finish:"Finish now", restart:"Restart", start:"Start",
@@ -253,12 +253,14 @@ const Typing = (() => {
     if(v.length < TARGET.length) g += `<span class="cur">${esc(TARGET[v.length])}</span>` + esc(TARGET.slice(v.length+1));
     $("ghost").innerHTML = g;
   }
-  const under = $("underlay");
-  under.addEventListener("change", () => {
-    $("typebox").classList.toggle("under", under.checked);
-    tgt.classList.toggle("hidden", under.checked);
-    ta.focus(); toEndSoon();
-  });
+  // położenie tekstu wzorcowego: nad polem / jako podkładka / pod polem
+  document.querySelectorAll('input[name="txtpos"]').forEach(r => r.addEventListener("change", () => {
+    const v = r.value, box = $("typebox");
+    box.classList.toggle("under", v==="under");
+    tgt.classList.toggle("hidden", v==="under");
+    if(v==="below") box.after(tgt); else $("txtpos").after(tgt);
+    if(!ta.disabled){ ta.focus(); toEndSoon(); }
+  }));
   const toEndSoon = () => setTimeout(() => { const n=ta.value.length; ta.setSelectionRange(n,n); }, 0);
   function renderLive(){
     const t = S.startT==null ? 0 : ((S.done?S.lastT:performance.now()) - S.startT)/1000;
