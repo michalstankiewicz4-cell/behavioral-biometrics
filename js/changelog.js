@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.24.0";
+const VERSION = "0.25.0";
 const CHANGELOG = [
+  { v:"0.25.0", date:"2026-10-30",
+    pl:["Zakładka „Wyniki” podzielona na: same liczby (tabela), interpretację każdego testu i interpretacje łączone.","Cztery interpretacje łączone z kilku testów: szybkość ogólna, szybkość kontra precyzja, stabilność ręki i rytmu, uwaga i pamięć. Każda pokazuje, na czym się opiera i jakich testów brakuje."],
+    en:["“Results” tab split into: numbers only (table), interpretation of each test, and combined interpretations.","Four combined interpretations from several tests: overall speed, speed vs accuracy, hand and rhythm steadiness, attention and memory. Each shows what it is based on and which tests are missing."] },
   { v:"0.24.0", date:"2026-10-30",
     pl:["Nowa nazwa strony: „Cyfrowy odcisk człowieka” (ang. „Human Digital Fingerprint”), bo strona obejmuje już nie tylko klawiaturę i myszkę."],
     en:["New site name: “Human Digital Fingerprint” (Polish: „Cyfrowy odcisk człowieka”), since the site now covers more than the keyboard and mouse."] },

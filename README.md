@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.24.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.25.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -49,6 +49,7 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 - Tekst do przepisania nad polem, jako podkładka lub pod polem · Reference text above, under or below the field
 - Hasło: wymyślone hasło nigdy nie jest zapisywane ani eksportowane · Password: the made-up password is never stored or exported
 - Linki do polskiej i angielskiej Wikipedii przy testach · Links to Polish and English Wikipedia next to the tests
+- Wyniki osobno od interpretacji oraz interpretacje łączone z kilku testów · Results separate from interpretation, plus combined interpretations
 - Porównanie dwóch eksportów i karta wyniku PNG (lokalnie) · Comparing two exports and a PNG result card (locally)
 - Eksport profilu (ocena + statystyki + surowe pomiary) do JSON; w Chrome/Edge domyślnie na Pulpit · Profile export to JSON; Desktop by default in Chrome/Edge
 
@@ -89,6 +90,7 @@ js/
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
   results/tools.js         porównanie eksportów, karta PNG
+  results/combined.js      interpretacje łączone
   wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku

@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.24.0",
+  "softwareVersion": "0.25.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/assets/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -423,7 +423,16 @@
   <!-- Wyniki -->
   <section class="panel" id="tab-wyniki" data-panel="wyniki" hidden>
     <h2 data-i18n="res_h"></h2>
+    <h3 class="sec" data-i18n="res_num_h"></h3>
+    <p class="lead" data-i18n="res_num_desc"></p>
+    <div id="results-num" class="tablewrap"></div>
+    <h3 class="sec" data-i18n="res_int_h"></h3>
+    <p class="lead" data-i18n="res_int_desc"></p>
     <div id="results" class="results"></div>
+    <h3 class="sec" data-i18n="res_comb_h"></h3>
+    <p class="lead" data-i18n="res_comb_desc"></p>
+    <div id="results-comb" class="grid"></div>
+    <h3 class="sec" data-i18n="res_export_h"></h3>
     <div class="bar">
       <p class="lead" id="export-info" style="font-size:.85rem" data-i18n="export_info"></p>
       <button id="export" type="button" class="primary" data-i18n="export_btn" disabled></button>

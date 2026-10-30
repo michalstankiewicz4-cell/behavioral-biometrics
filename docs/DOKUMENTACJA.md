@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.24.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.25.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -30,6 +30,7 @@ js/
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
   tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
   results/tools.js         porównanie eksportów, karta PNG
+  results/combined.js      interpretacje łączone
   wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku
@@ -231,7 +232,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.24.0",
+  "version": "0.25.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -256,6 +257,16 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 **Porównanie:** dwa pola wyboru pliku w zakładce Wyniki. Pliki są czytane przez `FileReader` i `JSON.parse` lokalnie. Tabela pokazuje, dla każdego etapu obecnego w którymkolwiek pliku, wszystkie wartości z `stats` (A i B obok siebie); różniące się wartości są wyróżnione. Plik bez pola `stages` jest odrzucany z komunikatem.
 
 **Karta PNG:** płótno 1200 × 630 z nazwą, wersją, datą i główną wartością pierwszej karty każdego ukończonego testu (maks. 12, w dwóch kolumnach), z dopiskiem, że to amatorski projekt. Obraz powstaje przez `canvas.toBlob`, podgląd pokazuje się na stronie, a przycisk „Pobierz PNG” zapisuje go jako plik (`karta-wyniku-RRRR-MM-DD.png`).
+
+## 6b. Zakładka Wyniki: liczby, interpretacja, interpretacje łączone
+
+1. **Wyniki (liczby):** tabela z główną wartością każdej karty każdego ukończonego testu (z `cardStats`), bez komentarza.
+2. **Interpretacja testów:** ocena słowna każdego testu osobno (`task.summary`).
+3. **Interpretacje łączone** (`js/results/combined.js`): cztery opisowe zestawienia z kilku testów. Każde pokazuje, na jakich testach się opiera i których brakuje; potrzebuje co najmniej dwóch ukończonych testów.
+   - *Szybkość ogólna:* prosta reakcja (Hick, n = 1), reakcja przy klikaniu, tempo pisania, tapping. Porównanie z orientacyjnymi wartościami: prosta reakcja ok. 200–300 ms, pisanie ok. 35–45 słów/min.
+   - *Szybkość kontra precyzja:* pisanie (tempo, odsetek błędów), Fitts (przepustowość, pudła), klikanie (pudła, przestrzelenia), przeciąganie (precyzja). Szybko = ≥ 45 słów/min lub ≥ 5 bit/s; dużo błędów = ≥ 5% znaków, ≥ 15% pudeł lub ≥ 40% przestrzeleń. Progi ustalone na potrzeby strony.
+   - *Stabilność ręki i rytmu:* drżenie (przeciąganie, rysowanie), CV tappingu (< 0,15 = równo), CV rytmu pisania (< 0,35 = równo).
+   - *Uwaga i pamięć:* efekt Stroopa (> 150 ms silny, < 20 ms słaby), szukanie liter, zakres cyfr kontra Corsi.
 
 ## 7. Wersjonowanie
 

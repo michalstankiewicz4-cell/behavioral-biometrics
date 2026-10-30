@@ -232,3 +232,9 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .wiki a{text-decoration:none}
 .wiki a:hover{text-decoration:underline}
 .wiki abbr{font-family:var(--font-mono);font-size:.7rem;text-decoration:none;border:1px solid var(--line);border-radius:3px;padding:0 3px;color:var(--muted)}
+.comb-list{list-style:none;padding:0;display:grid;gap:4px;font-size:.88rem}
+.comb-list li{display:flex;flex-wrap:wrap;gap:6px;align-items:baseline;border-bottom:1px dashed var(--line);padding-bottom:3px}
+.comb-list span{color:var(--muted)}
+.comb-list b{font-family:var(--font-mono);font-weight:500}
+.comb-list small,.comb small{color:var(--muted);font-size:.78rem}
+.card.comb p{font-size:.92rem}

@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.25.0] – 2026-10-30
+- Zakładka „Wyniki” podzielona na: same liczby (tabela), interpretację każdego testu i interpretacje łączone.
+- Cztery interpretacje łączone z kilku testów: szybkość ogólna, szybkość kontra precyzja, stabilność ręki i rytmu, uwaga i pamięć. Każda pokazuje, na czym się opiera i jakich testów brakuje.
+
 ## [0.24.0] – 2026-10-30
 - Nowa nazwa strony: „Cyfrowy odcisk człowieka” (ang. „Human Digital Fingerprint”), bo strona obejmuje już nie tylko klawiaturę i myszkę.
 

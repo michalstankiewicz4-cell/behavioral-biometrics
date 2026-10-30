@@ -1,10 +1,11 @@
 // Punkt wejścia: lista testów, zakładki, eksport, motyw, język, inicjalizacja
 import { CHANGELOG, VERSION } from "./changelog.js";
 import { renderWiki } from "./wiki.js";
+import { renderCombined } from "./results/combined.js";
 import { REPO } from "./config.js";
 import { buildCards, setSummary } from "./core/cards.js";
 import { LANGHOOKS, LEAVE, SHOW } from "./core/registry.js";
-import { $ } from "./core/utils.js";
+import { $, esc } from "./core/utils.js";
 import { D, L, LANG, setLang } from "./i18n/index.js";
 import { FP } from "./tests/browser-fingerprint.js";
 import { Track } from "./tests/dot-tracking.js";
@@ -36,9 +37,18 @@ const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwukl
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){
   const done = TASKS.filter(t=>t.R);
+  // 1) same liczby
+  $("results-num").innerHTML = done.length
+    ? `<table><thead><tr><th>${LANG==="pl"?"Test":"Test"}</th><th>${LANG==="pl"?"Miara":"Measure"}</th><th>${LANG==="pl"?"Wynik":"Result"}</th></tr></thead><tbody>`
+      + done.map(t => Object.entries(cardStats(t)).map(([card, o], i) => `<tr><td>${i ? "" : esc(L(t.title))}</td><td>${esc(card)}</td><td>${esc(o.value ?? Object.values(o).flat().slice(0,3).join(", "))}</td></tr>`).join("")).join("")
+      + "</tbody></table>"
+    : `<p class="lead">${D[LANG].res_empty}</p>`;
+  // 2) interpretacja każdego testu
   $("results").innerHTML = done.length
     ? done.map(t=>`<article><h3>${L(t.title)}</h3>${t.summary(t.R)}</article>`).join("")
     : `<p class="lead">${D[LANG].res_empty}</p>`;
+  // 3) interpretacje łączone
+  renderCombined();
   $("export").disabled = !done.length;
 }
 
