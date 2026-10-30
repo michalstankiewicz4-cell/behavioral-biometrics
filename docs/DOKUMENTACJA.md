@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.19.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.20.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -195,6 +195,12 @@ Dwie rundy po 10 s: lewa ręka (klawisz F) i prawa (klawisz J); czas liczony od 
 
 W obu: poprawna odpowiedź wydłuża ciąg o 1, na każdej długości są 2 szanse, dwa błędy z rzędu kończą test. Zakres = najdłuższy poprawnie powtórzony ciąg.
 
+## 5l. Wzrok: tarcza astygmatyczna i wrażliwość na kontrast
+
+**Tarcza astygmatyczna:** 12 kierunków jak na zegarze (6 linii przez środek), każda linia jako 3 równoległe kreski, czarne na białym. Dwie rundy: lewe i prawe oko. Użytkownik zaznacza numery linii, które wyglądają na ciemniejsze lub ostrzejsze, albo „Wszystkie jednakowe”. Strona tylko zapisuje odpowiedzi.
+
+**Wrażliwość na kontrast:** litery Sloan o stałej wysokości (do 180 px), szare na białym tle. Poziomy kontrastu Webera `10^(−0,15·i)`, i = 0…14 (100% do ok. 0,8%), jak na tablicy Pelli-Robsona. Odcień szarości `round(255·(1 − C))`; rzeczywisty kontrast po zaokrągleniu jest zapisywany w wyniku. Na poziomie 3 litery, zaliczony przy 2 poprawnych. Wynik `log CS = log₁₀(1 ÷ najniższy zaliczony kontrast)`.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -202,7 +208,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.19.0",
+  "version": "0.20.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -219,7 +225,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `pamiec-cyfry`, `pamiec-corsi`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `astygmatyzm`, `kontrast`, `pamiec-cyfry`, `pamiec-corsi`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie

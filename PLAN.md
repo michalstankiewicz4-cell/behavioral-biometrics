@@ -25,7 +25,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 8. ☑ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru (v0.17.0)
 9. ☑ **Tapping** – 10 s stukania osobno lewą i prawą ręką (v0.18.0)
 10. ☑ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego (v0.19.0)
-11. ☐ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami)
+11. ☑ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami) (v0.20.0)
 12. ☐ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie)
 13. ☐ **Karta wyniku jako obrazek PNG** generowana lokalnie
 14. ☐ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł

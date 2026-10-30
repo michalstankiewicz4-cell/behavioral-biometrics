@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.19.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.20.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -28,7 +28,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 6 | Podwójne kliknięcie · Double click | odstęp, przytrzymanie, drgnięcie kursora, za wolne pary |
 | 7 | Hasło · Password | profil rytmu wpisywania hasła (5 wpisań) i test zgodności z profilem |
 | 8 | Litery i błędy · Letters & errors | przepisywanie pseudosłów (tempo, czas na słowo, rodzaje błędów) i szukanie liter b wśród d/p/q; **to nie jest test na dysleksję** |
-| 9 | Wzrok · Vision | kalibracja ekranu, tablica Snellena (litery lub obracane E), generowane tablice barwne w stylu Ishihary; **to nie jest badanie wzroku** |
+| 9 | Wzrok · Vision | kalibracja ekranu, tablica Snellena (litery lub obracane E), generowane tablice barwne w stylu Ishihary, tarcza astygmatyczna, wrażliwość na kontrast; **to nie jest badanie wzroku** |
 | 8 | Podpis myszką · Mouse signature | 3 podpisy jako wzorzec, weryfikacja kształtu (DTW), tempa i rytmu |
 | 9 | Człowiek czy bot · Human or bot | Twoje ruchy myszki kontra prosty bot: prostoliniowość, zmienność prędkości, drżenie, celność, przytrzymanie |
 | 10 | Odcisk przeglądarki · Browser fingerprint | co strona może odczytać bez pytania (14 cech) i skrót odcisku, liczone lokalnie |

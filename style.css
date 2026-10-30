@@ -223,3 +223,4 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
   font-family:var(--font-body);font-weight:600;font-size:clamp(2rem,7vw,3.6rem);letter-spacing:.04em;user-select:none}
 .answers .sw{display:inline-block;width:1.1em;height:1.1em;border-radius:3px;margin-right:6px;vertical-align:-2px}
 .stim.light{background:var(--bg);color:var(--ink);border:1px solid var(--line);font-family:var(--font-mono);font-size:4rem}
+.answers button.on{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}

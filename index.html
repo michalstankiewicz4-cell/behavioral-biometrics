@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.19.0",
+  "softwareVersion": "0.20.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -295,6 +295,22 @@
     <div class="grid" id="cards-sn-a"></div>
     <div id="sum-sn-b" class="summary empty"></div>
     <div class="grid" id="cards-sn-b"></div>
+
+    <h3 class="sec" data-i18n="ast_h"></h3>
+    <p class="lead" data-i18n="ast_desc"></p>
+    <div class="bar"><span class="status" id="st-ast"></span><div class="btns"><button id="ast-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-ast" class="plate" aria-label="Tarcza astygmatyczna"></canvas>
+    <div id="ast-ans" class="answers"></div>
+    <div id="sum-ast" class="summary empty"></div>
+    <div class="grid" id="cards-ast"></div>
+
+    <h3 class="sec" data-i18n="con_h"></h3>
+    <p class="lead" data-i18n="con_desc"></p>
+    <div class="bar"><span class="status" id="st-con"></span><div class="btns"><button id="con-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-con" class="arena snellen" aria-label="Litery o malejącym kontraście"></canvas>
+    <div id="con-ans" class="answers"></div>
+    <div id="sum-con" class="summary empty"></div>
+    <div class="grid" id="cards-con"></div>
 
     <h3 class="sec" data-i18n="ish_h"></h3>
     <p class="lead" data-i18n="ish_desc"></p>
