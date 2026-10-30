@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.29.0";
+const VERSION = "0.30.0";
 const CHANGELOG = [
+  { v:"0.30.0", date:"2026-10-31",
+    pl:["Chronotyp: skowronek czy sowa, z Twoich zwykłych godzin snu w dni robocze i wolne. Wynik to środek snu w dni wolne z korektą na odsypianie (metoda Roenneberga) oraz społeczny jet lag. Pytania są własne – bez kopiowania kwestionariuszy MEQ i MCTQ, które wymagają zgody autorów."],
+    en:["Chronotype: lark or owl, from your usual sleep times on workdays and free days. The result is mid-sleep on free days corrected for catch-up sleep (Roenneberg's method) plus social jetlag. The questions are my own – no copying of the MEQ and MCTQ questionnaires, which need the authors' permission."] },
   { v:"0.29.0", date:"2026-10-31",
     pl:["Wzrok: test oka dominującego – „okienko z dłoni” (metoda Milesa) prowadzone krok po kroku; można powtórzyć kilka prób, wynik to oko z większości prób."],
     en:["Vision: dominant eye test – the “hand window” (Miles test) guided step by step; you can repeat several trials, and the result is the eye found in most of them."] },

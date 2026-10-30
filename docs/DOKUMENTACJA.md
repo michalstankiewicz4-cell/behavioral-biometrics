@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.29.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.30.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -28,7 +28,7 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye, chronotype)
   data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
@@ -254,6 +254,18 @@ W zakładce Wzrok. Test „okienka z dłoni” (metoda Milesa) prowadzony w 3 kr
 - Każdy „Start” to nowa próba; wynik to oko z większości prób (remis = niejasne).
 - Eksport (`oko-dominujace`): wynik, lista prób, liczba zgodnych prób.
 
+## 5q. Chronotyp
+
+Pytania własne (liczba dni pracy/nauki w tygodniu; godzina zaśnięcia i obudzenia w dni robocze i wolne; budzik w dni wolne). Kwestionariusze MEQ (Horne i Östberg) i MCTQ (Roenneberg) nie są kopiowane – ich użycie wymaga zgody autorów lub ma niejasne warunki. Liczone są opublikowane miary (Roenneberg i in. 2003, 2004):
+
+- SD = koniec snu − zaśnięcie (mod 24 h), MS = zaśnięcie + SD/2, osobno dla dni roboczych (W) i wolnych (F).
+- ØSD = (SDW · dni_robocze + SDF · dni_wolne) / 7.
+- MSFsc = MSF − (SDF − ØSD)/2, gdy SDF > SDW; inaczej MSFsc = MSF.
+- Społeczny jet lag = |MSF − MSW| (najkrótsza różnica na zegarze).
+- Typ: orientacyjne przedziały godzinne MSFsc: < 2:00 wyraźny skowronek, 2–3 skowronek, 3–4 lekko wczesny, 4–5 pośredni, 5–6 lekko późny, 6–7 sowa, ≥ 7 wyraźna sowa.
+- Przy 0 dniach pracy liczone są tylko dni wolne. Długość snu poza 3–14 h jest odrzucana jako błąd wpisu. Budzik w dni wolne – komunikat o mniejszej pewności.
+- Eksport (`chronotyp`): godziny, długości snu (h), MSW, MSF, MSFsc (h od północy), jet lag.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -261,7 +273,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.29.0",
+  "version": "0.30.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

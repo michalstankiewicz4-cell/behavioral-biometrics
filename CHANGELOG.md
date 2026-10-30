@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.30.0] – 2026-10-31
+- Chronotyp: skowronek czy sowa, z Twoich zwykłych godzin snu w dni robocze i wolne. Wynik to środek snu w dni wolne z korektą na odsypianie (metoda Roenneberga) oraz społeczny jet lag. Pytania są własne – bez kopiowania kwestionariuszy MEQ i MCTQ, które wymagają zgody autorów.
+
 ## [0.29.0] – 2026-10-31
 - Wzrok: test oka dominującego – „okienko z dłoni” (metoda Milesa) prowadzone krok po kroku; można powtórzyć kilka prób, wynik to oko z większości prób.
 

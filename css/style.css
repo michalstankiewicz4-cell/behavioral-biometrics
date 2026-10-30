@@ -262,3 +262,6 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .eye-target span{width:22px;height:22px;border-radius:50%;background:#000;box-shadow:0 0 0 10px #fff,0 0 0 12px #000}
 .eye-ans button{font-family:var(--font-body);font-size:.95rem}
 #st-eye{font-family:var(--font-body);font-size:.95rem;color:var(--ink)}
+.chr-form{display:grid;gap:8px;margin:10px 0}
+.chr-form input[type=time]{font-family:var(--font-mono);font-size:1rem;padding:4px 6px;border:1px solid var(--line);border-radius:4px;background:var(--surface);color:var(--ink)}
+.chr-form .sec{margin-top:6px}
