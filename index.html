@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.8.0",
+  "softwareVersion": "0.9.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -80,6 +80,7 @@
     <a href="#dwuklik" data-tab="dwuklik"><span class="n">6</span><span data-i18n="tab_dbl"></span></a>
     <a href="#haslo" data-tab="haslo"><span class="n">7</span><span data-i18n="tab_pass"></span></a>
     <a href="#litery" data-tab="litery"><span class="n">8</span><span data-i18n="tab_let"></span></a>
+    <a href="#wzrok" data-tab="wzrok"><span class="n">9</span><span data-i18n="tab_vis"></span></a>
     <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
   </nav>
 
@@ -222,6 +223,54 @@
     <div id="ls-grid" class="lgrid" aria-label="Siatka liter"></div>
     <div id="sum-ls" class="summary empty"></div>
     <div class="grid" id="cards-ls"></div>
+    <div class="next"><a class="btn" href="#wzrok" data-i18n="next_vis"></a></div>
+  </section>
+
+  <!-- 9. Wzrok -->
+  <section class="panel" id="tab-wzrok" data-panel="wzrok" hidden>
+    <h2 data-i18n="vis_h"></h2>
+    <div class="notice amateur" role="note">
+      <h3 data-i18n="vis_warn_h"></h3>
+      <p data-i18n="vis_warn"></p>
+    </div>
+
+    <h3 class="sec" data-i18n="cal_h"></h3>
+    <p class="lead" data-i18n="cal_desc"></p>
+    <div class="cal-wrap"><div class="cal-card" id="cal-card"><span data-i18n="cal_card"></span></div></div>
+    <div class="cal-row">
+      <label for="cal-size" data-i18n="cal_size"></label>
+      <input type="range" id="cal-size" min="120" max="900" step="1">
+      <span class="status" id="cal-mm"></span>
+    </div>
+    <div class="cal-row">
+      <label for="cal-dist" data-i18n="cal_dist"></label>
+      <input type="number" id="cal-dist" class="num" min="0.5" max="6" step="0.1" value="2">
+      <span class="status" id="cal-info"></span>
+    </div>
+
+    <h3 class="sec" data-i18n="sn_h"></h3>
+    <p class="lead" data-i18n="sn_desc"></p>
+    <div class="bar"><span class="status" id="st-sn"></span><div class="btns"><button id="sn-go-a" type="button" class="primary" data-i18n="sn_start_a"></button><button id="sn-go-b" type="button" class="primary" data-i18n="sn_start_b"></button></div></div>
+    <canvas id="cv-sn" class="arena snellen" aria-label="Tablica Snellena"></canvas>
+    <div id="sn-answers" class="answers"></div>
+    <div id="sum-sn-a" class="summary empty"></div>
+    <div class="grid" id="cards-sn-a"></div>
+    <div id="sum-sn-b" class="summary empty"></div>
+    <div class="grid" id="cards-sn-b"></div>
+
+    <h3 class="sec" data-i18n="ish_h"></h3>
+    <p class="lead" data-i18n="ish_desc"></p>
+    <div class="bar"><span class="status" id="st-ish"></span><div class="btns"><button id="ish-go" type="button" class="primary" data-i18n="ish_start"></button></div></div>
+    <div class="ish-wrap">
+      <canvas id="cv-ish" class="plate" aria-label="Tablica barwna"></canvas>
+      <div class="ish-form">
+        <label for="ish-input" data-i18n="ish_label"></label>
+        <input id="ish-input" class="num" type="text" inputmode="numeric" maxlength="3" autocomplete="off" disabled>
+        <div class="btns"><button id="ish-ok" type="button" class="primary" disabled data-i18n="ish_ok"></button><button id="ish-none" type="button" disabled data-i18n="ish_none"></button></div>
+      </div>
+    </div>
+    <div id="sum-ish" class="summary empty"></div>
+    <div class="grid" id="cards-ish"></div>
     <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
   </section>
 

@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.8.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.9.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -26,10 +26,13 @@ This is a hobby demo, not a scientific or medical tool. Thresholds are rough and
 | 6 | Podwójne kliknięcie · Double click | odstęp, przytrzymanie, drgnięcie kursora, za wolne pary |
 | 7 | Hasło · Password | profil rytmu wpisywania hasła (5 wpisań) i test zgodności z profilem |
 | 8 | Litery i błędy · Letters & errors | przepisywanie pseudosłów (tempo, czas na słowo, rodzaje błędów) i szukanie liter b wśród d/p/q; **to nie jest test na dysleksję** |
+| 9 | Wzrok · Vision | kalibracja ekranu, tablica Snellena (litery lub obracane E), generowane tablice barwne w stylu Ishihary; **to nie jest badanie wzroku** |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 
 ## Funkcje · Features
+
+> ⚠️ Zakładki „Litery i błędy” i „Wzrok” niczego nie diagnozują. To nie jest test na dysleksję ani badanie wzroku. · The “Letters & errors” and “Vision” tabs diagnose nothing; they are not a dyslexia test or an eye test.
 
 - Polski i angielski, domyślnie według języka przeglądarki · Polish and English, picked from the browser language
 - Motyw dzień/noc, domyślnie według systemu · Day/night theme, follows the system by default

@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.9.0] – 2026-10-30
+- Nowa zakładka „Wzrok” z wyraźnym ostrzeżeniem, że to nie jest badanie wzroku ani widzenia barw.
+- Kalibracja ekranu kartą (85,6 × 54 mm) i odległością od ekranu.
+- Tablica Snellena w dwóch wariantach: litery (C, D, H, K, N, O, V, Z) i obracane E (odpowiedź strzałkami); wynik w zapisie 20/x, 6/x i dziesiętnym.
+- Tablice barwne w stylu Ishihary generowane na nowo przy każdym starcie, z tablicą pokazową.
+
 ## [0.8.0] – 2026-10-30
 - Favicon (odcisk palca) i ikona dla telefonów.
 - Optymalizacja pod wyszukiwarki: opis strony, adres kanoniczny, dane strukturalne (schema.org), mapa strony (`sitemap.xml`).

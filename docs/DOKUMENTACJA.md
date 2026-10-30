@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.8.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.9.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -31,8 +31,8 @@ Kolejność sekcji w pliku:
 5. **Karty miar**: `buildCards(grid, specs)` buduje karty z definicji. Każda definicja ma `id`, `title`, `unit`, `rows`, `chips` i `how` (opis metody). Wartości wpisują `setMain`, `setRow` i `setHTML`.
 6. **`Arena`**: obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania ruchu).
 7. **`mouseTask(o)`**: wspólny szkielet zadań z myszką. Zadanie dostarcza `start`, `down`, `move`, `up`, `draw`, `analyse`, `render`, `summary`; szkielet obsługuje przycisk Start, przerwanie przy zmianie zakładki i zakończenie.
-8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`, `Pseudo`, `Search`.
-9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wyniki`).
+8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`, `Pseudo`, `Search`, `SnA`, `SnB`, `Plates` (plus `Cal` – kalibracja, `SnRun` – przebieg tablicy Snellena).
+9. **Zakładki, wyniki, eksport, motyw, język**: routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wzrok`, `#wyniki`).
 
 Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstają karty (`render`), ocena słowna (`summary`), zestawienie w „Wynikach” i eksport. Przy zmianie języka karty budowane są od nowa z tego samego `R`.
 
@@ -118,6 +118,20 @@ Z ciągu kolejnych błędów na sąsiednich pozycjach liczony jest tylko pierwsz
 
 **Szukanie liter:** siatka 7 × 12 = 84 znaki, w tym 21 liter „b”, reszta losowo z d, p, q. Mierzony jest czas od „Start” do „Gotowe”, trafienia, pominięcia i pomyłki z podziałem na literę wziętą za „b”.
 
+## 5c. Wzrok
+
+Zakładka **nie jest badaniem wzroku ani widzenia barw**; mówi o tym ramka na górze oraz każda ocena.
+
+**Kalibracja.** Użytkownik dopasowuje prostokąt do karty o standardowym rozmiarze ID-1 (85,6 × 53,98 mm), co daje skalę `px/mm` w pikselach CSS, i podaje odległość od ekranu (0,5–6 m, domyślnie 2 m). Zmiana powiększenia strony po kalibracji ją psuje.
+
+**Tablica Snellena.** Wysokość znaku poziomu 20/x: `h = odległość × tan(5′ × x / 20)` (przy 2 m znak 20/20 ma ok. 2,9 mm). Poziomy: 20/200, 100, 70, 50, 40, 30, 25, 20, 15, 10. Start od największego poziomu, który mieści się w 80% wysokości pola. Na poziomie pokazywane są pojedyncze znaki (do 5): 3 poprawne = zaliczony, 3 błędne = koniec. Wynik = najmniejszy zaliczony poziom, podany też jako 6/x i dziesiętnie (20/x). Test kończy się też, gdy kolejny znak miałby mniej niż 5 px (wtedy wynik może być zaniżony).
+
+- Litery: C, D, H, K, N, O, V, Z rysowane na siatce 5 × 5 (grubość kreski = 1/5 wysokości, jak w literach Sloan); odpowiedź klawiszem litery lub przyciskiem.
+- Obracane E: ten sam rozmiar, ramiona w jednym z 4 kierunków; odpowiedź strzałką lub przyciskiem.
+- Znaki są czarne na białym tle niezależnie od motywu strony.
+
+**Tablice barwne w stylu Ishihary.** To nie są oryginalne tablice Ishihary (chronione prawem autorskim), tylko tablice generowane przez stronę. Kropki (promień ok. 2,4–10 px) są rozmieszczane losowo bez nakładania się. Maska liczby to tekst narysowany na niewidocznym płótnie. Kolory w HSL: liczba – odcienie 12–30° (pomarańczowo-czerwone), tło – 72–98° (zielono-oliwkowe), jasność obu grup losowana z tego samego zakresu 48–64%, więc liczbę odróżnia głównie odcień. Pierwsza tablica (liczba 12) jest pokazowa: ciemnoniebieska liczba na jasnopomarańczowym tle. Potem 6 tablic testowych z losowymi liczbami. Wynik: liczba odczytanych tablic testowych i informacja, czy odczytano tablicę pokazową.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -125,7 +139,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -142,7 +156,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
