@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.7.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.8.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -60,6 +60,8 @@ index.html            struktura strony
 style.css             wygląd, motywy, czcionki (@font-face)
 app.js                pomiary, obliczenia, teksty PL/EN, wersja i lista zmian
 fonts/                IBM Plex Sans i Mono (SIL OFL 1.1, fonts/OFL-LICENSE.txt)
+img/                  favicon, ikony, miniatura do udostępniania (og-image.png)
+sitemap.xml           mapa strony dla wyszukiwarek
 docs/DOKUMENTACJA.md  dokumentacja techniczna
 CHANGELOG.md          historia wersji
 .github/workflows/    automatyczne wdrożenie na GitHub Pages po pushu do main

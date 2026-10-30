@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.7.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.8.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -16,6 +16,8 @@ Wersja dokumentu odpowiada wersji strony **0.7.0**. Historia zmian: [CHANGELOG.m
 | `index.html` | Szkielet: nagłówek, zastrzeżenia, zakładki, panele zadań, „Co nowego”, stopka. Teksty wstawiane są z `app.js` przez atrybut `data-i18n`. |
 | `style.css` | `@font-face` dla czcionek lokalnych, tokeny kolorów (jasny i ciemny motyw), układ. |
 | `app.js` | Cała logika, w jednym IIFE (opis niżej). |
+| `img/` | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180 px), `icon-512.png`, `og-image.png` (1200 × 630, miniatura linku). |
+| `sitemap.xml` | Mapa strony dla wyszukiwarek. |
 | `fonts/` | IBM Plex Sans i Mono (400/500/600, zakresy `latin` i `latin-ext`), licencja SIL OFL 1.1. |
 
 ## 3. Budowa `app.js`
@@ -123,7 +125,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.7.0",
+  "version": "0.8.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -151,7 +153,8 @@ Przy każdej zmianie:
 1. Podnieś `VERSION` w `app.js`.
 2. Dodaj wpis na górze tablicy `CHANGELOG` w `app.js` (PL i EN).
 3. Dodaj ten sam wpis na górze `CHANGELOG.md`.
-4. Zaktualizuj numer wersji w `README.md` i na początku tej dokumentacji.
+4. Zaktualizuj numer wersji w `README.md`, na początku tej dokumentacji i w `softwareVersion` (JSON-LD w `index.html`).
+5. Przy zmianach wyglądu wygeneruj ponownie `img/og-image.png` (sekcja 9).
 
 ## 8. Dodawanie nowego zadania z myszką
 
@@ -159,3 +162,11 @@ Przy każdej zmianie:
 2. W `app.js` utwórz zadanie przez `mouseTask({...})` z definicją kart (`specs`) i funkcjami `start`, `down`/`move`/`up`, `draw`, `analyse`, `render`, `summary`.
 3. Dopisz je do tablic `TASKS`, `MOUSE` i nazwę zakładki do `TABS`.
 4. Dodaj teksty do słownika `D` (oba języki).
+
+## 9. Wyszukiwarki, favicon i miniatura
+
+- **`<head>` w `index.html`:** tytuł i opis (`description`), adres kanoniczny, `theme-color`, ikony, znaczniki Open Graph i Twitter (miniatura `img/og-image.png`), dane strukturalne JSON-LD typu `WebApplication`.
+- **Treść dla robotów:** nagłówek i opis są wpisane w HTML po polsku, więc są widoczne nawet bez uruchamiania JavaScriptu; JS podmienia je po wybraniu języka. Przy zmianie języka JS aktualizuje też `document.title` i opis.
+- **`sitemap.xml`:** jeden adres. `robots.txt` nie ma sensu na stronie projektu GitHub Pages (`…github.io/behavioral-biometrics/`), bo roboty czytają go tylko z katalogu głównego domeny.
+- **Google Search Console:** żeby przyspieszyć indeksowanie, dodaj w Search Console właściwość z prefiksem URL `https://michalstankiewicz4-cell.github.io/behavioral-biometrics/`, zweryfikuj ją plikiem HTML (wrzuć go do repo) i zgłoś `sitemap.xml`.
+- **Odświeżanie miniatury:** `og-image.png` to zrzut górnej części strony 1200 × 630 w jasnym motywie. Przy większych zmianach wyglądu warto go wygenerować ponownie (np. Playwright: `page.setViewportSize({width:1200,height:630})`, `page.screenshot()`).

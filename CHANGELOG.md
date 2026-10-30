@@ -3,6 +3,12 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.8.0] – 2026-10-30
+- Favicon (odcisk palca) i ikona dla telefonów.
+- Optymalizacja pod wyszukiwarki: opis strony, adres kanoniczny, dane strukturalne (schema.org), mapa strony (`sitemap.xml`).
+- Miniatura do udostępniania linku (zrzut strony) dla Facebooka, X, komunikatorów.
+- Poprawka eksportu: pseudosłowa i szukanie liter zapisują się pod osobnymi nazwami.
+
 ## [0.7.0] – 2026-10-30
 - Nowa zakładka „Litery i błędy” z wyraźną informacją, że to nie jest test na dysleksję i niczego nie diagnozuje.
 - Ramka „Co mówią badania” z linkami do prac o zapisie klawiszy i dysleksji (Inputlog, Dytective).

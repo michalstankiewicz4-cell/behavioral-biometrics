@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.7.0";
+const VERSION = "0.8.0";
 const CHANGELOG = [
+  { v:"0.8.0", date:"2026-10-30",
+    pl:["Favicon (odcisk palca) i ikona dla telefonów.","Optymalizacja pod wyszukiwarki: opis strony, adres kanoniczny, dane strukturalne (schema.org), mapa strony (sitemap.xml).","Miniatura do udostępniania linku (zrzut strony) dla Facebooka, X, komunikatorów.","Poprawka eksportu: pseudosłowa i szukanie liter zapisują się pod osobnymi nazwami."],
+    en:["Favicon (fingerprint) and a phone icon.","Search engine optimisation: page description, canonical URL, structured data (schema.org), sitemap (sitemap.xml).","Link preview image (page screenshot) for Facebook, X and messengers.","Export fix: pseudowords and letter search are saved under separate names."] },
   { v:"0.7.0", date:"2026-10-30",
     pl:["Nowa zakładka „Litery i błędy” z wyraźną informacją, że to nie jest test na dysleksję i niczego nie diagnozuje.","Ramka „Co mówią badania” z linkami do prac o zapisie klawiszy i dysleksji (Inputlog, Dytective).","Zadanie „Przepisywanie pseudosłów”: tempo, czas na słowo, błędy i porównanie ze zwykłym tekstem z etapu 1.","Zadanie „Szukanie liter”: zaznaczanie liter b wśród d, p i q; czas, trafienia, pominięcia i pomyłki.","Nowa karta „Rodzaje błędów” w teście pisania i w pseudosłowach: spacje, wielkość liter, litery lustrzane, polska ortografia, ogonki, przestawienia, pominięcia, podwojenia i sąsiednie klawisze."],
     en:["New “Letters & errors” tab with a clear note that it is not a dyslexia test and diagnoses nothing.","“What research says” box with links to work on keystroke logging and dyslexia (Inputlog, Dytective).","“Retyping pseudowords” task: pace, time per word, errors and comparison with the normal text from stage 1.","“Letter search” task: marking b among d, p and q; time, hits, misses and false marks.","New “Error types” card in the typing test and the pseudowords task: spaces, letter case, mirror letters, Polish spelling, diacritics, swaps, skips, doubles and neighbouring keys."] },
@@ -44,7 +47,8 @@ const L = o => (o && typeof o === "object" && "pl" in o) ? o[LANG] : o;
 
 const D = {
 pl:{
-  title:"Odcisk klawiatury i myszki",
+  title:"Odcisk klawiatury i myszki", doc_title:"Odcisk klawiatury i myszki · biometria behawioralna – demo",
+  meta_desc:"Jawne demo biometrii behawioralnej: sprawdź, jak strona rozpoznaje cię po pisaniu na klawiaturze i ruchach myszki. Test pisania, zadania z myszką, rytm hasła. Wszystko liczy się lokalnie w przeglądarce.",
   tag:"BIOMETRIA BEHAWIORALNA",
   lang_btn:"English", lang_label:"Przełącz na angielski",
   lead:"Biometria behawioralna rozpoznaje ludzi po tym, <strong>jak</strong> coś robią: jak piszą, jak ruszają myszką, jak klikają. Zwykle działa ukryta w tle (np. w bankowości). Tutaj jest <strong>jawna</strong>: wykonujesz krótkie zadania, a strona pokazuje, co zmierzyła i jak to policzyła.",
@@ -99,7 +103,8 @@ pl:{
   author:"autor: Michał Stankiewicz · stworzone przy użyciu vibecodingu"
 },
 en:{
-  title:"Keyboard and mouse fingerprint",
+  title:"Keyboard and mouse fingerprint", doc_title:"Keyboard and mouse fingerprint · behavioral biometrics demo",
+  meta_desc:"An open behavioral biometrics demo: see how a page can recognise you by your typing and mouse movements. Typing test, mouse tasks, password rhythm. Everything is computed locally in your browser.",
   tag:"BEHAVIORAL BIOMETRICS",
   lang_btn:"Polski", lang_label:"Switch to Polish",
   lead:"Behavioral biometrics recognises people by <strong>how</strong> they do things: how they type, move the mouse and click. It usually runs hidden in the background (e.g. in banking). Here it is <strong>out in the open</strong>: you do a few short tasks and the page shows what it measured and how it calculated it.",
@@ -1170,7 +1175,8 @@ function showTab(){
 }
 function applyLang(){
   document.documentElement.lang = LANG;
-  document.title = D[LANG].title;
+  document.title = D[LANG].doc_title;
+  document.querySelector('meta[name="description"]').setAttribute("content", D[LANG].meta_desc);
   document.querySelectorAll("[data-i18n]").forEach(el => { el.innerHTML = D[LANG][el.dataset.i18n]; });
   const b=$("lang"); b.textContent = D[LANG].lang_btn; b.setAttribute("aria-label", D[LANG].lang_label);
   $("tabs").setAttribute("aria-label", LANG==="pl" ? "Etapy" : "Stages");
