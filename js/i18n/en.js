@@ -96,6 +96,8 @@ export default {
   tab_hand:"Handedness", next_recznosc:"Next: handedness →", hand_go:"Show result",
   hand_h:"Handedness: left, right or mixed",
   hand_desc:"Mark which hand you use for each activity. If you usually help with the other hand, count the one making the main movement. The questions are modelled on the Edinburgh Handedness Inventory (Oldfield, 1971), but this is not the original questionnaire. At the end I compare the result with the <a href=\"#tapping\">Tapping</a> test, if you do it.",
+  eye_h:"Dominant eye",
+  eye_desc:"Most people have one eye that “leads” when aiming. Ideally step back 2–3 metres from the screen (or at least a bit further than your arms' length). Click “Start” and follow the steps – you look at the black dot below.",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",

@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.28.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.29.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -28,7 +28,7 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness, dominant-eye)
   data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
@@ -246,6 +246,14 @@ Grupa zakładek „Cechy stałe”. Pełny kwestionariusz IPIP-NEO: 300 pozycji 
 - Porównanie z tappingiem (jeśli wykonany): asymetria tempa (prawa − lewa) ÷ średnia; poniżej 3% remis. Liczone przy każdym pokazaniu zakładki, więc tapping może być zrobiony przed albo po.
 - Eksport (`recznosc`): odpowiedzi, LQ, kategoria, liczba czynności lewą / prawą / obiema.
 
+## 5p. Oko dominujące
+
+W zakładce Wzrok. Test „okienka z dłoni” (metoda Milesa) prowadzony w 3 krokach: (1) obojgiem oczu ustaw okienko ze złożonych dłoni na czarnym punkcie, (2) zamknij lewe oko – czy punkt jest w okienku?, (3) zamknij prawe oko – czy punkt jest w okienku?
+
+- Punkt zostaje tylko przy prawym oku → prawe dominujące; tylko przy lewym → lewe; przy obu albo przy żadnym → próba niejasna.
+- Każdy „Start” to nowa próba; wynik to oko z większości prób (remis = niejasne).
+- Eksport (`oko-dominujace`): wynik, lista prób, liczba zgodnych prób.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -253,7 +261,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.28.0",
+  "version": "0.29.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

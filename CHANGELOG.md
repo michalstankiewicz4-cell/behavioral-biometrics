@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.29.0] – 2026-10-31
+- Wzrok: test oka dominującego – „okienko z dłoni” (metoda Milesa) prowadzone krok po kroku; można powtórzyć kilka prób, wynik to oko z większości prób.
+
 ## [0.28.0] – 2026-10-31
 - Ręczność: 10 codziennych czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji od −100 do +100 (lewo-, prawo- lub ręczność mieszana) i porównanie z tym, która ręka była szybsza w teście Tapping.
 

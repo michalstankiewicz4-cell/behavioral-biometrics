@@ -23,7 +23,7 @@ export const WIKI = {
   recznosc:     [W("pl","Leworęczność"), W("pl","Lateralizacja"), W("en","Handedness"), W("en","Edinburgh_Handedness_Inventory")],
   litery:       [W("pl","Dysleksja"), W("en","Dyslexia"), W("en","Pseudoword")],
   wzrok:        [W("pl","Tablica_Snellena"), W("pl","Visus"), W("pl","Tablice_Ishihary"), W("pl","Astygmatyzm_(wada_wzroku)"),
-                 W("en","Snellen_chart"), W("en","Ishihara_test"), W("en","Astigmatism"), W("en","Contrast_(vision)")]
+                 W("en","Snellen_chart"), W("en","Ishihara_test"), W("en","Astigmatism"), W("en","Contrast_(vision)"), W("en","Ocular_dominance")]
 };
 
 export function renderWiki(){

@@ -96,6 +96,8 @@ export default {
   tab_hand:"Ręczność", next_recznosc:"Dalej: ręczność →", hand_go:"Pokaż wynik",
   hand_h:"Ręczność: lewa, prawa czy mieszana",
   hand_desc:"Zaznacz, której ręki używasz przy każdej czynności. Jeśli przy jakiejś czynności zwykle pomagasz sobie drugą ręką, liczy się ta, która wykonuje główny ruch. Pytania są wzorowane na Inwentarzu Edynburskim (Oldfield, 1971), ale to nie jest oryginalny kwestionariusz. Na końcu wynik porównuję z testem <a href=\"#tapping\">Tapping</a>, jeśli go zrobisz.",
+  eye_h:"Oko dominujące",
+  eye_desc:"Większość ludzi ma oko, które „prowadzi” przy celowaniu. Najlepiej odsuń się od ekranu na 2–3 metry (albo przynajmniej na długość wyprostowanych rąk i trochę dalej). Kliknij „Start” i postępuj według kroków – patrzysz na czarny punkt poniżej.",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",

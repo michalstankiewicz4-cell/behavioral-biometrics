@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.28.0";
+const VERSION = "0.29.0";
 const CHANGELOG = [
+  { v:"0.29.0", date:"2026-10-31",
+    pl:["Wzrok: test oka dominującego – „okienko z dłoni” (metoda Milesa) prowadzone krok po kroku; można powtórzyć kilka prób, wynik to oko z większości prób."],
+    en:["Vision: dominant eye test – the “hand window” (Miles test) guided step by step; you can repeat several trials, and the result is the eye found in most of them."] },
   { v:"0.28.0", date:"2026-10-31",
     pl:["Ręczność: 10 codziennych czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji od −100 do +100 (lewo-, prawo- lub ręczność mieszana) i porównanie z tym, która ręka była szybsza w teście Tapping."],
     en:["Handedness: 10 everyday activities in the style of the Edinburgh Handedness Inventory, a laterality quotient from −100 to +100 (left-, right- or mixed-handed) and a comparison with which hand was faster in the Tapping test."] },
