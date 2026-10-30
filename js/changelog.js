@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.26.0";
+const VERSION = "0.26.1";
 const CHANGELOG = [
+  { v:"0.26.1", date:"2026-10-30",
+    pl:["Poprawka: przyciski „Utwórz kartę” i porównanie eksportów w zakładce Wyniki znowu działają (moduł nie był wczytywany po podziale na pliki w 0.22.0).","Test automatyczny sprawdza teraz, czy strona wczytuje każdy plik z js/, i tworzy kartę PNG."],
+    en:["Fix: the “Create card” button and export comparison in the Results tab work again (the module was not loaded after the file split in 0.22.0).","The automated test now checks that the page loads every file in js/ and creates the PNG card."] },
   { v:"0.26.0", date:"2026-10-30",
     pl:["Nowy opis strony dla wyszukiwarek po polsku i angielsku, obejmujący wszystkie zakładki (biometria, testy reakcji, pamięci i wzroku).","Frazy kluczowe po polsku i angielsku (m.in. biometria behawioralna, dynamika pisania, efekt Stroopa, prawo Fittsa, tablica Snellena, odcisk przeglądarki) w znacznikach strony i danych strukturalnych."],
     en:["New search engine description in Polish and English, covering all tabs (biometrics, reaction, memory and vision tests).","Keywords in Polish and English (incl. behavioral biometrics, keystroke dynamics, Stroop test, Fitts's law, Snellen chart, browser fingerprint) in page tags and structured data."] },

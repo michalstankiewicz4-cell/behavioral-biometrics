@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.26.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.26.1** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -94,7 +94,7 @@ js/
   wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku
-tests/smoke.mjs            test dymny (Playwright)
+tests/smoke.mjs            test dymny (Playwright): zakładki, test pisania, karta PNG, czy każdy moduł z js/ jest wczytany
 tools/serve.mjs            lokalny serwer plików
 tools/make-images.mjs      generowanie ikon i miniatury
 docs/DOKUMENTACJA.md       dokumentacja techniczna

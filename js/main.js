@@ -2,6 +2,7 @@
 import { CHANGELOG, VERSION } from "./changelog.js";
 import { renderWiki } from "./wiki.js";
 import { renderCombined } from "./results/combined.js";
+import "./results/tools.js";   // porównanie eksportów i karta PNG (rejestruje obsługę przycisków)
 import { REPO } from "./config.js";
 import { buildCards, setSummary } from "./core/cards.js";
 import { LANGHOOKS, LEAVE, SHOW } from "./core/registry.js";

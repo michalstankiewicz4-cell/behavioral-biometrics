@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.26.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.26.1**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -34,7 +34,7 @@ js/
   wiki.js                  linki do Wikipedii przy testach
 assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
 assets/img/                favicon, ikony, miniatura linku
-tests/smoke.mjs            test dymny (Playwright)
+tests/smoke.mjs            test dymny (Playwright): zakładki, test pisania, karta PNG, czy każdy moduł z js/ jest wczytany
 tools/serve.mjs            lokalny serwer plików
 tools/make-images.mjs      generowanie ikon i miniatury
 docs/DOKUMENTACJA.md       dokumentacja techniczna
@@ -232,7 +232,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.26.0",
+  "version": "0.26.1",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

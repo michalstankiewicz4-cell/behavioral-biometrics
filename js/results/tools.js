@@ -30,6 +30,7 @@ const Compare = (() => { const files={a:null, b:null};
 
 const Card = (() => { let blob=null, url=null;
   function make(){ const done=TASKS.filter(t=>t.R); if(!done.length){ $("png-status").textContent = LANG==="pl"?"Najpierw ukończ co najmniej jeden test.":"Finish at least one test first."; return; }
+    $("png-status").textContent = LANG==="pl" ? "Tworzę kartę…" : "Creating the card…";
     const W=1200, H=630, cv=document.createElement("canvas"); cv.width=W; cv.height=H; const g=cv.getContext("2d");
     const C={bg:"#eef0ec", ink:"#1b2320", muted:"#5d6863", acc:"#2b48c9", line:"#cfd5cf", warn:"#b07413"}, FB=css("--font-body"), FM=css("--font-mono");
     g.fillStyle=C.bg; g.fillRect(0,0,W,H); g.fillStyle=C.acc; g.fillRect(0,0,W,10);
