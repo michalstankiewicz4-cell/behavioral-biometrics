@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.31.0";
+const VERSION = "0.31.1";
 const CHANGELOG = [
+  { v:"0.31.1", date:"2026-10-31",
+    pl:["Opis strony i frazy kluczowe dla wyszukiwarek (PL i EN) obejmują teraz testy z grupy „Cechy stałe” i oko dominujące; odświeżona miniatura linku; uzupełnione README i dokumentacja (klucze eksportu)."],
+    en:["The page description and search keywords (PL and EN) now cover the “Stable traits” tests and the dominant eye; refreshed link thumbnail; README and documentation updated (export keys)."] },
   { v:"0.31.0", date:"2026-10-31",
     pl:["Rotacja umysłowa: czy obrócona figura z kwadratów to ta sama, czy jej odbicie lustrzane (klawisze F/J albo przyciski). 30 prób przy kątach 0–180°; wynik to trafność, czas i tempo „obracania w wyobraźni” w ms na stopień, z wykresem."],
     en:["Mental rotation: is the rotated figure made of squares the same one or its mirror image (F/J keys or buttons). 30 trials at angles 0–180°; the result is accuracy, time and the speed of “mental rotation” in ms per degree, with a chart."] },

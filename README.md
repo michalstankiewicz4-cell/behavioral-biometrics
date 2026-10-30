@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.31.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.31.1** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -16,7 +16,7 @@ This is a hobby demo, not a scientific or medical tool. Thresholds are rough and
 
 ## Zadania · Tasks
 
-Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ ciekawostki zdrowotne (inny kolor: wynik może być nieprawdziwy), wyniki i narzędzia. · Tabs are grouped; the health-curiosities group is highlighted because its results may be wrong.
+Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ ciekawostki zdrowotne (inny kolor: wynik może być nieprawdziwy), cechy stałe (osobowość, ręczność, chronotyp, rotacja umysłowa), wyniki i narzędzia. · Tabs are grouped; the health-curiosities group is highlighted because its results may be wrong.
 
 | # | Zadanie | Co mierzy |
 |---|---------|-----------|

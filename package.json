@@ -1,6 +1,6 @@
 {
   "name": "behavioral-biometrics",
-  "version": "0.31.0",
+  "version": "0.31.1",
   "private": true,
   "description": "Jawne demo biometrii behawioralnej i testów psychomotorycznych w przeglądarce (statyczna strona, bez budowania).",
   "type": "module",

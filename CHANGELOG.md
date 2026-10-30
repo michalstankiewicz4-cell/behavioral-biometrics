@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.31.1] – 2026-10-31
+- Opis strony i frazy kluczowe dla wyszukiwarek (PL i EN) obejmują teraz testy z grupy „Cechy stałe” i oko dominujące; odświeżona miniatura linku; uzupełnione README i dokumentacja (klucze eksportu).
+
 ## [0.31.0] – 2026-10-31
 - Rotacja umysłowa: czy obrócona figura z kwadratów to ta sama, czy jej odbicie lustrzane (klawisze F/J albo przyciski). 30 prób przy kątach 0–180°; wynik to trafność, czas i tempo „obracania w wyobraźni” w ms na stopień, z wykresem.
 
