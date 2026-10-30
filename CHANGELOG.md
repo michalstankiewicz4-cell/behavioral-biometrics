@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.19.0] – 2026-10-30
+- Nowy test „Pamięć krótkotrwała” z dwiema częściami: ciąg cyfr (digit span) i bloki Corsiego.
+- Ciąg wydłuża się po każdym poprawnym powtórzeniu, dwa błędy z rzędu kończą test; wynik to zakres pamięci i lista prób.
+
 ## [0.18.0] – 2026-10-30
 - Nowy test „Tapping”: 10 s stukania osobno lewą (F) i prawą (J) ręką.
 - Tempo, równomierność odstępów, przytrzymanie klawisza, zmęczenie pod koniec rundy, różnica między rękami i wykres odstępów w czasie.

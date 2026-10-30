@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.18.0";
+const VERSION = "0.19.0";
 const CHANGELOG = [
+  { v:"0.19.0", date:"2026-10-30",
+    pl:["Nowy test „Pamięć krótkotrwała” z dwiema częściami: ciąg cyfr (digit span) i bloki Corsiego.","Ciąg wydłuża się po każdym poprawnym powtórzeniu, dwa błędy z rzędu kończą test; wynik to zakres pamięci i lista prób."],
+    en:["New “Short-term memory” test with two parts: digit span and Corsi blocks.","The sequence grows after every correct repeat, two errors in a row end the test; the result is the memory span and a list of attempts."] },
   { v:"0.18.0", date:"2026-10-30",
     pl:["Nowy test „Tapping”: 10 s stukania osobno lewą (F) i prawą (J) ręką.","Tempo, równomierność odstępów, przytrzymanie klawisza, zmęczenie pod koniec rundy, różnica między rękami i wykres odstępów w czasie."],
     en:["New “Finger tapping” test: 10 s of tapping with the left (F) and right (J) hand separately.","Rate, interval regularity, key hold, end-of-round fatigue, difference between hands and a chart of intervals over time."] },
@@ -149,6 +152,10 @@ pl:{
   tab_tap:"Tapping", next_tapping:"Dalej: tapping →",
   tap_h:"Tapping (stukanie palcem)", tap_desc:"Dwie rundy po 10 sekund: najpierw palcem wskazującym lewej ręki w klawisz F, potem prawej w klawisz J. Stukaj jak najszybciej, a czas ruszy od pierwszego uderzenia. Test stukania jest używany m.in. w badaniach motoryki; tutaj to tylko ciekawostka.",
   tap_l:"Start: lewa ręka (F)", tap_r:"Start: prawa ręka (J)",
+  tab_mem:"Pamięć", next_pamiec:"Dalej: pamięć →",
+  mem_h:"Pamięć krótkotrwała", mem_desc:"Dwa klasyczne testy zakresu pamięci: słownej (ciąg cyfr) i przestrzennej (bloki Corsiego). Ciąg wydłuża się po każdym poprawnym powtórzeniu, a dwa błędy z rzędu kończą test.",
+  ds_h:"Ciąg cyfr", ds_desc:"Cyfry pojawiają się po kolei, jedna na sekundę. Potem wpisz je w tej samej kolejności. Zaczynasz od 3 cyfr.", ds_label:"Twoja odpowiedź",
+  cs_h:"Bloki Corsiego", cs_desc:"Bloki zapalają się po kolei. Potem kliknij je w tej samej kolejności. Zaczynasz od 2 bloków.",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -236,6 +243,10 @@ en:{
   tab_tap:"Tapping", next_tapping:"Next: tapping →",
   tap_h:"Finger tapping", tap_desc:"Two 10-second rounds: first the left index finger on the F key, then the right one on J. Tap as fast as you can; timing starts at the first tap. The tapping test is used, among others, in motor-skill research; here it is just a curiosity.",
   tap_l:"Start: left hand (F)", tap_r:"Start: right hand (J)",
+  tab_mem:"Memory", next_pamiec:"Next: memory →",
+  mem_h:"Short-term memory", mem_desc:"Two classic memory span tests: verbal (digit span) and spatial (Corsi blocks). The sequence grows after every correct repeat, and two errors in a row end the test.",
+  ds_h:"Digit span", ds_desc:"Digits appear one at a time, one per second. Then type them in the same order. You start with 3 digits.", ds_label:"Your answer",
+  cs_h:"Corsi blocks", cs_desc:"Blocks light up one after another. Then click them in the same order. You start with 2 blocks.",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -1883,11 +1894,79 @@ const Tap = (() => { const DUR=10000, HANDS=[{k:"left",code:"KeyF",key:"F"},{k:"
 })();
 
 // =====================================================================
+// PAMIĘĆ — zakres cyfr (digit span) i bloki Corsiego
+// =====================================================================
+function spanSpecs(id, typ){ return [
+  {id, title:{pl:"Zakres pamięci",en:"Memory span"}, unit:{pl:"elementów",en:"items"}, rows:[["tries",{pl:"prób",en:"attempts"}],["typ",{pl:"orientacyjnie u dorosłych",en:"typical for adults"}]],
+   how:{pl:"Zaczynam od krótkiego ciągu; po poprawnym powtórzeniu ciąg wydłuża się o 1. Na każdej długości są 2 szanse; dwa błędy z rzędu kończą test. Zakres to najdłuższy poprawnie powtórzony ciąg.",
+        en:"It starts with a short sequence; after a correct repeat the sequence grows by 1. Each length has 2 chances; two errors in a row end the test. The span is the longest correctly repeated sequence."}},
+  {id:id+"-l", title:{pl:"Próby",en:"Attempts"}, chips:[["list",null]], how:{pl:"Długość ciągu i wynik każdej próby.",en:"Sequence length and result of each attempt."}}
+];}
+const spanRender = (id, R) => { setMain(id, R.span); setRow(id,"tries", R.attempts.length); setRow(id,"typ", R.typical);
+  setHTML(id+"-l","list", R.attempts.map(a=>`<span class="chip ${a.ok?"ok":"no"}">${a.len} ${a.ok?"✓":"✗"}</span>`).join("")); };
+function spanStep(S, ok){ S.attempts.push({len:S.len, ok}); if(ok){ S.span=Math.max(S.span,S.len); S.len++; S.fails=0; return S.len<=S.max; } S.fails++; return S.fails<2; }
+
+const Digits = (() => { const inp=$("ds-input"), box=$("ds-show"); let S=null, st=null;
+  const self = { tab:"pamiec", key:"pamiec-cyfry", grid:"cards-ds", sumId:"sum-ds", R:null, title:{pl:"Pamięć: ciąg cyfr",en:"Memory: digit span"}, specs:spanSpecs("ds-span") };
+  const status = o => { st=o; $("st-ds").textContent = L(o)||""; };
+  function play(){ inp.disabled=true; $("ds-ok").disabled=true; inp.value=""; const seq=[]; while(seq.length<S.len){ const d=Math.floor(Math.random()*10); if(d!==seq[seq.length-1]) seq.push(d); } S.seq=seq;
+    status({pl:`Zapamiętaj ${S.len} cyfr…`,en:`Remember ${S.len} digits…`}); let i=0;
+    const step=()=>{ if(!S) return; if(i>=seq.length){ box.textContent=""; inp.disabled=false; $("ds-ok").disabled=false; inp.focus(); status({pl:"Wpisz cyfry w tej samej kolejności i naciśnij Enter.",en:"Type the digits in the same order and press Enter."}); return; }
+      box.textContent=seq[i]; S.timer=setTimeout(()=>{ box.textContent=""; i++; S.timer=setTimeout(step,200); }, 800); };
+    S.timer=setTimeout(step,600); }
+  function submit(){ if(!S||inp.disabled) return; const ok=inp.value.replace(/\D/g,"")===S.seq.join("");
+    box.textContent = ok ? "✓" : "✗"; if(spanStep(S,ok)) setTimeout(play,700); else finish(); }
+  function finish(){ inp.disabled=true; $("ds-ok").disabled=true; self.R={ span:S.span, attempts:S.attempts, typical:"7 ± 2" }; S=null; status({pl:"Gotowe.",en:"Done."});
+    self.render(self.R); setSummary(self); markDone("pamiec"); }
+  self.render = R => spanRender("ds-span", R);
+  self.summary = R => LANG==="pl"
+    ? `<p>Twój zakres pamięci cyfr to <strong>${R.span}</strong>. Klasycznie podaje się, że dorośli zapamiętują ok. 7 ± 2 elementów naraz („magiczna liczba” Millera), choć nowsze badania wskazują raczej na ok. 4 porcje informacji, gdy nie da się ich grupować.</p>`
+    : `<p>Your digit span is <strong>${R.span}</strong>. Classically adults hold about 7 ± 2 items at once (Miller's “magical number”), although newer research suggests closer to 4 chunks when grouping isn't possible.</p>`;
+  $("ds-go").addEventListener("click", () => { if(S) clearTimeout(S.timer); S={len:3, max:12, span:0, fails:0, attempts:[]}; play(); });
+  $("ds-ok").addEventListener("click", submit);
+  inp.addEventListener("keydown", e => { if(e.key==="Enter"){ e.preventDefault(); submit(); } });
+  LEAVE.pamiec = () => { if(S){ clearTimeout(S.timer); S=null; box.textContent=""; status(null); } if(Corsi.leave) Corsi.leave(); };
+  LANGHOOKS.push(() => status(st));
+  return self;
+})();
+
+const Corsi = (() => { const POS=[[.12,.70],[.26,.28],[.40,.62],[.52,.18],[.60,.48],[.74,.78],[.84,.30],[.30,.88],[.90,.62]], SZ=46;
+  const A=new Arena("cv-corsi"); let S=null, st=null;
+  const self = { tab:"pamiec", key:"pamiec-corsi", grid:"cards-corsi", sumId:"sum-corsi", R:null, title:{pl:"Pamięć: bloki Corsiego",en:"Memory: Corsi blocks"}, specs:spanSpecs("cs-span") };
+  const status = o => { st=o; $("st-corsi").textContent = L(o)||""; };
+  const at = i => ({x:POS[i][0]*A.w, y:POS[i][1]*A.h});
+  function draw(lit){ A.fit(); if(!A.w) return; A.clear(); const g=A.ctx;
+    POS.forEach((_,i)=>{ const p=at(i); g.fillStyle = i===lit ? css("--warn") : css("--accent"); g.globalAlpha = i===lit ? 1 : 0.75; g.fillRect(p.x-SZ/2,p.y-SZ/2,SZ,SZ); g.globalAlpha=1; });
+    if(!S) A.label(LANG==="pl"?"Kliknij „Start”":"Click “Start”", 24); }
+  function play(){ S.input=null; const seq=[]; while(seq.length<S.len){ const b=Math.floor(Math.random()*POS.length); if(!seq.includes(b)) seq.push(b); } S.seq=seq;
+    status({pl:`Patrz: ${S.len} bloków…`,en:`Watch: ${S.len} blocks…`}); let i=0;
+    const step=()=>{ if(!S) return; if(i>=seq.length){ draw(); S.input=[]; status({pl:"Kliknij bloki w tej samej kolejności.",en:"Click the blocks in the same order."}); return; }
+      draw(seq[i]); S.timer=setTimeout(()=>{ draw(); i++; S.timer=setTimeout(step,250); }, 700); };
+    draw(); S.timer=setTimeout(step,600); }
+  A.c.addEventListener("pointerdown", e => { if(!S||!S.input) return; e.preventDefault(); const p=A.pos(e);
+    const i=POS.findIndex((_,k)=>{ const q=at(k); return Math.abs(p.x-q.x)<=SZ/2 && Math.abs(p.y-q.y)<=SZ/2; }); if(i<0) return;
+    S.input.push(i); draw(i); setTimeout(()=>{ if(S) draw(); },180);
+    if(S.input.length===S.seq.length){ const ok=S.input.every((v,k)=>v===S.seq[k]); S.input=null; status(ok?{pl:"Dobrze ✓",en:"Correct ✓"}:{pl:"Źle ✗",en:"Wrong ✗"});
+      if(spanStep(S,ok)) S.timer=setTimeout(play,900); else finish(); } });
+  function finish(){ self.R={ span:S.span, attempts:S.attempts, typical:LANG==="pl"?"ok. 5–6":"about 5–6" }; S=null; status({pl:"Gotowe.",en:"Done."}); draw();
+    self.render(self.R); setSummary(self); markDone("pamiec"); }
+  self.render = R => spanRender("cs-span", R);
+  self.summary = R => LANG==="pl"
+    ? `<p>Twój zakres pamięci przestrzennej (bloki Corsiego) to <strong>${R.span}</strong>. U dorosłych zwykle wynosi ok. 5–6, czyli nieco mniej niż zakres cyfr.</p>`
+    : `<p>Your spatial memory span (Corsi blocks) is <strong>${R.span}</strong>. For adults it is usually about 5–6, slightly less than the digit span.</p>`;
+  $("cs-go").addEventListener("click", () => { if(S) clearTimeout(S.timer); A.fit(); S={len:2, max:9, span:0, fails:0, attempts:[]}; play(); });
+  self.leave = () => { if(S){ clearTimeout(S.timer); S=null; status(null); } };
+  SHOW.pamiec = () => draw();
+  LANGHOOKS.push(() => { status(st); if(!S) draw(); });
+  return self;
+})();
+
+// =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts, Tap];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts, Tap, Digits, Corsi];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","tapping","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","tapping","pamiec","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){

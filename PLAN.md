@@ -24,7 +24,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 7. ☑ **Czas reakcji i prawo Hicka** – reakcja na 1, 2, 4 i 8 możliwych bodźców, wykres (v0.16.0)
 8. ☑ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru (v0.17.0)
 9. ☑ **Tapping** – 10 s stukania osobno lewą i prawą ręką (v0.18.0)
-10. ☐ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego
+10. ☑ **Pamięć** – ciąg cyfr (digit span) i bloki Corsiego (v0.19.0)
 11. ☐ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami)
 12. ☐ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie)
 13. ☐ **Karta wyniku jako obrazek PNG** generowana lokalnie
@@ -32,6 +32,8 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 15. ☐ **Nowa nazwa strony** zamiast „Odcisk klawiatury i myszki” (do wyboru przez autora)
 16. ☐ **Rozdzielenie wyników od interpretacji** w zakładce Wyniki oraz **interpretacje łączone** (wnioski z kilku testów naraz)
 17. ☐ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek
+
+18. ☐ **Podział projektu na pliki i foldery** jak w profesjonalnym projekcie (moduły JS, style, dane, testy) – wykonywany zaraz po punkcie 13
 
 ## Odrzucone
 

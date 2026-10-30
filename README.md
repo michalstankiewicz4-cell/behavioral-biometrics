@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.18.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.19.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -36,6 +36,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 12 | Czas reakcji · Reaction time (Hick) | reakcja przy 1, 2, 4 i 8 możliwościach, dopasowanie prawa Hicka |
 | 13 | Prawo Fittsa · Fitts's law | 18 ruchów do celów różnej wielkości i odległości, dopasowanie MT = a + b·ID, przepustowość |
 | 14 | Tapping · Finger tapping | 10 s stukania lewą i prawą ręką: tempo, równomierność, zmęczenie, różnica rąk |
+| 15 | Pamięć · Memory | zakres pamięci cyfr i bloki Corsiego |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 

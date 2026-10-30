@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.18.0",
+  "softwareVersion": "0.19.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -94,6 +94,7 @@
         <a href="#reakcja" data-tab="reakcja"><span data-i18n="tab_hick"></span></a>
         <a href="#fitts" data-tab="fitts"><span data-i18n="tab_fitts"></span></a>
         <a href="#tapping" data-tab="tapping"><span data-i18n="tab_tap"></span></a>
+        <a href="#pamiec" data-tab="pamiec"><span data-i18n="tab_mem"></span></a>
       </div>
     </div>
     <div class="tgroup warn" data-group="health">
@@ -381,6 +382,25 @@
     <canvas id="cv-tap" class="arena" aria-label="Pole zadania"></canvas>
     <div id="sum-tap" class="summary empty"></div>
     <div class="grid" id="cards-tap"></div>
+    <div class="next"><a class="btn" href="#pamiec" data-i18n="next_pamiec"></a></div>
+  </section>
+
+  <section class="panel" id="tab-pamiec" data-panel="pamiec" hidden>
+    <h2 data-i18n="mem_h"></h2>
+    <p class="lead" data-i18n="mem_desc"></p>
+    <h3 class="sec" data-i18n="ds_h"></h3>
+    <p class="lead" data-i18n="ds_desc"></p>
+    <div class="bar"><span class="status" id="st-ds"></span><div class="btns"><button id="ds-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <div class="stim light" id="ds-show" aria-live="polite"></div>
+    <div class="cal-row"><label for="ds-input" data-i18n="ds_label"></label><input id="ds-input" class="num" type="text" inputmode="numeric" autocomplete="off" disabled style="width:10em"><button id="ds-ok" type="button" class="primary" disabled data-i18n="ish_ok"></button></div>
+    <div id="sum-ds" class="summary empty"></div>
+    <div class="grid" id="cards-ds"></div>
+    <h3 class="sec" data-i18n="cs_h"></h3>
+    <p class="lead" data-i18n="cs_desc"></p>
+    <div class="bar"><span class="status" id="st-corsi"></span><div class="btns"><button id="cs-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-corsi" class="arena" aria-label="Bloki Corsiego"></canvas>
+    <div id="sum-corsi" class="summary empty"></div>
+    <div class="grid" id="cards-corsi"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 

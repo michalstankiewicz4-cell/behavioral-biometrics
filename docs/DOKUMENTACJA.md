@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.18.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.19.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -187,6 +187,14 @@ Dla każdego ruchu `ID = log₂(D/W + 1)` (wersja Shannona) i czas ruchu MT (od 
 
 Dwie rundy po 10 s: lewa ręka (klawisz F) i prawa (klawisz J); czas liczony od pierwszego uderzenia, automatyczne powtórzenia klawisza są ignorowane. Dla każdej ręki: liczba uderzeń, tempo (uderzenia/s), średni odstęp i jego CV, średnie przytrzymanie klawisza, zmęczenie = (tempo w 7–10 s − tempo w 0–3 s) ÷ tempo w 0–3 s. Różnica rąk = (prawa − lewa) ÷ średnia. Wykres odstępów w czasie dla obu rąk.
 
+## 5k. Pamięć
+
+**Ciąg cyfr (digit span):** cyfry (bez dwóch takich samych z rzędu) pokazywane po kolei: 800 ms widoczna, 200 ms przerwy. Potem użytkownik wpisuje ciąg. Start od 3 cyfr, maks. 12.
+
+**Bloki Corsiego:** 9 bloków w stałych miejscach; sekwencja (bez powtórzeń bloków) zapala się po kolei: 700 ms + 250 ms przerwy. Użytkownik klika w tej samej kolejności. Start od 2 bloków, maks. 9.
+
+W obu: poprawna odpowiedź wydłuża ciąg o 1, na każdej długości są 2 szanse, dwa błędy z rzędu kończą test. Zakres = najdłuższy poprawnie powtórzony ciąg.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -194,7 +202,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.18.0",
+  "version": "0.19.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -211,7 +219,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `pamiec-cyfry`, `pamiec-corsi`, `tapping`, `prawo-fittsa`, `reakcja-hick`, `stroop`, `odcisk-przegladarki`, `czlowiek-czy-bot`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
