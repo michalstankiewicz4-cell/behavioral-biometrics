@@ -83,6 +83,7 @@ export default {
   cmp_h:"Compare two exports", cmp_desc:"Load two JSON files exported from this page (e.g. yours in the morning and evening, or yours and a friend's). Files are read only in the browser, nothing is sent. Differing values are highlighted.",
   cmp_a:"File A", cmp_b:"File B",
   png_h:"Result card (PNG)", png_desc:"An image with the key value from each finished test, to show friends. Created locally in the browser.",
+  png_pick:"Tests on the card (untick the ones you don't want to show; the browser fingerprint is unticked by default):",
   png_go:"Create card", png_dl:"Download PNG",
   res_num_h:"Results (numbers)", res_num_desc:"Key values from all finished tests, without comment.",
   res_int_h:"Test interpretation", res_int_desc:"A verbal description of each test's result separately.",

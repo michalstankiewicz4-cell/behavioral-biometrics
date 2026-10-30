@@ -29,7 +29,13 @@ const Compare = (() => { const files={a:null, b:null};
 })();
 
 const Card = (() => { let blob=null, url=null;
-  function make(){ const done=TASKS.filter(t=>t.R); if(!done.length){ $("png-status").textContent = LANG==="pl"?"Najpierw ukończ co najmniej jeden test.":"Finish at least one test first."; return; }
+  // wybór testów na kartę: odznaczone klucze (tylko w pamięci karty); odcisk przeglądarki domyślnie odznaczony
+  const off = new Set(["odcisk-przegladarki"]), keyOf = t => t.key || t.tab;
+  function pick(){ const done=TASKS.filter(t=>t.R), box=$("png-pick"); if(!box) return; box.hidden = !done.length;
+    $("png-pick-list").innerHTML = done.map(t => `<label><input type="checkbox" value="${esc(keyOf(t))}"${off.has(keyOf(t))?"":" checked"}> <span>${esc(L(t.title))}</span></label>`).join(""); }
+  $("png-pick-list").addEventListener("change", e => { const c=e.target; if(c.type!=="checkbox") return; if(c.checked) off.delete(c.value); else off.add(c.value); });
+  function make(){ const all=TASKS.filter(t=>t.R); if(!all.length){ $("png-status").textContent = LANG==="pl"?"Najpierw ukończ co najmniej jeden test.":"Finish at least one test first."; return; }
+    const done=all.filter(t=>!off.has(keyOf(t))); if(!done.length){ $("png-status").textContent = LANG==="pl"?"Zaznacz co najmniej jeden test.":"Tick at least one test."; return; }
     $("png-status").textContent = LANG==="pl" ? "Tworzę kartę…" : "Creating the card…";
     const W=1200, H=630, cv=document.createElement("canvas"); cv.width=W; cv.height=H; const g=cv.getContext("2d");
     const C={bg:"#eef0ec", ink:"#1b2320", muted:"#5d6863", acc:"#2b48c9", line:"#cfd5cf", warn:"#b07413"}, FB=css("--font-body"), FM=css("--font-mono");
@@ -54,8 +60,8 @@ const Card = (() => { let blob=null, url=null;
     cv.toBlob(b=>{ blob=b; if(url) URL.revokeObjectURL(url); url=URL.createObjectURL(b); $("png-prev").src=url; $("png-prev").hidden=false; $("png-dl").disabled=false;
       $("png-status").textContent = LANG==="pl"?"Karta gotowa. Obrazek jest tylko na Twoim urządzeniu.":"Card ready. The image stays on your device."; }, "image/png"); }
   function download(){ if(!url) return; const a=document.createElement("a"); a.href=url; a.download=(LANG==="pl"?"karta-wyniku-":"result-card-")+new Date().toISOString().slice(0,10)+".png"; document.body.appendChild(a); a.click(); a.remove(); }
-  $("png-go").addEventListener("click", make); $("png-dl").addEventListener("click", download);
-  return {};
+  $("png-go").addEventListener("click", make); LANGHOOKS.push(pick); $("png-dl").addEventListener("click", download);
+  return { pick };
 })();
 
 export { Compare, Card };

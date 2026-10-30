@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.32.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.33.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -54,7 +54,7 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 - Hasło: wymyślone hasło nigdy nie jest zapisywane ani eksportowane · Password: the made-up password is never stored or exported
 - Linki do polskiej i angielskiej Wikipedii przy testach · Links to Polish and English Wikipedia next to the tests
 - Wyniki osobno od interpretacji oraz 6 interpretacji łączonych z kilku testów (m.in. lateralizacja ręka–oko, osobowość i rytm dnia) · Results separate from interpretation, plus 6 combined interpretations
-- Porównanie dwóch eksportów i karta wyniku PNG (lokalnie) · Comparing two exports and a PNG result card (locally)
+- Porównanie dwóch eksportów i karta wyniku PNG z wyborem testów (lokalnie; odcisk przeglądarki domyślnie pominięty) · Comparing two exports and a PNG result card with test selection (locally; browser fingerprint left out by default)
 - Eksport profilu (ocena + statystyki + surowe pomiary) do JSON; w Chrome/Edge domyślnie na Pulpit · Profile export to JSON; Desktop by default in Chrome/Edge
 
 ## Gdzie trafiają dane · Where data goes

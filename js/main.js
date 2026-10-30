@@ -2,7 +2,7 @@
 import { CHANGELOG, VERSION } from "./changelog.js";
 import { renderWiki } from "./wiki.js";
 import { renderCombined } from "./results/combined.js";
-import "./results/tools.js";   // porównanie eksportów i karta PNG (rejestruje obsługę przycisków)
+import { Card } from "./results/tools.js";   // porównanie eksportów i karta PNG
 import { REPO } from "./config.js";
 import { buildCards, setSummary } from "./core/cards.js";
 import { LANGHOOKS, LEAVE, SHOW } from "./core/registry.js";
@@ -55,6 +55,8 @@ function renderResults(){
     : `<p class="lead">${D[LANG].res_empty}</p>`;
   // 3) interpretacje łączone
   renderCombined();
+  // 4) lista testów do wyboru na kartę PNG
+  Card.pick();
   $("export").disabled = !done.length;
 }
 

@@ -83,6 +83,7 @@ export default {
   cmp_h:"Porównanie dwóch eksportów", cmp_desc:"Wczytaj dwa pliki JSON wyeksportowane z tej strony (np. Twój rano i wieczorem albo Twój i znajomego). Pliki są czytane tylko w przeglądarce, nic nie jest wysyłane. Różniące się wartości są wyróżnione.",
   cmp_a:"Plik A", cmp_b:"Plik B",
   png_h:"Karta wyniku (PNG)", png_desc:"Obrazek z najważniejszą wartością z każdego ukończonego testu, do pokazania znajomym. Tworzony lokalnie w przeglądarce.",
+  png_pick:"Testy na karcie (odznacz te, których nie chcesz pokazywać; odcisk przeglądarki jest domyślnie odznaczony):",
   png_go:"Utwórz kartę", png_dl:"Pobierz PNG",
   res_num_h:"Wyniki (liczby)", res_num_desc:"Główne wartości ze wszystkich ukończonych testów, bez komentarza.",
   res_int_h:"Interpretacja testów", res_int_desc:"Słowny opis wyniku każdego testu osobno.",

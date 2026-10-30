@@ -267,3 +267,8 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .chr-form .sec{margin-top:6px}
 .rot-ans{justify-content:center;margin-top:8px}.rot-ans button{font-family:var(--font-body);font-size:1rem;min-width:9em}
 .b5-ver{margin:6px 0 4px}
+.png-pick{border:1px solid var(--line);border-radius:6px;padding:10px 14px;margin:8px 0 12px;background:var(--surface)}
+.png-pick legend{font-size:.85rem;color:var(--muted);padding:0 4px}
+.png-pick-list{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:4px 14px;font-size:.88rem}
+.png-pick-list label{display:flex;gap:6px;align-items:center;cursor:pointer}
+.png-pick-list input{accent-color:var(--accent)}
