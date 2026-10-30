@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.14.0",
+  "softwareVersion": "0.15.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -87,9 +87,11 @@
         <a href="#odcisk" data-tab="odcisk"><span data-i18n="tab_fp"></span></a>
       </div>
     </div>
-    <div class="tgroup" data-group="psy" hidden>
+    <div class="tgroup" data-group="psy">
       <span class="tglabel" data-i18n="grp_psy"></span>
-      <div class="tglinks"></div>
+      <div class="tglinks">
+        <a href="#stroop" data-tab="stroop"><span data-i18n="tab_stroop"></span></a>
+      </div>
     </div>
     <div class="tgroup warn" data-group="health">
       <span class="tglabel" data-i18n="grp_health"></span>
@@ -335,6 +337,17 @@
     <div id="fp-table" class="tablewrap"></div>
     <div id="sum-fp" class="summary empty"></div>
     <div class="grid" id="cards-fp"></div>
+    <div class="next"><a class="btn" href="#stroop" data-i18n="next_stroop"></a></div>
+  </section>
+
+  <section class="panel" id="tab-stroop" data-panel="stroop" hidden>
+    <h2 data-i18n="stroop_h"></h2>
+    <p class="lead" data-i18n="stroop_desc"></p>
+    <div class="bar"><span class="status" id="st-stroop"></span><div class="btns"><button id="stroop-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <div class="stim" id="stroop-word" aria-live="polite"></div>
+    <div id="stroop-ans" class="answers"></div>
+    <div id="sum-stroop" class="summary empty"></div>
+    <div class="grid" id="cards-stroop"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 

@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.14.0";
+const VERSION = "0.15.0";
 const CHANGELOG = [
+  { v:"0.15.0", date:"2026-10-30",
+    pl:["Nowa grupa „Testy psychomotoryczne” i pierwszy test: test Stroopa (24 próby, słowa zgodne i niezgodne, odpowiedź klawiszami 1–4).","Wynik: efekt Stroopa w milisekundach, błędy i liczba pomyłek „przeczytałem słowo zamiast koloru”."],
+    en:["New “Psychomotor tests” group and the first test: the Stroop test (24 trials, congruent and incongruent words, answer with keys 1–4).","Result: Stroop effect in milliseconds, errors and the number of “read the word instead of the colour” mistakes."] },
   { v:"0.14.0", date:"2026-10-30",
     pl:["Mapa cieplna klawiatury w zakładce Pisanie: kolor klawisza według średniego czasu przytrzymania albo liczby błędów, z przełącznikiem i podpowiedzią z liczbą pomiarów."],
     en:["Keyboard heat map in the Typing tab: key colour by mean hold time or number of errors, with a switch and a tooltip showing the sample count."] },
@@ -128,6 +131,8 @@ pl:{
   fp_local:"Liczone tylko lokalnie, nic nie jest wysyłane.", fp_go:"Pokaż mój odcisk",
   kbd_h:"Mapa klawiatury", kbd_desc:"Kolor klawisza pokazuje średni czas przytrzymania (im ciemniejszy, tym dłużej trzymasz) albo liczbę błędów, w których ten klawisz był oczekiwany. Polskie litery liczą się do klawisza bazowego (ą → a). Najedź na klawisz, żeby zobaczyć liczbę pomiarów.",
   kbd_legend:"Pokaż:", kbd_dwell:"czas przytrzymania", kbd_err:"błędy",
+  tab_stroop:"Test Stroopa", next_stroop:"Dalej: test Stroopa →",
+  stroop_h:"Test Stroopa", stroop_desc:"Pojawi się 24 nazw kolorów. Za każdym razem wskaż <strong>kolor, którym słowo jest napisane</strong>, a nie to, co słowo znaczy: klawiszami 1–4 albo przyciskami. Połowa słów ma zgodny kolor, połowa niezgodny. Odpowiadaj szybko, ale bez zgadywania.",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -206,6 +211,8 @@ en:{
   fp_local:"Computed locally only, nothing is sent.", fp_go:"Show my fingerprint",
   kbd_h:"Keyboard heat map", kbd_desc:"Key colour shows the mean hold time (darker = held longer) or the number of errors where that key was expected. Polish letters count towards their base key (ą → a). Hover a key to see the number of samples.",
   kbd_legend:"Show:", kbd_dwell:"hold time", kbd_err:"errors",
+  tab_stroop:"Stroop test", next_stroop:"Next: Stroop test →",
+  stroop_h:"Stroop test", stroop_desc:"24 colour names will appear. Each time pick <strong>the colour the word is printed in</strong>, not what the word says: keys 1–4 or the buttons. Half of the words have a matching colour, half don't. Answer quickly, but don't guess.",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -1627,12 +1634,79 @@ const FP = (() => {
   return self;
 })();
 
+// ---------- prosty wykres punktowy z linią dopasowania (dla Hicka, Fittsa, tappingu) ----------
+function linfit(xs, ys){ const mx=mean(xs), my=mean(ys); let sxy=0, sxx=0, syy=0;
+  for(let i=0;i<xs.length;i++){ sxy+=(xs[i]-mx)*(ys[i]-my); sxx+=(xs[i]-mx)**2; syy+=(ys[i]-my)**2; }
+  const b=sxx?sxy/sxx:NaN, a=my-b*mx; return { a, b, r2: (sxx&&syy) ? (sxy*sxy)/(sxx*syy) : NaN }; }
+function plotXY(A, o){ A.fit(); if(!A.w) return; const g=A.ctx; A.clear();
+  const xs=o.pts.map(p=>p.x), ys=o.pts.map(p=>p.y); if(!xs.length){ A.label(o.empty||""); return; }
+  let x0=o.x0??Math.min(...xs), x1=Math.max(...xs), y0=o.y0??0, y1=Math.max(...ys);
+  if(o.line){ y1=Math.max(y1, o.line.a+o.line.b*x1); } if(x1===x0) x1=x0+1; y1=y1*1.1||1;
+  const L0=58, R0=14, T0=14, B0=40, W=A.w-L0-R0, H=A.h-T0-B0, X=v=>L0+(v-x0)/(x1-x0)*W, Y=v=>T0+H-(v-y0)/(y1-y0)*H;
+  g.font="11px "+css("--font-mono"); g.fillStyle=css("--muted"); g.strokeStyle=css("--line"); g.lineWidth=1;
+  const step=(()=>{ const r=(y1-y0)/5, p=Math.pow(10,Math.floor(Math.log10(r))); return [1,2,5,10].map(k=>k*p).find(s=>s>=r); })();
+  g.textAlign="right"; g.textBaseline="middle";
+  for(let v=Math.ceil(y0/step)*step; v<=y1; v+=step){ g.beginPath(); g.moveTo(L0,Y(v)); g.lineTo(A.w-R0,Y(v)); g.stroke(); g.fillText(nf(v)+(o.yu||""), L0-6, Y(v)); }
+  g.textAlign="center"; g.textBaseline="top"; (o.xticks||[...new Set(xs)]).forEach(v=>g.fillText(o.xfmt?o.xfmt(v):nf(v,1), X(v), T0+H+6));
+  g.fillStyle=css("--ink"); g.font="12px "+css("--font-body"); g.fillText(o.xl||"", L0+W/2, T0+H+22);
+  if(o.line && Number.isFinite(o.line.b)){ g.strokeStyle=css("--accent"); g.lineWidth=2; g.beginPath(); g.moveTo(X(x0),Y(o.line.a+o.line.b*x0)); g.lineTo(X(x1),Y(o.line.a+o.line.b*x1)); g.stroke(); }
+  if(o.connect){ g.strokeStyle=css("--accent"); g.lineWidth=1.5; g.beginPath(); o.pts.forEach((p,i)=> i?g.lineTo(X(p.x),Y(p.y)):g.moveTo(X(p.x),Y(p.y))); g.stroke(); }
+  for(const p of o.pts) A.dot(X(p.x), Y(p.y), p.r||3.5, p.c||css("--accent"));
+}
+
+// =====================================================================
+// TEST STROOPA — nazwa koloru napisana innym kolorem
+// =====================================================================
+const Stroop = (() => { const N=24;
+  const COLS = [{k:"red",hex:"#e5484d",pl:"CZERWONY",en:"RED"},{k:"green",hex:"#30a46c",pl:"ZIELONY",en:"GREEN"},{k:"blue",hex:"#3e8bff",pl:"NIEBIESKI",en:"BLUE"},{k:"yellow",hex:"#f5d90a",pl:"ŻÓŁTY",en:"YELLOW"}];
+  let S=null, st=null;
+  const self = { tab:"stroop", key:"stroop", grid:"cards-stroop", sumId:"sum-stroop", R:null, title:{pl:"Test Stroopa",en:"Stroop test"}, specs:[
+    {id:"st-eff", title:{pl:"Efekt Stroopa",en:"Stroop effect"}, unit:{pl:"ms",en:"ms"}, rows:[["con",{pl:"zgodne (mediana)",en:"congruent (median)"}],["inc",{pl:"niezgodne (mediana)",en:"incongruent (median)"}]],
+     how:{pl:"Mediana czasu poprawnych odpowiedzi dla słów niezgodnych (np. „ZIELONY” na czerwono) minus mediana dla zgodnych („ZIELONY” na zielono). Czytanie jest tak zautomatyzowane, że przeszkadza w nazwaniu koloru; w badaniach różnica wynosi zwykle kilkadziesiąt do ponad stu milisekund.",
+          en:"Median time of correct answers for incongruent words (e.g. “GREEN” in red) minus the median for congruent ones (“GREEN” in green). Reading is so automatic that it interferes with naming the colour; in studies the difference is usually tens to over a hundred milliseconds."}},
+    {id:"st-err", title:{pl:"Błędy",en:"Errors"}, unit:{pl:`z ${N}`,en:`of ${N}`}, rows:[["con",{pl:"zgodne",en:"congruent"}],["inc",{pl:"niezgodne",en:"incongruent"}]],
+     how:{pl:"Błąd to wybranie innego koloru niż kolor napisu. Najczęstszy błąd przy niezgodnych słowach to wybranie koloru, który słowo nazywa.",en:"An error is choosing a colour other than the ink colour. The most common error on incongruent words is choosing the colour the word names."}},
+    {id:"st-rt", title:{pl:"Czas odpowiedzi",en:"Response time"}, unit:U.ms_med, rows:[R_MEAN,R_SD],
+     how:{pl:"Od pokazania słowa do odpowiedzi, wszystkie próby.",en:"From showing the word to the answer, all trials."}}
+  ]};
+  const status = o => { st=o; $("st-stroop").textContent = L(o)||""; };
+  function buttons(){ $("stroop-ans").innerHTML = COLS.map((c,i)=>`<button type="button" data-c="${c.k}"><span class="sw" style="background:${c.hex}"></span>${i+1}</button>`).join(""); }
+  function show(){ const box=$("stroop-word"); box.textContent="+"; box.style.color="#aaa";
+    S.timer=setTimeout(()=>{ const t=S.trials[S.i], w=COLS.find(c=>c.k===t.word), ink=COLS.find(c=>c.k===t.ink);
+      box.textContent=w[LANG]; box.style.color=ink.hex; S.t0=performance.now(); S.ready=true; }, 400+Math.random()*400);
+    status({pl:`Próba ${S.i+1} z ${N}: wskaż KOLOR napisu (klawisze 1–4)`,en:`Trial ${S.i+1} of ${N}: pick the INK colour (keys 1–4)`}); }
+  function start(){ const tr=[]; for(let i=0;i<N;i++){ const ink=COLS[i%4].k, con=i<N/2; let word=ink;
+      if(!con){ const o=COLS.filter(c=>c.k!==ink); word=o[Math.floor(Math.random()*3)].k; } tr.push({ink, word, con}); }
+    tr.sort(()=>Math.random()-0.5); clearTimeout(S&&S.timer); S={trials:tr, i:0, res:[], ready:false}; show(); }
+  function answer(k){ if(!S||!S.ready) return; S.ready=false; const t=S.trials[S.i];
+    S.res.push({con:t.con, ok:k===t.ink, rt:performance.now()-S.t0, ink:t.ink, word:t.word, answer:k}); S.i++;
+    if(S.i<N) show(); else finish(); }
+  function finish(){ const r=S.res, ok=x=>x.filter(z=>z.ok).map(z=>z.rt), con=r.filter(x=>x.con), inc=r.filter(x=>!x.con);
+    self.R = { trials:r, medCon:median(ok(con)), medInc:median(ok(inc)), errCon:con.filter(x=>!x.ok).length, errInc:inc.filter(x=>!x.ok).length,
+      wordErrors:inc.filter(x=>!x.ok && x.answer===x.word).length, rts:r.map(x=>x.rt) };
+    self.R.effect=self.R.medInc-self.R.medCon; S=null; $("stroop-word").textContent=""; status({pl:"Gotowe.",en:"Done."});
+    self.render(self.R); setSummary(self); markDone("stroop"); }
+  self.render = R => { setMain("st-eff", (R.effect>0?"+":"")+nf(R.effect)); setRow("st-eff","con",ms(R.medCon)); setRow("st-eff","inc",ms(R.medInc));
+    setMain("st-err", R.errCon+R.errInc); setRow("st-err","con",R.errCon); setRow("st-err","inc",R.errInc);
+    setMain("st-rt", nf(median(R.rts))); setRow("st-rt","mean",ms(mean(R.rts))); setRow("st-rt","sd",ms(sd(R.rts))); };
+  self.summary = R => LANG==="pl"
+    ? `<p>Na słowa niezgodne odpowiadałeś o <strong>${nf(Math.abs(R.effect))} ms</strong> ${R.effect>=0?"wolniej":"szybciej"} niż na zgodne (${ms(R.medInc)} wobec ${ms(R.medCon)}). Błędów: ${R.errCon+R.errInc}, w tym ${R.wordErrors} razy wybrałeś kolor, który słowo nazywało, zamiast koloru napisu.</p><p>Jeśli masz trudność z rozróżnianiem kolorów, ten wynik nie jest miarodajny.</p>`
+    : `<p>You answered incongruent words <strong>${nf(Math.abs(R.effect))} ms</strong> ${R.effect>=0?"slower":"faster"} than congruent ones (${ms(R.medInc)} vs ${ms(R.medCon)}). Errors: ${R.errCon+R.errInc}, of which ${R.wordErrors} times you chose the colour the word named instead of the ink colour.</p><p>If you have difficulty telling colours apart, this result is not meaningful.</p>`;
+  $("stroop-go").addEventListener("click", start);
+  $("stroop-ans").addEventListener("click", e => { const b=e.target.closest("button[data-c]"); if(b) answer(b.dataset.c); });
+  document.addEventListener("keydown", e => { if(!S || $("tab-stroop").hidden) return; const i="1234".indexOf(e.key); if(i>=0){ e.preventDefault(); answer(COLS[i].k); } });
+  SHOW.stroop = () => buttons();
+  LEAVE.stroop = () => { if(S){ clearTimeout(S.timer); S=null; $("stroop-word").textContent=""; status(null); } };
+  LANGHOOKS.push(() => { status(st); buttons(); });
+  return self;
+})();
+
 // =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){

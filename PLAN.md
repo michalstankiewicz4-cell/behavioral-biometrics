@@ -20,7 +20,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 3. ☑ **Człowiek czy bot** – jak zabezpieczenia w stylu CAPTCHA odróżniają człowieka od bota po ruchu myszki; przycisk „puść bota” do porównania (v0.12.0)
 4. ☑ **Odcisk przeglądarki (jawny)** – co strona wie bez pytania o zgodę (ekran, strefa czasowa, języki, czcionki, karta graficzna…), z wyjaśnieniem śledzenia bez ciasteczek; wszystko lokalnie (v0.13.0)
 5. ☑ **Mapa cieplna klawiatury** w zakładce Pisanie – kolor klawisza według czasu przytrzymania lub liczby błędów (v0.14.0)
-6. ☐ **Test Stroopa** – kolor napisu kontra treść słowa
+6. ☑ **Test Stroopa** – kolor napisu kontra treść słowa (v0.15.0)
 7. ☐ **Czas reakcji i prawo Hicka** – reakcja na 1, 2, 4 i 8 możliwych bodźców, wykres
 8. ☐ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru
 9. ☐ **Tapping** – 10 s stukania osobno lewą i prawą ręką
@@ -28,6 +28,8 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 11. ☐ **Wzrok: tarcza astygmatyczna i wrażliwość na kontrast** (z ostrzeżeniami)
 12. ☐ **Porównanie dwóch eksportów** w zakładce Wyniki (pliki JSON wczytywane lokalnie)
 13. ☐ **Karta wyniku jako obrazek PNG** generowana lokalnie
+14. ☐ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł
+15. ☐ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek
 
 ## Odrzucone
 

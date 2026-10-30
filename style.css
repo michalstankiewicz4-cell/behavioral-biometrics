@@ -218,3 +218,7 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .key small{font-size:.58rem;font-variant-numeric:tabular-nums}
 .key.has{background:color-mix(in srgb,var(--accent) calc(10% + var(--t) * 0.8),var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
 .key.hot{color:var(--on-accent)}
+
+.stim{height:160px;display:flex;align-items:center;justify-content:center;background:#1c1f24;border-radius:6px;
+  font-family:var(--font-body);font-weight:600;font-size:clamp(2rem,7vw,3.6rem);letter-spacing:.04em;user-select:none}
+.answers .sw{display:inline-block;width:1.1em;height:1.1em;border-radius:3px;margin-right:6px;vertical-align:-2px}

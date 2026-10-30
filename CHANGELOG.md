@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.15.0] – 2026-10-30
+- Nowa grupa „Testy psychomotoryczne” i pierwszy test: test Stroopa (24 próby, słowa zgodne i niezgodne, odpowiedź klawiszami 1–4).
+- Wynik: efekt Stroopa w milisekundach, błędy i liczba pomyłek „przeczytałem słowo zamiast koloru”.
+
 ## [0.14.0] – 2026-10-30
 - Mapa cieplna klawiatury w zakładce Pisanie: kolor klawisza według średniego czasu przytrzymania albo liczby błędów, z przełącznikiem i podpowiedzią z liczbą pomiarów.
 
