@@ -20,6 +20,7 @@ import { Pass } from "./tests/password.js";
 import { Pseudo } from "./tests/pseudowords.js";
 import { Hick } from "./tests/reaction-hick.js";
 import { Sig } from "./tests/signature.js";
+import { Big5 } from "./tests/personality.js";
 import { Stroop } from "./tests/stroop.js";
 import { Tap } from "./tests/tapping.js";
 import { Click } from "./tests/target-clicking.js";
@@ -31,9 +32,9 @@ import { Cal, Plates, SnA, SnB, SnRun } from "./tests/vision.js";
 // =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts, Tap, Digits, Corsi, Astig, Contrast];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick, Fitts, Tap, Digits, Corsi, Astig, Contrast, Big5];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","tapping","pamiec","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","fitts","tapping","pamiec","osobowosc","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){

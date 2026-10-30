@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.26.1";
+const VERSION = "0.27.0";
 const CHANGELOG = [
+  { v:"0.27.0", date:"2026-10-31",
+    pl:["Nowa grupa zakładek „Cechy stałe”.","Osobowość: pełny kwestionariusz Wielkiej Piątki IPIP-NEO – 300 pytań z otwartej bazy IPIP, wynik dla 5 cech i 30 pod-cech. Polskie tłumaczenie jest własne i niesprawdzone naukowo, a strona nie ma norm – wynik to średnia odpowiedzi, nie porównanie z innymi."],
+    en:["New tab group “Stable traits”.","Personality: the full IPIP-NEO Big Five questionnaire – 300 questions from the open IPIP item pool, scores for 5 traits and 30 facets. The Polish translation is my own and unvalidated, and the site has no norms – the result is the mean of your answers, not a comparison with others."] },
   { v:"0.26.1", date:"2026-10-30",
     pl:["Poprawka: przyciski „Utwórz kartę” i porównanie eksportów w zakładce Wyniki znowu działają (moduł nie był wczytywany po podziale na pliki w 0.22.0).","Test automatyczny sprawdza teraz, czy strona wczytuje każdy plik z js/, i tworzy kartę PNG."],
     en:["Fix: the “Create card” button and export comparison in the Results tab work again (the module was not loaded after the file split in 0.22.0).","The automated test now checks that the page loads every file in js/ and creates the PNG card."] },

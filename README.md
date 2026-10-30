@@ -1,6 +1,6 @@
 # Cyfrowy odcisk człowieka · Human Digital Fingerprint
 
-**Wersja / version: 0.26.1** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.27.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -37,6 +37,7 @@ Zakładki są w grupach: biometria behawioralna, testy psychomotoryczne, ⚠️ 
 | 13 | Prawo Fittsa · Fitts's law | 18 ruchów do celów różnej wielkości i odległości, dopasowanie MT = a + b·ID, przepustowość |
 | 14 | Tapping · Finger tapping | 10 s stukania lewą i prawą ręką: tempo, równomierność, zmęczenie, różnica rąk |
 | 15 | Pamięć · Memory | zakres pamięci cyfr i bloki Corsiego |
+| 16 | Osobowość · Personality | Wielka Piątka, pełny IPIP-NEO (300 pytań): 5 cech i 30 pod-cech; bez norm, własne tłumaczenie PL |
 
 Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
 
@@ -88,7 +89,8 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality)
+  data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
   wiki.js                  linki do Wikipedii przy testach

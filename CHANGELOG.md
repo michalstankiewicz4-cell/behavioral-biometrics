@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.27.0] – 2026-10-31
+- Nowa grupa zakładek „Cechy stałe”.
+- Osobowość: pełny kwestionariusz Wielkiej Piątki IPIP-NEO – 300 pytań z otwartej bazy IPIP, wynik dla 5 cech i 30 pod-cech. Polskie tłumaczenie jest własne i niesprawdzone naukowo, a strona nie ma norm – wynik to średnia odpowiedzi, nie porównanie z innymi.
+
 ## [0.26.1] – 2026-10-30
 - Poprawka: przyciski „Utwórz kartę” i porównanie eksportów w zakładce Wyniki znowu działają (moduł nie był wczytywany po podziale na pliki w 0.22.0).
 - Test automatyczny sprawdza teraz, czy strona wczytuje każdy plik z js/, i tworzy kartę PNG.

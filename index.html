@@ -41,7 +41,7 @@
   "inLanguage": ["pl", "en"],
   "keywords": "biometria behawioralna, dynamika pisania, odcisk przeglądarki, fingerprinting, test szybkości pisania, test czasu reakcji, efekt Stroopa, prawo Fittsa, prawo Hicka, test pamięci, bloki Corsiego, tablica Snellena, tablice Ishihary, podpis myszką, człowiek czy bot, behavioral biometrics, keystroke dynamics, mouse dynamics, browser fingerprint, typing speed test, reaction time test, Stroop test, Fitts's law, Hick's law, memory span test, Corsi blocks, Snellen chart, Ishihara test, mouse signature, human or bot",
   "isAccessibleForFree": true,
-  "softwareVersion": "0.26.1",
+  "softwareVersion": "0.27.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/assets/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -103,6 +103,12 @@
       <div class="tglinks">
         <a href="#litery" data-tab="litery"><span data-i18n="tab_let"></span></a>
         <a href="#wzrok" data-tab="wzrok"><span data-i18n="tab_vis"></span></a>
+      </div>
+    </div>
+    <div class="tgroup stable" data-group="stable">
+      <span class="tglabel" data-i18n="grp_stable"></span>
+      <div class="tglinks">
+        <a href="#osobowosc" data-tab="osobowosc"><span data-i18n="tab_b5"></span></a>
       </div>
     </div>
     <div class="tgroup" data-group="tools">
@@ -326,7 +332,7 @@
     </div>
     <div id="sum-ish" class="summary empty"></div>
     <div class="grid" id="cards-ish"></div>
-    <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
+    <div class="next"><a class="btn" href="#osobowosc" data-i18n="next_osobowosc"></a></div>
   </section>
 
   <section class="panel" id="tab-podpis" data-panel="podpis" hidden>
@@ -419,6 +425,22 @@
     <div id="sum-corsi" class="summary empty"></div>
     <div class="grid" id="cards-corsi"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
+  </section>
+
+  <section class="panel" id="tab-osobowosc" data-panel="osobowosc" hidden>
+    <h2 data-i18n="b5_h"></h2>
+    <div class="notice amateur" role="note">
+      <h3 data-i18n="b5_warn_h"></h3>
+      <p data-i18n="b5_warn"></p>
+    </div>
+    <p class="lead" data-i18n="b5_desc"></p>
+    <div class="bar"><span class="status" id="st-b5"></span><div class="btns"><button id="b5-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <progress id="b5-prog" class="b5-prog" value="0" max="300"></progress>
+    <div id="b5-items" class="q-list"></div>
+    <div class="bar" id="b5-nav" hidden><button id="b5-prev" type="button" data-i18n="b5_prev"></button><button id="b5-next" type="button" class="primary"></button></div>
+    <div id="sum-b5" class="summary empty"></div>
+    <div class="grid" id="cards-b5"></div>
+    <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
   </section>
 
   <!-- Wyniki -->

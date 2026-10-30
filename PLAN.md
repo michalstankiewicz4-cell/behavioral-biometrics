@@ -11,6 +11,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 | Biometria behawioralna | Pisanie, Klikanie celów, Śledzenie punktu, Przeciąganie, Rysowanie po śladzie, Podwójne kliknięcie, Hasło, Podpis myszką, Człowiek czy bot, Odcisk przeglądarki |
 | Testy psychomotoryczne | Stroop, Czas reakcji (Hick), Prawo Fittsa, Tapping, Pamięć |
 | ⚠️ Ciekawostki zdrowotne – wynik może być nieprawdziwy | Litery i błędy, Wzrok |
+| Cechy stałe | Osobowość, Ręczność, Chronotyp, Rotacja umysłowa |
 | Wyniki i narzędzia | Wyniki (zestawienie, eksport, porównanie eksportów, karta PNG) |
 
 ## Kolejność prac
@@ -34,6 +35,11 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 17. ☑ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek (v0.26.0)
 
 18. ☑ **Podział projektu na pliki i foldery** jak w profesjonalnym projekcie (moduły JS, style, dane, testy) – wykonywany zaraz po punkcie 13 (v0.22.0)
+19. ☑ **Osobowość – Wielka Piątka**, pełny kwestionariusz IPIP-NEO (300 pytań z otwartej bazy IPIP, 5 cech i 30 pod-cech), w nowej grupie „Cechy stałe” (v0.27.0)
+20. ☐ **Ręczność** – kwestionariusz w stylu Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem
+21. ☐ **Oko dominujące** – test „okienka z dłoni” z instrukcją, w zakładce Wzrok
+22. ☐ **Chronotyp** – skowronek czy sowa: własne pytania o godziny snu, wynik metodą punktu środka snu w dni wolne (bez kopiowania kwestionariuszy MEQ/MCTQ, które wymagają zgody)
+23. ☐ **Rotacja umysłowa** – czy obrócona figura to ta sama, czy odbicie lustrzane; czas i trafność zależnie od kąta
 
 ## Odrzucone
 

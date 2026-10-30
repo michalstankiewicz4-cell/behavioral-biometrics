@@ -19,6 +19,7 @@ export const WIKI = {
   fitts:        [W("pl","Prawo_Fittsa"), W("en","Fitts's_law")],
   tapping:      [W("en","Tapping_rate")],
   pamiec:       [W("pl","Pamięć_krótkotrwała"), W("en","Memory_span"), W("en","Corsi_block-tapping_test")],
+  osobowosc:    [W("pl","Wielka_piątka"), W("en","Big_Five_personality_traits"), W("en","International_Personality_Item_Pool")],
   litery:       [W("pl","Dysleksja"), W("en","Dyslexia"), W("en","Pseudoword")],
   wzrok:        [W("pl","Tablica_Snellena"), W("pl","Visus"), W("pl","Tablice_Ishihary"), W("pl","Astygmatyzm_(wada_wzroku)"),
                  W("en","Snellen_chart"), W("en","Ishihara_test"), W("en","Astigmatism"), W("en","Contrast_(vision)")]
