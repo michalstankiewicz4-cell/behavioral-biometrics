@@ -2,7 +2,7 @@
 import { REPO } from "../config.js";
 
 export default {
-  title:"Odcisk klawiatury i myszki", doc_title:"Odcisk klawiatury i myszki · biometria behawioralna – demo",
+  title:"Cyfrowy odcisk człowieka", doc_title:"Cyfrowy odcisk człowieka · biometria behawioralna i testy w przeglądarce",
   meta_desc:"Jawne demo biometrii behawioralnej: sprawdź, jak strona rozpoznaje cię po pisaniu na klawiaturze i ruchach myszki. Test pisania, zadania z myszką, rytm hasła. Wszystko liczy się lokalnie w przeglądarce.",
   tag:"BIOMETRIA BEHAWIORALNA",
   lang_btn:"English", lang_label:"Przełącz na angielski",

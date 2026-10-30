@@ -2,7 +2,7 @@
 import { REPO } from "../config.js";
 
 export default {
-  title:"Keyboard and mouse fingerprint", doc_title:"Keyboard and mouse fingerprint · behavioral biometrics demo",
+  title:"Human Digital Fingerprint", doc_title:"Human Digital Fingerprint · behavioral biometrics and tests in your browser",
   meta_desc:"An open behavioral biometrics demo: see how a page can recognise you by your typing and mouse movements. Typing test, mouse tasks, password rhythm. Everything is computed locally in your browser.",
   tag:"BEHAVIORAL BIOMETRICS",
   lang_btn:"Polski", lang_label:"Switch to Polish",

@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.24.0] – 2026-10-30
+- Nowa nazwa strony: „Cyfrowy odcisk człowieka” (ang. „Human Digital Fingerprint”), bo strona obejmuje już nie tylko klawiaturę i myszkę.
+
 ## [0.23.0] – 2026-10-30
 - Linki do polskiej i angielskiej Wikipedii pod nagłówkiem każdego testu, tam gdzie artykuł istnieje (np. efekt Stroopa, prawo Fittsa, tablica Snellena, dynamika pisania).
 

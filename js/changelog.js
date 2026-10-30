@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.23.0";
+const VERSION = "0.24.0";
 const CHANGELOG = [
+  { v:"0.24.0", date:"2026-10-30",
+    pl:["Nowa nazwa strony: „Cyfrowy odcisk człowieka” (ang. „Human Digital Fingerprint”), bo strona obejmuje już nie tylko klawiaturę i myszkę."],
+    en:["New site name: “Human Digital Fingerprint” (Polish: „Cyfrowy odcisk człowieka”), since the site now covers more than the keyboard and mouse."] },
   { v:"0.23.0", date:"2026-10-30",
     pl:["Linki do polskiej i angielskiej Wikipedii pod nagłówkiem każdego testu, tam gdzie artykuł istnieje (np. efekt Stroopa, prawo Fittsa, tablica Snellena, dynamika pisania)."],
     en:["Links to Polish and English Wikipedia under each test's heading, where an article exists (e.g. Stroop effect, Fitts's law, Snellen chart, keystroke dynamics)."] },
