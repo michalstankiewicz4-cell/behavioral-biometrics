@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.27.0";
+const VERSION = "0.28.0";
 const CHANGELOG = [
+  { v:"0.28.0", date:"2026-10-31",
+    pl:["Ręczność: 10 codziennych czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji od −100 do +100 (lewo-, prawo- lub ręczność mieszana) i porównanie z tym, która ręka była szybsza w teście Tapping."],
+    en:["Handedness: 10 everyday activities in the style of the Edinburgh Handedness Inventory, a laterality quotient from −100 to +100 (left-, right- or mixed-handed) and a comparison with which hand was faster in the Tapping test."] },
   { v:"0.27.0", date:"2026-10-31",
     pl:["Nowa grupa zakładek „Cechy stałe”.","Osobowość: pełny kwestionariusz Wielkiej Piątki IPIP-NEO – 300 pytań z otwartej bazy IPIP, wynik dla 5 cech i 30 pod-cech. Polskie tłumaczenie jest własne i niesprawdzone naukowo, a strona nie ma norm – wynik to średnia odpowiedzi, nie porównanie z innymi."],
     en:["New tab group “Stable traits”.","Personality: the full IPIP-NEO Big Five questionnaire – 300 questions from the open IPIP item pool, scores for 5 traits and 30 facets. The Polish translation is my own and unvalidated, and the site has no norms – the result is the mean of your answers, not a comparison with others."] },

@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.27.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.28.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -28,7 +28,7 @@ js/
     chart.js               wykres punktowy, regresja liniowa
     errors.js              rodzaje błędów pisania
     registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
-  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality)
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory, personality, handedness)
   data/ipip-neo-300.js     300 pozycji IPIP-NEO (EN z pakietu MIT, PL – własne tłumaczenie)
   results/tools.js         porównanie eksportów, karta PNG
   results/combined.js      interpretacje łączone
@@ -237,6 +237,15 @@ Grupa zakładek „Cechy stałe”. Pełny kwestionariusz IPIP-NEO: 300 pozycji 
 - Odpowiedzi są tylko w pamięci karty (przejście do innej zakładki ich nie kasuje, zamknięcie karty – tak). Ponowny „Start” w trakcie wymaga drugiego kliknięcia w ciągu 4 s.
 - Eksport (`osobowosc`): średnie cech i pod-cech, czas wypełniania w minutach i wszystkie 300 odpowiedzi.
 
+## 5o. Ręczność
+
+10 codziennych czynności (pisanie, rysowanie, rzucanie, nożyczki, szczoteczka, nóż bez widelca, łyżka, zapałka, młotek, słoik) – pytania własne, wzorowane na Inwentarzu Edynburskim (Oldfield, 1971). Odpowiedź −2 (zawsze lewa) … +2 (zawsze prawa).
+
+- LQ = suma ÷ (2 × 10) × 100, zakres −100 … +100.
+- Kategorie jak w krótkiej wersji EHI (Veale, 2014): LQ ≥ 60 praworęczność, ≤ −60 leworęczność, pomiędzy ręczność mieszana.
+- Porównanie z tappingiem (jeśli wykonany): asymetria tempa (prawa − lewa) ÷ średnia; poniżej 3% remis. Liczone przy każdym pokazaniu zakładki, więc tapping może być zrobiony przed albo po.
+- Eksport (`recznosc`): odpowiedzi, LQ, kategoria, liczba czynności lewą / prawą / obiema.
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -244,7 +253,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.27.0",
+  "version": "0.28.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",

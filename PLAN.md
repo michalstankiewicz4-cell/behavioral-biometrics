@@ -36,7 +36,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 
 18. ☑ **Podział projektu na pliki i foldery** jak w profesjonalnym projekcie (moduły JS, style, dane, testy) – wykonywany zaraz po punkcie 13 (v0.22.0)
 19. ☑ **Osobowość – Wielka Piątka**, pełny kwestionariusz IPIP-NEO (300 pytań z otwartej bazy IPIP, 5 cech i 30 pod-cech), w nowej grupie „Cechy stałe” (v0.27.0)
-20. ☐ **Ręczność** – kwestionariusz w stylu Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem
+20. ☑ **Ręczność** – kwestionariusz w stylu Edynburskiego, wskaźnik lateralizacji, porównanie z tappingiem (v0.28.0)
 21. ☐ **Oko dominujące** – test „okienka z dłoni” z instrukcją, w zakładce Wzrok
 22. ☐ **Chronotyp** – skowronek czy sowa: własne pytania o godziny snu, wynik metodą punktu środka snu w dni wolne (bez kopiowania kwestionariuszy MEQ/MCTQ, które wymagają zgody)
 23. ☐ **Rotacja umysłowa** – czy obrócona figura to ta sama, czy odbicie lustrzane; czas i trafność zależnie od kąta

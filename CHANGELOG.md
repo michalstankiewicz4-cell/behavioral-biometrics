@@ -3,6 +3,9 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.28.0] – 2026-10-31
+- Ręczność: 10 codziennych czynności w stylu Inwentarza Edynburskiego, wskaźnik lateralizacji od −100 do +100 (lewo-, prawo- lub ręczność mieszana) i porównanie z tym, która ręka była szybsza w teście Tapping.
+
 ## [0.27.0] – 2026-10-31
 - Nowa grupa zakładek „Cechy stałe”.
 - Osobowość: pełny kwestionariusz Wielkiej Piątki IPIP-NEO – 300 pytań z otwartej bazy IPIP, wynik dla 5 cech i 30 pod-cech. Polskie tłumaczenie jest własne i niesprawdzone naukowo, a strona nie ma norm – wynik to średnia odpowiedzi, nie porównanie z innymi.
