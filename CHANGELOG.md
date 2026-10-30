@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.11.0] – 2026-10-30
+- Nowa zakładka „Podpis myszką” w grupie biometrii: 3 podpisy tworzą wzorzec, a każdy kolejny jest weryfikowany pod względem kształtu (DTW), tempa i rytmu.
+- Po weryfikacji widać najbliższy wzorzec nałożony na nowy podpis; historia weryfikacji i karty z wyjaśnieniem obliczeń.
+
 ## [0.10.0] – 2026-10-30
 - Zakładki podzielone na grupy: biometria behawioralna, testy psychomotoryczne, ciekawostki zdrowotne, wyniki i narzędzia.
 - Grupa „Ciekawostki zdrowotne” (Litery i błędy, Wzrok) ma inny kolor i ostrzeżenie, że wynik może być nieprawdziwy.

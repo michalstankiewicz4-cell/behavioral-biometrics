@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.10.0",
+  "softwareVersion": "0.11.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -82,6 +82,7 @@
         <a href="#rysowanie" data-tab="rysowanie"><span data-i18n="tab_draw"></span></a>
         <a href="#dwuklik" data-tab="dwuklik"><span data-i18n="tab_dbl"></span></a>
         <a href="#haslo" data-tab="haslo"><span data-i18n="tab_pass"></span></a>
+        <a href="#podpis" data-tab="podpis"><span data-i18n="tab_sig"></span></a>
       </div>
     </div>
     <div class="tgroup" data-group="psy" hidden>
@@ -209,7 +210,7 @@
     <div id="pass-history" class="chips"></div>
     <div id="sum-pass" class="summary empty"></div>
     <div class="grid" id="cards-pass"></div>
-    <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
+    <div class="next"><a class="btn" href="#podpis" data-i18n="next_podpis"></a></div>
   </section>
 
   <!-- 8. Litery i błędy -->
@@ -291,6 +292,18 @@
     <div id="sum-ish" class="summary empty"></div>
     <div class="grid" id="cards-ish"></div>
     <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
+  </section>
+
+  <section class="panel" id="tab-podpis" data-panel="podpis" hidden>
+    <h2 data-i18n="sig_h"></h2>
+    <p class="lead" data-i18n="sig_desc"></p>
+    <div class="pass-steps" id="sig-steps"></div>
+    <div class="bar"><span class="status" id="st-sig"></span><div class="btns"><button id="sig-clear" type="button" data-i18n="sig_clear"></button><button id="sig-ok" type="button" class="primary" data-i18n="sig_ok"></button><button id="sig-reset" type="button" data-i18n="sig_reset"></button></div></div>
+    <canvas id="cv-sig" class="arena" aria-label="Pole podpisu"></canvas>
+    <div id="sig-history" class="chips"></div>
+    <div id="sum-sig" class="summary empty"></div>
+    <div class="grid" id="cards-sig"></div>
+    <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 
   <!-- Wyniki -->

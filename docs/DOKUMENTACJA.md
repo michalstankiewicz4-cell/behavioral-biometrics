@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.10.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.11.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -132,6 +132,17 @@ Zakładka **nie jest badaniem wzroku ani widzenia barw**; mówi o tym ramka na g
 
 **Tablice barwne w stylu Ishihary.** To nie są oryginalne tablice Ishihary (chronione prawem autorskim), tylko tablice generowane przez stronę. Kropki (promień ok. 2,4–10 px) są rozmieszczane losowo bez nakładania się. Maska liczby to tekst narysowany na niewidocznym płótnie. Kolory w HSL: liczba – odcienie 12–30° (pomarańczowo-czerwone), tło – 72–98° (zielono-oliwkowe), jasność obu grup losowana z tego samego zakresu 48–64%, więc liczbę odróżnia głównie odcień. Pierwsza tablica (liczba 12) jest pokazowa: ciemnoniebieska liczba na jasnopomarańczowym tle. Potem 6 tablic testowych z losowymi liczbami. Wynik: liczba odczytanych tablic testowych i informacja, czy odczytano tablicę pokazową.
 
+## 5d. Podpis myszką
+
+Trzy podpisy tworzą wzorzec, kolejne są weryfikowane. Dla każdego podpisu: punkty wszystkich kresek (z czasem), przesunięte do środka ciężkości i przeskalowane do większego boku prostokąta otaczającego, przepróbkowane po długości drogi do 64 punktów; profil prędkości w 16 równych odcinkach czasu.
+
+- **Kształt:** średnia odległość DTW podpisu od wzorców ÷ średnia odległość DTW między parami wzorców (min. 0,02).
+- **Tempo:** `|ln(czas) − średnia ln(czasów wzorców)| ÷ odchylenie ln(czasów wzorców)` (min. 0,08).
+- **Rytm:** średnia `1 − korelacja` profilu prędkości z profilami wzorców ÷ ta sama miara między parami wzorców (min. 0,05).
+- **Wynik** = średnia trzech wskaźników; zgodny, gdy ≤ 2. Po weryfikacji na płótnie widać najbliższy wzorzec (szary) przeskalowany do nowego podpisu.
+
+Sam podpis nie jest eksportowany, tylko liczby (czasy, liczba kresek, wskaźniki).
+
 ## 6. Format eksportu
 
 Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ startIn: "desktop" })`, czyli okna zapisu otwartego na Pulpicie. W pozostałych przeglądarkach (albo gdy API jest niedostępne) plik jest zwykłym pobraniem i trafia do folderu Pobrane.
@@ -139,7 +150,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -156,7 +167,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```
 
 - `result`: ocena słowna, `stats`: wartości z kart w tej postaci, w jakiej są na stronie, `measurements`: surowe dane analizy (listy czasów w ms, odległości w px).
-- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`; obecne są tylko ukończone etapy.
+- Klucze `stages`: `pisanie`, `klikanie`, `sledzenie`, `przeciaganie`, `rysowanie`, `dwuklik`, `haslo`, `pseudoslowa`, `szukanie-liter`, `snellen-litery`, `snellen-e`, `tablice-barwne`, `podpis`; obecne są tylko ukończone etapy.
 - Wpisany tekst nie jest eksportowany.
 
 ## 7. Wersjonowanie
