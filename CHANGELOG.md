@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
 
+## [0.16.0] – 2026-10-30
+- Nowy test „Czas reakcji i prawo Hicka”: 4 bloki z 1, 2, 4 i 8 możliwymi klawiszami, losowa przerwa przed bodźcem, wykrywanie falstartów.
+- Wykres median z dopasowaną prostą RT = a + b · log₂(n + 1), nachylenie w ms na bit i przepustowość.
+
 ## [0.15.0] – 2026-10-30
 - Nowa grupa „Testy psychomotoryczne” i pierwszy test: test Stroopa (24 próby, słowa zgodne i niezgodne, odpowiedź klawiszami 1–4).
 - Wynik: efekt Stroopa w milisekundach, błędy i liczba pomyłek „przeczytałem słowo zamiast koloru”.

@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.15.0";
+const VERSION = "0.16.0";
 const CHANGELOG = [
+  { v:"0.16.0", date:"2026-10-30",
+    pl:["Nowy test „Czas reakcji i prawo Hicka”: 4 bloki z 1, 2, 4 i 8 możliwymi klawiszami, losowa przerwa przed bodźcem, wykrywanie falstartów.","Wykres median z dopasowaną prostą RT = a + b · log₂(n + 1), nachylenie w ms na bit i przepustowość."],
+    en:["New “Reaction time and Hick's law” test: 4 blocks with 1, 2, 4 and 8 possible keys, a random pause before the stimulus, false-start detection.","Chart of medians with the fitted line RT = a + b · log₂(n + 1), slope in ms per bit and throughput."] },
   { v:"0.15.0", date:"2026-10-30",
     pl:["Nowa grupa „Testy psychomotoryczne” i pierwszy test: test Stroopa (24 próby, słowa zgodne i niezgodne, odpowiedź klawiszami 1–4).","Wynik: efekt Stroopa w milisekundach, błędy i liczba pomyłek „przeczytałem słowo zamiast koloru”."],
     en:["New “Psychomotor tests” group and the first test: the Stroop test (24 trials, congruent and incongruent words, answer with keys 1–4).","Result: Stroop effect in milliseconds, errors and the number of “read the word instead of the colour” mistakes."] },
@@ -133,6 +136,8 @@ pl:{
   kbd_legend:"Pokaż:", kbd_dwell:"czas przytrzymania", kbd_err:"błędy",
   tab_stroop:"Test Stroopa", next_stroop:"Dalej: test Stroopa →",
   stroop_h:"Test Stroopa", stroop_desc:"Pojawi się 24 nazw kolorów. Za każdym razem wskaż <strong>kolor, którym słowo jest napisane</strong>, a nie to, co słowo znaczy: klawiszami 1–4 albo przyciskami. Połowa słów ma zgodny kolor, połowa niezgodny. Odpowiadaj szybko, ale bez zgadywania.",
+  tab_hick:"Czas reakcji", next_reakcja:"Dalej: czas reakcji →",
+  hick_h:"Czas reakcji i prawo Hicka", hick_desc:"Cztery bloki po 8 prób: z 1, 2, 4 i 8 możliwymi klawiszami. Gdy któryś kwadrat się podświetli, naciśnij jego klawisz jak najszybciej (F; F J; D F J K; A S D F J K L ;). Połóż palce na klawiszach przed startem. Możesz też klikać kwadraty, ale wtedy mierzysz też ruch myszki.",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -213,6 +218,8 @@ en:{
   kbd_legend:"Show:", kbd_dwell:"hold time", kbd_err:"errors",
   tab_stroop:"Stroop test", next_stroop:"Next: Stroop test →",
   stroop_h:"Stroop test", stroop_desc:"24 colour names will appear. Each time pick <strong>the colour the word is printed in</strong>, not what the word says: keys 1–4 or the buttons. Half of the words have a matching colour, half don't. Answer quickly, but don't guess.",
+  tab_hick:"Reaction time", next_reakcja:"Next: reaction time →",
+  hick_h:"Reaction time and Hick's law", hick_desc:"Four blocks of 8 trials: with 1, 2, 4 and 8 possible keys. When a square lights up, press its key as fast as you can (F; F J; D F J K; A S D F J K L ;). Rest your fingers on the keys before starting. You can also click the squares, but then you also measure mouse movement.",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -1641,7 +1648,7 @@ function linfit(xs, ys){ const mx=mean(xs), my=mean(ys); let sxy=0, sxx=0, syy=0
 function plotXY(A, o){ A.fit(); if(!A.w) return; const g=A.ctx; A.clear();
   const xs=o.pts.map(p=>p.x), ys=o.pts.map(p=>p.y); if(!xs.length){ A.label(o.empty||""); return; }
   let x0=o.x0??Math.min(...xs), x1=Math.max(...xs), y0=o.y0??0, y1=Math.max(...ys);
-  if(o.line){ y1=Math.max(y1, o.line.a+o.line.b*x1); } if(x1===x0) x1=x0+1; y1=y1*1.1||1;
+  if(o.line){ y1=Math.max(y1, o.line.a+o.line.b*x1); } if(x1===x0) x1=x0+1; x1+=(x1-x0)*0.04; y1=y1*1.1||1;
   const L0=58, R0=14, T0=14, B0=40, W=A.w-L0-R0, H=A.h-T0-B0, X=v=>L0+(v-x0)/(x1-x0)*W, Y=v=>T0+H-(v-y0)/(y1-y0)*H;
   g.font="11px "+css("--font-mono"); g.fillStyle=css("--muted"); g.strokeStyle=css("--line"); g.lineWidth=1;
   const step=(()=>{ const r=(y1-y0)/5, p=Math.pow(10,Math.floor(Math.log10(r))); return [1,2,5,10].map(k=>k*p).find(s=>s>=r); })();
@@ -1702,11 +1709,68 @@ const Stroop = (() => { const N=24;
 })();
 
 // =====================================================================
+// CZAS REAKCJI I PRAWO HICKA — reakcja na 1, 2, 4 i 8 możliwych bodźców
+// =====================================================================
+const Hick = (() => { const PER=8;
+  const SETS = { 1:["KeyF"], 2:["KeyF","KeyJ"], 4:["KeyD","KeyF","KeyJ","KeyK"], 8:["KeyA","KeyS","KeyD","KeyF","KeyJ","KeyK","KeyL","Semicolon"] };
+  const LBL = c => c==="Semicolon" ? ";" : c.slice(3);
+  const A = new Arena("cv-hick"); let S=null, st=null;
+  const self = { tab:"reakcja", key:"reakcja-hick", grid:"cards-hick", sumId:"sum-hick", R:null, title:{pl:"Czas reakcji (Hick)",en:"Reaction time (Hick)"}, specs:[
+    {id:"hk-b", title:{pl:"Nachylenie (prawo Hicka)",en:"Slope (Hick's law)"}, unit:{pl:"ms na bit",en:"ms per bit"},
+     rows:[["a",{pl:"wyraz wolny a",en:"intercept a"}],["r2",{pl:"dopasowanie R²",en:"fit R²"}],["tp",{pl:"przepustowość 1000/b",en:"throughput 1000/b"}]],
+     how:{pl:"Prawo Hicka–Hymana: czas reakcji rośnie liniowo z ilością informacji, czyli z logarytmem liczby możliwości: <code>RT = a + b · log₂(n + 1)</code>. Dopasowuję prostą metodą najmniejszych kwadratów do median z 4 bloków. <i>b</i> to dodatkowy czas na każdy „bit” wyboru, <i>a</i> to czas niezależny od liczby możliwości (zauważenie bodźca i ruch palca).",
+          en:"Hick–Hyman law: reaction time grows linearly with information, i.e. with the log of the number of choices: <code>RT = a + b · log₂(n + 1)</code>. I fit a least-squares line to the medians of the 4 blocks. <i>b</i> is the extra time per “bit” of choice, <i>a</i> is time independent of the number of choices (noticing the stimulus and moving the finger)."}},
+    {id:"hk-n", title:{pl:"Mediany bloków",en:"Block medians"}, rows:[["1",{pl:"1 możliwość",en:"1 choice"}],["2",{pl:"2 możliwości",en:"2 choices"}],["4",{pl:"4 możliwości",en:"4 choices"}],["8",{pl:"8 możliwości",en:"8 choices"}]],
+     how:{pl:`W każdym bloku ${PER} prób. Bodziec pojawia się po losowej przerwie 0,7–1,8 s, żeby nie dało się go przewidzieć. Liczę tylko poprawne odpowiedzi; naciśnięcie przed bodźcem to falstart i próba się powtarza.`,
+          en:`Each block has ${PER} trials. The stimulus appears after a random 0.7–1.8 s pause so it can't be predicted. Only correct answers count; a press before the stimulus is a false start and the trial repeats.`}},
+    {id:"hk-e", title:{pl:"Błędy i falstarty",en:"Errors and false starts"}, unit:{pl:"złych klawiszy",en:"wrong keys"}, rows:[["fs",{pl:"falstarty",en:"false starts"}]],
+     how:{pl:"Zły klawisz to naciśnięcie klawisza innego niż podświetlony.",en:"A wrong key is pressing a key other than the highlighted one."}}
+  ]};
+  const status = o => { st=o; $("st-hick").textContent = L(o)||""; };
+  function draw(){ A.fit(); if(!A.w) return; A.clear(); const g=A.ctx;
+    if(!S || S.chart){ const pts=(self.R?[1,2,4,8].map(n=>({x:Math.log2(n+1), y:self.R.med[n]})):[]).filter(p=>Number.isFinite(p.y));
+      plotXY(A, { pts, line:self.R&&self.R.fit, xl:LANG==="pl"?"log₂(n + 1): liczba możliwości n = 1, 2, 4, 8":"log₂(n + 1): number of choices n = 1, 2, 4, 8", yu:" ms",
+        xticks:[1,2,4,8].map(n=>Math.log2(n+1)), xfmt:v=>"n="+Math.round(2**v-1), x0:0.8, empty:LANG==="pl"?"Kliknij „Start”. Wykres pojawi się po teście.":"Click “Start”. The chart appears after the test." }); return; }
+    const keys=SETS[S.n], bw=Math.min(90,(A.w-40)/keys.length-10), tot=keys.length*(bw+10)-10, x0=(A.w-tot)/2, y=A.h/2-bw/2;
+    keys.forEach((k,i)=>{ const x=x0+i*(bw+10), on=S.lit===i; g.fillStyle=on?css("--accent"):css("--surface"); g.strokeStyle=css("--line"); g.lineWidth=1.5;
+      g.beginPath(); g.roundRect ? g.roundRect(x,y,bw,bw,8) : g.rect(x,y,bw,bw); g.fill(); g.stroke();
+      g.fillStyle=on?css("--on-accent"):css("--muted"); g.font=`600 ${Math.round(bw*0.32)}px ${css("--font-mono")}`; g.textAlign="center"; g.textBaseline="middle"; g.fillText(LBL(k), x+bw/2, y+bw/2); }); }
+  function trial(){ S.lit=null; S.armed=false; draw();
+    status({pl:`Blok: ${S.n} ${S.n===1?"możliwość":"możliwości"} · próba ${S.k+1} z ${PER} · czekaj na podświetlenie`,en:`Block: ${S.n} choice${S.n>1?"s":""} · trial ${S.k+1} of ${PER} · wait for the highlight`});
+    S.timer=setTimeout(()=>{ S.lit=Math.floor(Math.random()*S.n); S.t0=performance.now(); S.armed=true; draw(); }, 700+Math.random()*1100); }
+  function start(){ clearTimeout(S&&S.timer); S={order:[1,2,4,8], bi:0, n:1, k:0, res:[], fs:0, err:0}; trial(); }
+  function key(code){ if(!S || S.chart) return; const keys=SETS[S.n];
+    if(!S.armed){ if(keys.includes(code)){ clearTimeout(S.timer); S.fs++; status({pl:"Falstart! Poczekaj na podświetlenie.",en:"False start! Wait for the highlight."}); setTimeout(trial,700); } return; }
+    const idx=keys.indexOf(code); if(idx<0) return;
+    S.armed=false; const rt=performance.now()-S.t0, ok=idx===S.lit; if(!ok) S.err++; S.lit=null; draw();
+    S.res.push({n:S.n, rt, ok}); S.k++;
+    if(S.k>=PER){ S.bi++; S.k=0; if(S.bi>=4) return finish(); S.n=S.order[S.bi]; }
+    setTimeout(trial,300); }
+  function finish(){ const med={}; [1,2,4,8].forEach(n=>med[n]=median(S.res.filter(r=>r.n===n&&r.ok).map(r=>r.rt)));
+    const ns=[1,2,4,8].filter(n=>Number.isFinite(med[n])), fit=linfit(ns.map(n=>Math.log2(n+1)), ns.map(n=>med[n]));
+    self.R={ med, fit, trials:S.res, errors:S.err, falseStarts:S.fs }; S={chart:true}; status({pl:"Gotowe.",en:"Done."}); draw(); S=null;
+    self.render(self.R); setSummary(self); markDone("reakcja"); }
+  self.render = R => { setMain("hk-b", nf(R.fit.b)); setRow("hk-b","a", ms(R.fit.a)); setRow("hk-b","r2", nf(R.fit.r2,2)); setRow("hk-b","tp", Number.isFinite(R.fit.b)&&R.fit.b>0 ? nf(1000/R.fit.b,1)+" bit/s" : "—");
+    [1,2,4,8].forEach(n=>setRow("hk-n",String(n), ms(R.med[n]))); setMain("hk-e", R.errors); setRow("hk-e","fs", R.falseStarts); };
+  self.summary = R => LANG==="pl"
+    ? `<p>Prosta reakcja (1 możliwość) zajmuje Ci <strong>${ms(R.med[1])}</strong>, a wybór z 8 możliwości <strong>${ms(R.med[8])}</strong>. Każdy dodatkowy „bit” wyboru (podwojenie liczby możliwości) dodaje średnio ${nf(R.fit.b)} ms; prawo Hicka opisuje Twoje wyniki z dopasowaniem R² = ${nf(R.fit.r2,2)}.</p>`
+    : `<p>Your simple reaction (1 choice) takes <strong>${ms(R.med[1])}</strong> and choosing among 8 takes <strong>${ms(R.med[8])}</strong>. Each extra “bit” of choice (doubling the options) adds ${nf(R.fit.b)} ms on average; Hick's law fits your results with R² = ${nf(R.fit.r2,2)}.</p>`;
+  $("hick-go").addEventListener("click", start);
+  A.c.addEventListener("pointerdown", e => { if(!S||S.chart) return; e.preventDefault(); const keys=SETS[S.n], p=A.pos(e), bw=Math.min(90,(A.w-40)/keys.length-10), tot=keys.length*(bw+10)-10, x0=(A.w-tot)/2;
+    const i=Math.floor((p.x-x0)/(bw+10)); if(i>=0 && i<keys.length && Math.abs(p.y-A.h/2)<=bw/2) key(keys[i]); });
+  document.addEventListener("keydown", e => { if(!S || $("tab-reakcja").hidden || e.repeat) return; if(Object.values(SETS).flat().includes(e.code)){ e.preventDefault(); key(e.code); } });
+  SHOW.reakcja = draw;
+  LEAVE.reakcja = () => { if(S){ clearTimeout(S.timer); S=null; status(null); } };
+  LANGHOOKS.push(() => { status(st); draw(); });
+  return self;
+})();
+
+// =====================================================================
 // zakładki, wyniki, język
 // =====================================================================
-const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop];
+const TASKS = [Typing, Click, Track, Drag, Draw, Dbl, Pass, Pseudo, Search, SnA, SnB, Plates, Sig, Bot, FP, Stroop, Hick];
 const MOUSE = [Click, Track, Drag, Draw, Dbl];
-const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","wyniki"];
+const TABS = ["pisanie","klikanie","sledzenie","przeciaganie","rysowanie","dwuklik","haslo","litery","wzrok","podpis","bot","odcisk","stroop","reakcja","wyniki"];
 
 function markDone(tab){ document.querySelector(`#tabs a[data-tab="${tab}"]`).classList.add("done"); renderResults(); }
 function renderResults(){

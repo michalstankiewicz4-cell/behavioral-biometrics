@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.15.0",
+  "softwareVersion": "0.16.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -91,6 +91,7 @@
       <span class="tglabel" data-i18n="grp_psy"></span>
       <div class="tglinks">
         <a href="#stroop" data-tab="stroop"><span data-i18n="tab_stroop"></span></a>
+        <a href="#reakcja" data-tab="reakcja"><span data-i18n="tab_hick"></span></a>
       </div>
     </div>
     <div class="tgroup warn" data-group="health">
@@ -348,6 +349,16 @@
     <div id="stroop-ans" class="answers"></div>
     <div id="sum-stroop" class="summary empty"></div>
     <div class="grid" id="cards-stroop"></div>
+    <div class="next"><a class="btn" href="#reakcja" data-i18n="next_reakcja"></a></div>
+  </section>
+
+  <section class="panel" id="tab-reakcja" data-panel="reakcja" hidden>
+    <h2 data-i18n="hick_h"></h2>
+    <p class="lead" data-i18n="hick_desc"></p>
+    <div class="bar"><span class="status" id="st-hick"></span><div class="btns"><button id="hick-go" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-hick" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-hick" class="summary empty"></div>
+    <div class="grid" id="cards-hick"></div>
     <div class="next"><a class="btn" href="#litery" data-i18n="next_let"></a></div>
   </section>
 
