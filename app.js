@@ -8,8 +8,11 @@ const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.13.0";
+const VERSION = "0.14.0";
 const CHANGELOG = [
+  { v:"0.14.0", date:"2026-10-30",
+    pl:["Mapa cieplna klawiatury w zakładce Pisanie: kolor klawisza według średniego czasu przytrzymania albo liczby błędów, z przełącznikiem i podpowiedzią z liczbą pomiarów."],
+    en:["Keyboard heat map in the Typing tab: key colour by mean hold time or number of errors, with a switch and a tooltip showing the sample count."] },
   { v:"0.13.0", date:"2026-10-30",
     pl:["Nowa zakładka „Odcisk przeglądarki”: tabela 14 cech, które każda strona może odczytać bez pytania (m.in. strefa czasowa, ekran, karta graficzna, odcisk canvas, czcionki), z opisem, co każda zdradza.","Skrót odcisku liczony lokalnie i wyjaśnienie, jak działa śledzenie bez ciasteczek."],
     en:["New “Browser fingerprint” tab: a table of 14 features any website can read without asking (incl. time zone, screen, graphics card, canvas fingerprint, fonts), with what each one reveals.","Fingerprint hash computed locally and an explanation of tracking without cookies."] },
@@ -123,6 +126,8 @@ pl:{
   tab_fp:"Odcisk przeglądarki", next_odcisk:"Dalej: odcisk przeglądarki →",
   fp_h:"Odcisk przeglądarki", fp_desc:"Każda strona może bez pytania o zgodę odczytać wiele cech Twojej przeglądarki i komputera. Razem tworzą „odcisk palca”, który pozwala rozpoznać Cię przy kolejnych wizytach, nawet bez ciasteczek i po wyczyszczeniu historii. Kliknij przycisk, żeby zobaczyć, co widzi ta strona.",
   fp_local:"Liczone tylko lokalnie, nic nie jest wysyłane.", fp_go:"Pokaż mój odcisk",
+  kbd_h:"Mapa klawiatury", kbd_desc:"Kolor klawisza pokazuje średni czas przytrzymania (im ciemniejszy, tym dłużej trzymasz) albo liczbę błędów, w których ten klawisz był oczekiwany. Polskie litery liczą się do klawisza bazowego (ą → a). Najedź na klawisz, żeby zobaczyć liczbę pomiarów.",
+  kbd_legend:"Pokaż:", kbd_dwell:"czas przytrzymania", kbd_err:"błędy",
   news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
@@ -199,6 +204,8 @@ en:{
   tab_fp:"Browser fingerprint", next_odcisk:"Next: browser fingerprint →",
   fp_h:"Browser fingerprint", fp_desc:"Any website can read many features of your browser and computer without asking. Together they form a “fingerprint” that lets a site recognise you on later visits, even without cookies and after clearing your history. Click the button to see what this page can see.",
   fp_local:"Computed locally only, nothing is sent.", fp_go:"Show my fingerprint",
+  kbd_h:"Keyboard heat map", kbd_desc:"Key colour shows the mean hold time (darker = held longer) or the number of errors where that key was expected. Polish letters count towards their base key (ą → a). Hover a key to see the number of samples.",
+  kbd_legend:"Show:", kbd_dwell:"hold time", kbd_err:"errors",
   news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
@@ -530,7 +537,7 @@ const Typing = (() => {
     }
     const ranked = Object.entries(pairs).filter(([,a])=>a.length>=2).map(([p,a])=>({p,m:mean(a),n:a.length})).sort((x,y)=>y.m-x.m);
     return { wpm:(v.length/5)/(dur/60), cpm:v.length/(dur/60), dur, dwell, flight, dd, pauses, ranked,
-      errTyped:S.errTyped, errRate:S.typed?S.errTyped/S.typed:NaN, errTypes:classifyErrors(S.ins, TARGET),
+      errTyped:S.errTyped, errRate:S.typed?S.errTyped/S.typed:NaN, errTypes:classifyErrors(S.ins, TARGET), keys:keyStats(chars, S.ins, TARGET),
       left:[...v].filter((c,i)=>c!==TARGET[i]).length, missing:Math.max(0,TARGET.length-v.length),
       deletions:S.deletions, corr:{...S.corr} };
   }
@@ -553,6 +560,7 @@ const Typing = (() => {
     setHTML("t-pairs","slow", R.ranked.length ? R.ranked.slice(0,5).map(r=>chip(r,"slow")).join("") : none);
     setHTML("t-pairs","fast", R.ranked.length ? R.ranked.slice(-5).reverse().map(r=>chip(r,"fast")).join("") : none);
     renderErrTypes("t-types", R.errTypes);
+    renderKbd(R.keys);
   };
   self.summary = R => {
     const cv = sd(R.dd)/mean(R.dd), w = R.wpm;
@@ -582,6 +590,29 @@ const Typing = (() => {
   self.onLang = () => { if(!S.done) reset(); else renderLive(); };
   return self;
 })();
+
+
+// ---------- mapa cieplna klawiatury ----------
+const KBD_ROWS = ["1234567890-=","qwertyuiop[]","asdfghjkl;'","zxcvbnm,./"," "];
+function keyStats(chars, ins, T){ const dw={}, err={};
+  for(const s of chars) if(s.up!=null){ const k=base(s.key.toLowerCase()); (dw[k] ||= []).push(s.up-s.down); }
+  for(const x of ins) if(T[x.pos]!==undefined && x.ch!==T[x.pos]){ const k=base(T[x.pos].toLowerCase()); err[k]=(err[k]||0)+1; }
+  const dwell={}, n={}; for(const k in dw){ dwell[k]=mean(dw[k]); n[k]=dw[k].length; }
+  return { dwell, n, err }; }
+let KBD_MODE = "dwell";
+function renderKbd(keys){ const el=$("kbd"); if(!el) return;
+  const vals = KBD_MODE==="dwell" ? keys && keys.dwell : keys && keys.err;
+  const nums = vals ? Object.values(vals) : []; const lo=nums.length?Math.min(...nums):0, hi=nums.length?Math.max(...nums):1;
+  el.innerHTML = KBD_ROWS.map((row,ri) => `<div class="kr" style="padding-left:${[0,0.5,0.75,1.25,3.5][ri]*2.6}rem">` + [...row].map(k => {
+    const v = vals ? vals[k] : undefined, has = v!==undefined;
+    const t = has ? (KBD_MODE==="err" ? v/(hi||1) : (hi>lo ? (v-lo)/(hi-lo) : 0.5)) : 0;
+    const label = k===" " ? (LANG==="pl"?"spacja":"space") : k;
+    const val = has ? (KBD_MODE==="dwell" ? nf(v)+" ms" : String(v)) : "";
+    const tip = has ? `${label}: ${val}` + (KBD_MODE==="dwell" ? ` (n=${keys.n[k]})` : "") : label;
+    return `<span class="key${k===" "?" space":""}${has?" has":""}${t>0.6?" hot":""}" title="${esc(tip)}" style="--t:${(t*100).toFixed(0)}%"><b>${esc(label)}</b><small>${val}</small></span>`;
+  }).join("") + `</div>`).join("");
+}
+document.querySelectorAll('input[name="kbdmode"]').forEach(r => r.addEventListener("change", () => { KBD_MODE=r.value; renderKbd(Typing.R && Typing.R.keys); }));
 
 // =====================================================================
 // 2. KLIKANIE CELÓW
@@ -1691,6 +1722,7 @@ function applyLang(){
   Search.onLang();
   Cal.upd(); SnRun.onLang(); Plates.onLang();
   LANGHOOKS.forEach(f => f());
+  renderKbd(Typing.R && Typing.R.keys);
   renderResults();
   renderNews();
   renderTheme();

@@ -19,7 +19,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 2. ☑ **Podpis myszką** – podpis 3 razy jako wzorzec, potem weryfikacja kolejnego podpisu (kształt, tempo, rytm) (v0.11.0)
 3. ☑ **Człowiek czy bot** – jak zabezpieczenia w stylu CAPTCHA odróżniają człowieka od bota po ruchu myszki; przycisk „puść bota” do porównania (v0.12.0)
 4. ☑ **Odcisk przeglądarki (jawny)** – co strona wie bez pytania o zgodę (ekran, strefa czasowa, języki, czcionki, karta graficzna…), z wyjaśnieniem śledzenia bez ciasteczek; wszystko lokalnie (v0.13.0)
-5. ☐ **Mapa cieplna klawiatury** w zakładce Pisanie – kolor klawisza według czasu przytrzymania lub liczby błędów
+5. ☑ **Mapa cieplna klawiatury** w zakładce Pisanie – kolor klawisza według czasu przytrzymania lub liczby błędów (v0.14.0)
 6. ☐ **Test Stroopa** – kolor napisu kontra treść słowa
 7. ☐ **Czas reakcji i prawo Hicka** – reakcja na 1, 2, 4 i 8 możliwych bodźców, wykres
 8. ☐ **Prawo Fittsa** – cele różnej wielkości i odległości, dopasowanie wzoru

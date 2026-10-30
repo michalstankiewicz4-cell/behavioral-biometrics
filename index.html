@@ -40,7 +40,7 @@
   "operatingSystem": "Any (web browser)",
   "inLanguage": ["pl", "en"],
   "isAccessibleForFree": true,
-  "softwareVersion": "0.13.0",
+  "softwareVersion": "0.14.0",
   "image": "https://michalstankiewicz4-cell.github.io/behavioral-biometrics/img/og-image.png",
   "author": { "@type": "Person", "name": "Michał Stankiewicz", "url": "https://github.com/michalstankiewicz4-cell" },
   "codeRepository": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics"
@@ -137,6 +137,16 @@
     <p id="hint" class="note hidden" data-i18n="hint"></p>
     <div id="sum-type" class="summary empty"></div>
     <div class="grid" id="cards-type"></div>
+    <div class="kbd-wrap">
+      <h3 class="sec" data-i18n="kbd_h"></h3>
+      <p class="lead" data-i18n="kbd_desc"></p>
+      <fieldset class="seg" id="kbd-mode">
+        <legend data-i18n="kbd_legend"></legend>
+        <label><input type="radio" name="kbdmode" value="dwell" checked> <span data-i18n="kbd_dwell"></span></label>
+        <label><input type="radio" name="kbdmode" value="err"> <span data-i18n="kbd_err"></span></label>
+      </fieldset>
+      <div id="kbd" class="kbd" aria-label="Mapa klawiatury"></div>
+    </div>
     <div class="next"><a class="btn" href="#klikanie" data-i18n="next_click"></a></div>
   </section>
 

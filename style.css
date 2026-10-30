@@ -208,3 +208,13 @@ input.num:focus{outline:2px solid var(--accent);outline-offset:1px}
 .tablewrap td:first-child{white-space:nowrap;font-weight:500}
 .tablewrap td code{word-break:break-word;background:transparent;padding:0}
 .tablewrap td:last-child{color:var(--muted);min-width:220px}
+
+.kbd{display:grid;gap:4px;overflow-x:auto;padding:4px 0}
+.kr{display:flex;gap:4px}
+.key{flex:0 0 2.4rem;height:2.6rem;border:1px solid var(--line);border-radius:5px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  font-family:var(--font-mono);background:var(--surface);color:var(--muted);line-height:1.05}
+.key.space{flex-basis:16rem}
+.key b{font-weight:500;font-size:.9rem}
+.key small{font-size:.58rem;font-variant-numeric:tabular-nums}
+.key.has{background:color-mix(in srgb,var(--accent) calc(10% + var(--t) * 0.8),var(--surface));color:var(--ink);border-color:color-mix(in srgb,var(--accent) 40%,var(--line))}
+.key.hot{color:var(--on-accent)}

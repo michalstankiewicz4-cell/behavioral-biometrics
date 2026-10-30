@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.13.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.14.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -50,6 +50,8 @@ Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstaj�
 | Poprawki | ciąg usunięć = jedna poprawka. Opóźnienie = liczba znaków wpisanych po pierwszym błędzie w chwili rozpoczęcia poprawki (0 = natychmiastowa) |
 | Pauzy | odstęp `keydown → keydown` ≥ 1 s, z podaniem słowa |
 | Pary liter | średni odstęp `keydown → keydown` dla dwóch kolejnych poprawnych liter; pokazywane pary z ≥ 2 wystąpieniami |
+
+**Mapa klawiatury** (pod kartami): dla każdego klawisza układu QWERTY średni czas przytrzymania albo liczba błędów, w których ten klawisz był oczekiwany. Polskie litery są liczone do klawisza bazowego (ą → a). Kolor: czas przytrzymania skalowany od najkrótszego do najdłuższego klawisza, błędy od 0 do maksimum. Dane trafiają do eksportu jako `measurements.keys`.
 
 Pole tekstowe blokuje wklejanie, upuszczanie, Enter i przesuwanie kursora, żeby pomiar dotyczył tylko pisania na końcu tekstu.
 
@@ -170,7 +172,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
