@@ -729,8 +729,20 @@ function applyLang(){
   MOUSE.forEach(t => { t.status(t.st); if(t.A.w) t.redraw(); });
   Typing.onLang();
   renderResults();
+  renderTheme();
 }
 $("lang").addEventListener("click", () => { LANG = LANG==="pl" ? "en" : "pl"; applyLang(); });
+
+// dzień / noc: domyślnie motyw systemu, przycisk przełącza ręcznie (bez zapisywania)
+const isDark = () => { const t=document.documentElement.dataset.theme; return t ? t==="dark" : matchMedia("(prefers-color-scheme: dark)").matches; };
+function renderTheme(){ const b=$("theme"), d=isDark();
+  b.textContent = d ? (LANG==="pl"?"☀ Dzień":"☀ Day") : (LANG==="pl"?"☾ Noc":"☾ Night");
+  b.setAttribute("aria-label", d ? (LANG==="pl"?"Włącz jasny motyw":"Switch to light theme") : (LANG==="pl"?"Włącz ciemny motyw":"Switch to dark theme")); }
+$("theme").addEventListener("click", () => {
+  document.documentElement.dataset.theme = isDark() ? "light" : "dark";
+  renderTheme(); MOUSE.forEach(t => { if(t.A.w) t.redraw(); });
+});
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => { renderTheme(); MOUSE.forEach(t => { if(t.A.w) t.redraw(); }); });
 window.addEventListener("hashchange", showTab);
 window.addEventListener("resize", () => { const cur = MOUSE.find(t => !$( "tab-"+t.tab).hidden); if(cur){ cur.A.fit(); cur.redraw(); } });
 if(matchMedia("(pointer: coarse)").matches) $("mobile").classList.remove("hidden");
