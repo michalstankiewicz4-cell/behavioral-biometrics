@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.25.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.26.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -232,7 +232,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Cyfrowy odcisk człowieka",
-  "version": "0.25.0",
+  "version": "0.26.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -289,7 +289,7 @@ Przy każdej zmianie:
 
 ## 9. Wyszukiwarki, favicon i miniatura
 
-- **`<head>` w `index.html`:** tytuł i opis (`description`), adres kanoniczny, `theme-color`, ikony, znaczniki Open Graph i Twitter (miniatura `assets/img/og-image.png`), dane strukturalne JSON-LD typu `WebApplication`.
+- **`<head>` w `index.html`:** tytuł, opis (`description`, po polsku; wersję angielską JS wstawia po zmianie języka), frazy kluczowe po polsku i angielsku (`keywords` oraz `keywords` w JSON-LD, obejmujące wszystkie zakładki), adres kanoniczny, `theme-color`, ikony, znaczniki Open Graph i Twitter (miniatura `assets/img/og-image.png`), dane strukturalne JSON-LD typu `WebApplication`.
 - **Treść dla robotów:** nagłówek i opis są wpisane w HTML po polsku, więc są widoczne nawet bez uruchamiania JavaScriptu; JS podmienia je po wybraniu języka. Przy zmianie języka JS aktualizuje też `document.title` i opis.
 - **`sitemap.xml`:** jeden adres. `robots.txt` nie ma sensu na stronie projektu GitHub Pages (`…github.io/behavioral-biometrics/`), bo roboty czytają go tylko z katalogu głównego domeny.
 - **Google Search Console:** żeby przyspieszyć indeksowanie, dodaj w Search Console właściwość z prefiksem URL `https://michalstankiewicz4-cell.github.io/behavioral-biometrics/`, zweryfikuj ją plikiem HTML (wrzuć go do repo) i zgłoś `sitemap.xml`.

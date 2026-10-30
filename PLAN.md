@@ -31,7 +31,7 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 14. ☑ **Linki do Wikipedii** (polskiej i angielskiej) przy testach, tam gdzie jest artykuł (v0.23.0)
 15. ☑ **Nowa nazwa strony**: „Cyfrowy odcisk człowieka” (wcześniej „Odcisk klawiatury i myszki”) (v0.24.0)
 16. ☑ **Rozdzielenie wyników od interpretacji** w zakładce Wyniki oraz **interpretacje łączone** (wnioski z kilku testów naraz) (v0.25.0)
-17. ☐ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek
+17. ☑ **Frazy kluczowe i opis** dla wyszukiwarek po polsku i angielsku, dopasowane do wszystkich zakładek (v0.26.0)
 
 18. ☑ **Podział projektu na pliki i foldery** jak w profesjonalnym projekcie (moduły JS, style, dane, testy) – wykonywany zaraz po punkcie 13 (v0.22.0)
 

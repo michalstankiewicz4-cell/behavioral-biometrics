@@ -3,7 +3,7 @@ import { REPO } from "../config.js";
 
 export default {
   title:"Cyfrowy odcisk człowieka", doc_title:"Cyfrowy odcisk człowieka · biometria behawioralna i testy w przeglądarce",
-  meta_desc:"Jawne demo biometrii behawioralnej: sprawdź, jak strona rozpoznaje cię po pisaniu na klawiaturze i ruchach myszki. Test pisania, zadania z myszką, rytm hasła. Wszystko liczy się lokalnie w przeglądarce.",
+  meta_desc:"Sprawdź, co zdradzają o Tobie pisanie, ruchy myszki i przeglądarka. Biometria behawioralna oraz testy reakcji, pamięci i wzroku – lokalnie, bez wysyłania danych.",
   tag:"BIOMETRIA BEHAWIORALNA",
   lang_btn:"English", lang_label:"Przełącz na angielski",
   lead:"Biometria behawioralna rozpoznaje ludzi po tym, <strong>jak</strong> coś robią: jak piszą, jak ruszają myszką, jak klikają. Zwykle działa ukryta w tle (np. w bankowości). Tutaj jest <strong>jawna</strong>: wykonujesz krótkie zadania, a strona pokazuje, co zmierzyła i jak to policzyła.",

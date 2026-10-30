@@ -3,6 +3,10 @@
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
 Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
 
+## [0.26.0] – 2026-10-30
+- Nowy opis strony dla wyszukiwarek po polsku i angielsku, obejmujący wszystkie zakładki (biometria, testy reakcji, pamięci i wzroku).
+- Frazy kluczowe po polsku i angielsku (m.in. biometria behawioralna, dynamika pisania, efekt Stroopa, prawo Fittsa, tablica Snellena, odcisk przeglądarki) w znacznikach strony i danych strukturalnych.
+
 ## [0.25.0] – 2026-10-30
 - Zakładka „Wyniki” podzielona na: same liczby (tabela), interpretację każdego testu i interpretacje łączone.
 - Cztery interpretacje łączone z kilku testów: szybkość ogólna, szybkość kontra precyzja, stabilność ręki i rytmu, uwaga i pamięć. Każda pokazuje, na czym się opiera i jakich testów brakuje.

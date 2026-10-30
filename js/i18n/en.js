@@ -3,7 +3,7 @@ import { REPO } from "../config.js";
 
 export default {
   title:"Human Digital Fingerprint", doc_title:"Human Digital Fingerprint · behavioral biometrics and tests in your browser",
-  meta_desc:"An open behavioral biometrics demo: see how a page can recognise you by your typing and mouse movements. Typing test, mouse tasks, password rhythm. Everything is computed locally in your browser.",
+  meta_desc:"See what your typing, mouse movements and browser reveal about you. Behavioral biometrics plus reaction, memory and vision tests – all local, nothing is sent.",
   tag:"BEHAVIORAL BIOMETRICS",
   lang_btn:"Polski", lang_label:"Switch to Polish",
   lead:"Behavioral biometrics recognises people by <strong>how</strong> they do things: how they type, move the mouse and click. It usually runs hidden in the background (e.g. in banking). Here it is <strong>out in the open</strong>: you do a few short tasks and the page shows what it measured and how it calculated it.",

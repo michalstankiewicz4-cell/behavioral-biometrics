@@ -9,8 +9,11 @@ import { Stroop } from "./tests/stroop.js";
 import { Typing } from "./tests/typing.js";
 
 // ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
-const VERSION = "0.25.0";
+const VERSION = "0.26.0";
 const CHANGELOG = [
+  { v:"0.26.0", date:"2026-10-30",
+    pl:["Nowy opis strony dla wyszukiwarek po polsku i angielsku, obejmujący wszystkie zakładki (biometria, testy reakcji, pamięci i wzroku).","Frazy kluczowe po polsku i angielsku (m.in. biometria behawioralna, dynamika pisania, efekt Stroopa, prawo Fittsa, tablica Snellena, odcisk przeglądarki) w znacznikach strony i danych strukturalnych."],
+    en:["New search engine description in Polish and English, covering all tabs (biometrics, reaction, memory and vision tests).","Keywords in Polish and English (incl. behavioral biometrics, keystroke dynamics, Stroop test, Fitts's law, Snellen chart, browser fingerprint) in page tags and structured data."] },
   { v:"0.25.0", date:"2026-10-30",
     pl:["Zakładka „Wyniki” podzielona na: same liczby (tabela), interpretację każdego testu i interpretacje łączone.","Cztery interpretacje łączone z kilku testów: szybkość ogólna, szybkość kontra precyzja, stabilność ręki i rytmu, uwaga i pamięć. Każda pokazuje, na czym się opiera i jakich testów brakuje."],
     en:["“Results” tab split into: numbers only (table), interpretation of each test, and combined interpretations.","Four combined interpretations from several tests: overall speed, speed vs accuracy, hand and rhythm steadiness, attention and memory. Each shows what it is based on and which tests are missing."] },
