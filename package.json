@@ -1,0 +1,17 @@
+{
+  "name": "behavioral-biometrics",
+  "version": "0.22.0",
+  "private": true,
+  "description": "Jawne demo biometrii behawioralnej i testów psychomotorycznych w przeglądarce (statyczna strona, bez budowania).",
+  "type": "module",
+  "scripts": {
+    "start": "node tools/serve.mjs",
+    "test": "node tests/smoke.mjs",
+    "images": "node tools/make-images.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.48.0"
+  },
+  "author": "Michał Stankiewicz",
+  "license": "UNLICENSED"
+}

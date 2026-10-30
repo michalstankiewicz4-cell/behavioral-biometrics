@@ -1,6 +1,6 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-**Wersja / version: 0.21.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
+**Wersja / version: 0.22.0** · [Co nowego / changelog](CHANGELOG.md) · [Plan](PLAN.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
 ▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
 
@@ -55,7 +55,7 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 
 - **Nigdzie.** Wszystkie pomiary zbiera i liczy JavaScript w przeglądarce. Są tylko w pamięci karty i znikają po jej odświeżeniu lub zamknięciu.
 - **Nic nie jest wysyłane na GitHub.** GitHub Pages tylko dostarcza statyczne pliki; nie ma serwera, który mógłby coś odebrać.
-- Kod nie zawiera `fetch`, `XMLHttpRequest`, WebSocketów, formularzy, ciasteczek, `localStorage` ani analityki. Sprawdź w `app.js` albo w zakładce Network w DevTools.
+- Kod nie zawiera `fetch`, `XMLHttpRequest`, WebSocketów, formularzy, ciasteczek, `localStorage` ani analityki. Sprawdź w kodzie (`js/`) albo w zakładce Network w DevTools.
 - Przy wczytaniu strony GitHub (hosting, także czcionek) widzi standardowe dane żądania (IP, przeglądarka), ale nic z tego, co wpisujesz ani jak ruszasz myszką. Innych serwerów strona nie używa.
 - Eksport profilu zapisuje plik JSON tylko na Twoim dysku.
 
@@ -63,30 +63,54 @@ Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to lic
 
 - **Nowhere.** All measurements are collected and computed by JavaScript in your browser, kept only in the tab's memory and gone on refresh or close.
 - **Nothing is sent to GitHub.** GitHub Pages only serves static files; there is no server to receive anything.
-- The code has no `fetch`, `XMLHttpRequest`, WebSockets, forms, cookies, `localStorage` or analytics. Check `app.js` or the Network tab in DevTools.
+- The code has no `fetch`, `XMLHttpRequest`, WebSockets, forms, cookies, `localStorage` or analytics. Check the code (`js/`) or the Network tab in DevTools.
 - On page load GitHub (hosting, fonts included) sees standard request data (IP, browser), but nothing of what you type or how you move the mouse. No other servers are used.
 - Profile export saves a JSON file only to your own disk.
 
 ## Pliki · Files
 
 ```
-index.html            struktura strony
-style.css             wygląd, motywy, czcionki (@font-face)
-app.js                pomiary, obliczenia, teksty PL/EN, wersja i lista zmian
-fonts/                IBM Plex Sans i Mono (SIL OFL 1.1, fonts/OFL-LICENSE.txt)
-img/                  favicon, ikony, miniatura do udostępniania (og-image.png)
-sitemap.xml           mapa strony dla wyszukiwarek
-docs/DOKUMENTACJA.md  dokumentacja techniczna
-CHANGELOG.md          historia wersji
-PLAN.md               plan dalszych prac
-.github/workflows/    automatyczne wdrożenie na GitHub Pages po pushu do main
+index.html                 szkielet strony (zakładki, panele, meta dla wyszukiwarek)
+css/style.css              wygląd, motywy jasny/ciemny, @font-face
+js/
+  main.js                  punkt wejścia: lista testów, zakładki, wyniki, eksport, motyw, język
+  config.js                stałe (adres repozytorium)
+  changelog.js             VERSION i lista zmian (dział „Co nowego”)
+  i18n/
+    index.js               wykrywanie i przełączanie języka, L(), słownik D
+    pl.js, en.js           teksty interfejsu
+  core/
+    utils.js               DOM, statystyka, formatowanie, miary ruchu (drżenie, zatrzymania)
+    cards.js               karty miar i podsumowania
+    arena.js               płótno (canvas) i szkielet zadań z myszką
+    chart.js               wykres punktowy, regresja liniowa
+    errors.js              rodzaje błędów pisania
+    registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
+  results/tools.js         porównanie eksportów, karta PNG
+assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
+assets/img/                favicon, ikony, miniatura linku
+tests/smoke.mjs            test dymny (Playwright)
+tools/serve.mjs            lokalny serwer plików
+tools/make-images.mjs      generowanie ikon i miniatury
+docs/DOKUMENTACJA.md       dokumentacja techniczna
+CHANGELOG.md, PLAN.md      historia wersji, plan prac
+sitemap.xml                mapa strony
+.github/workflows/         wdrożenie na GitHub Pages po pushu do main
 ```
 
 ## Uruchomienie · Running
 
-Otwórz `index.html` w przeglądarce, bez instalowania czegokolwiek. Każdy push do `main` publikuje stronę na GitHub Pages.
+Strona to zwykłe pliki statyczne bez budowania, ale używa modułów ES, które nie działają po dwukliku w `index.html` (`file://`). Lokalnie uruchom serwer:
 
-Open `index.html` in a browser, nothing to install. Every push to `main` publishes the page to GitHub Pages.
+```bash
+npm start                 # albo: python3 -m http.server 8000
+# potem otwórz http://localhost:8000/
+```
+
+Testy i narzędzia (wymagają Node.js): `npm install`, `npx playwright install chromium`, potem `npm test` (test dymny) i `npm run images` (ikony i miniatura linku). Każdy push do `main` publikuje stronę na GitHub Pages.
+
+The site is plain static files with no build step, but it uses ES modules, which don't work from `file://`. Run `npm start` (or `python3 -m http.server 8000`) and open `http://localhost:8000/`. Every push to `main` publishes the site to GitHub Pages.
 
 ---
 

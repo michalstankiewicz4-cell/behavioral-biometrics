@@ -1,6 +1,6 @@
 # Dokumentacja techniczna
 
-Wersja dokumentu odpowiada wersji strony **0.21.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
+Wersja dokumentu odpowiada wersji strony **0.22.0**. Historia zmian: [CHANGELOG.md](../CHANGELOG.md).
 
 ## 1. Założenia
 
@@ -11,28 +11,46 @@ Wersja dokumentu odpowiada wersji strony **0.21.0**. Historia zmian: [CHANGELOG.
 
 ## 2. Struktura plików
 
-| Plik | Zawartość |
-|------|-----------|
-| `index.html` | Szkielet: nagłówek, zastrzeżenia, zakładki, panele zadań, „Co nowego”, stopka. Teksty wstawiane są z `app.js` przez atrybut `data-i18n`. |
-| `style.css` | `@font-face` dla czcionek lokalnych, tokeny kolorów (jasny i ciemny motyw), układ. |
-| `app.js` | Cała logika, w jednym IIFE (opis niżej). |
-| `img/` | `favicon.svg`, `favicon-32.png`, `apple-touch-icon.png` (180 px), `icon-512.png`, `og-image.png` (1200 × 630, miniatura linku). |
-| `sitemap.xml` | Mapa strony dla wyszukiwarek. |
-| `fonts/` | IBM Plex Sans i Mono (400/500/600, zakresy `latin` i `latin-ext`), licencja SIL OFL 1.1. |
+```
+index.html                 szkielet strony (zakładki, panele, meta dla wyszukiwarek)
+css/style.css              wygląd, motywy jasny/ciemny, @font-face
+js/
+  main.js                  punkt wejścia: lista testów, zakładki, wyniki, eksport, motyw, język
+  config.js                stałe (adres repozytorium)
+  changelog.js             VERSION i lista zmian (dział „Co nowego”)
+  i18n/
+    index.js               wykrywanie i przełączanie języka, L(), słownik D
+    pl.js, en.js           teksty interfejsu
+  core/
+    utils.js               DOM, statystyka, formatowanie, miary ruchu (drżenie, zatrzymania)
+    cards.js               karty miar i podsumowania
+    arena.js               płótno (canvas) i szkielet zadań z myszką
+    chart.js               wykres punktowy, regresja liniowa
+    errors.js              rodzaje błędów pisania
+    registry.js            zdarzenia zakładek: SHOW, LEAVE, LANGHOOKS
+  tests/                   jeden plik na test (typing, target-clicking, …, vision, memory)
+  results/tools.js         porównanie eksportów, karta PNG
+assets/fonts/              IBM Plex Sans i Mono (SIL OFL 1.1)
+assets/img/                favicon, ikony, miniatura linku
+tests/smoke.mjs            test dymny (Playwright)
+tools/serve.mjs            lokalny serwer plików
+tools/make-images.mjs      generowanie ikon i miniatury
+docs/DOKUMENTACJA.md       dokumentacja techniczna
+CHANGELOG.md, PLAN.md      historia wersji, plan prac
+sitemap.xml                mapa strony
+.github/workflows/         wdrożenie na GitHub Pages po pushu do main
+```
 
-## 3. Budowa `app.js`
+Strona nie ma kroku budowania: przeglądarka wczytuje moduły ES (`<script type="module" src="js/main.js">`) bezpośrednio. Moduły nie działają z adresu `file://`, więc lokalnie stronę otwiera się przez serwer: `npm start` (albo `python3 -m http.server`) i adres `http://localhost:8000/`.
 
-Kolejność sekcji w pliku:
+## 3. Budowa kodu
 
-1. **`VERSION` i `CHANGELOG`**: numer wersji i lista zmian (PL/EN), z których powstaje dział „Co nowego” i plakietka przy nazwie.
-2. **Język**: `detectLang()` wybiera `pl` lub `en` według `navigator.languages`. Słownik `D` zawiera teksty statyczne; `L({pl,en})` zwraca tekst w bieżącym języku.
-3. **Statystyka**: `mean`, `median`, `sd` (odchylenie próbkowe, n−1), formatowanie liczb według języka.
-4. **Wspólne miary ruchu**: `tremorRMS`, `countPauses`, `pathLen` (opis w p. 5).
-5. **Karty miar**: `buildCards(grid, specs)` buduje karty z definicji. Każda definicja ma `id`, `title`, `unit`, `rows`, `chips` i `how` (opis metody). Wartości wpisują `setMain`, `setRow` i `setHTML`.
-6. **`Arena`**: obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania ruchu).
-7. **`mouseTask(o)`**: wspólny szkielet zadań z myszką. Zadanie dostarcza `start`, `down`, `move`, `up`, `draw`, `analyse`, `render`, `summary`; szkielet obsługuje przycisk Start, przerwanie przy zmianie zakładki i zakończenie.
-8. **Zadania**: `Typing`, `Click`, `Track`, `Drag`, `Draw`, `Dbl`, `Pass`, `Pseudo`, `Search`, `SnA`, `SnB`, `Plates` (plus `Cal` – kalibracja, `SnRun` – przebieg tablicy Snellena).
-9. **Zakładki, wyniki, eksport, motyw, język**: zakładki są w grupach (`<div class="tgroup">` w `index.html`); grupa `warn` (ciekawostki zdrowotne) i jej panele (`panel warn`) mają kolor ostrzegawczy. Routing po `location.hash` (`#pisanie`, `#klikanie`, `#sledzenie`, `#przeciaganie`, `#rysowanie`, `#dwuklik`, `#haslo`, `#litery`, `#wzrok`, `#wyniki`).
+- **`js/main.js`** importuje wszystkie testy, trzyma listę `TASKS` (testy z wynikiem), obsługuje zakładki (`showTab`, routing po `location.hash`), zestawienie wyników, eksport, motyw i język (`applyLang`), a na końcu inicjalizuje stronę.
+- **Język:** `detectLang()` wybiera `pl` lub `en` według `navigator.languages`; `setLang()` przełącza. `LANG` jest eksportowane jako żywe powiązanie, więc każdy moduł widzi bieżący język. Teksty statyczne są w `js/i18n/pl.js` i `en.js` (wstawiane do elementów z atrybutem `data-i18n`), a teksty testów są obiektami `{pl, en}` w plikach testów; `L(obiekt)` zwraca wersję w bieżącym języku.
+- **Karty miar** (`core/cards.js`): `buildCards(grid, specs)` buduje karty z definicji (`id`, `title`, `unit`, `rows`, `chips`, `how` – opis metody). Wartości wpisują `setMain`, `setRow`, `setHTML`; `setSummary(task)` wstawia ocenę słowną.
+- **`Arena`** (`core/arena.js`): obsługa `<canvas>` (skalowanie do `devicePixelRatio`, współrzędne zdarzeń, `getCoalescedEvents()` dla gęstszego próbkowania). **`mouseTask(o)`**: szkielet zadań z myszką (start, `down`/`move`/`up`, `draw`, `analyse`, `render`, `summary`).
+- **Rejestry** (`core/registry.js`): test może dopisać funkcję do `SHOW[hash]` (pokazanie zakładki / zmiana rozmiaru okna), `LEAVE[hash]` (opuszczenie zakładki) i `LANGHOOKS` (zmiana języka).
+- **Test** to obiekt z polami `tab` (zakładka), `key` (nazwa w eksporcie), `grid`, `sumId`, `specs`, `title`, `R` (wynik) oraz metodami `render(R)` i `summary(R)`. Zakładki są w grupach (`<div class="tgroup">`); grupa `warn` (ciekawostki zdrowotne) i jej panele (`panel warn`) mają kolor ostrzegawczy.
 
 Każde zadanie po zakończeniu zapisuje wynik analizy w `task.R`. Z `R` powstają karty (`render`), ocena słowna (`summary`), zestawienie w „Wynikach” i eksport. Przy zmianie języka karty budowane są od nowa z tego samego `R`.
 
@@ -208,7 +226,7 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 ```json
 {
   "app": "Odcisk klawiatury i myszki",
-  "version": "0.21.0",
+  "version": "0.22.0",
   "source": "https://github.com/michalstankiewicz4-cell/behavioral-biometrics",
   "exported": "2026-10-30T20:40:00.000Z",
   "language": "pl",
@@ -239,23 +257,24 @@ Przycisk w zakładce „Wyniki”. W Chrome i Edge używa `showSaveFilePicker({ 
 Numeracja [SemVer](https://semver.org/lang/pl/): `MAJOR.MINOR.PATCH`. Dopóki projekt jest w fazie 0.x, nowa funkcja podnosi MINOR, poprawka PATCH.
 
 Przy każdej zmianie:
-1. Podnieś `VERSION` w `app.js`.
-2. Dodaj wpis na górze tablicy `CHANGELOG` w `app.js` (PL i EN).
+1. Podnieś `VERSION` w `js/changelog.js` (i `version` w `package.json`).
+2. Dodaj wpis na górze tablicy `CHANGELOG` w `js/changelog.js` (PL i EN).
 3. Dodaj ten sam wpis na górze `CHANGELOG.md`.
 4. Zaktualizuj numer wersji w `README.md`, na początku tej dokumentacji i w `softwareVersion` (JSON-LD w `index.html`).
-5. Przy zmianach wyglądu wygeneruj ponownie `img/og-image.png` (sekcja 9).
+5. Przy zmianach wyglądu wygeneruj ponownie `assets/img/og-image.png` (sekcja 9).
 
 ## 8. Dodawanie nowego zadania z myszką
 
 1. W `index.html` skopiuj panel istniejącego zadania i nadaj nowe id (`tab-…`, `cv-…`, `st-…`, `go-…`, `sum-…`, `cards-…`), dodaj zakładkę w `<nav id="tabs">`.
-2. W `app.js` utwórz zadanie przez `mouseTask({...})` z definicją kart (`specs`) i funkcjami `start`, `down`/`move`/`up`, `draw`, `analyse`, `render`, `summary`.
-3. Dopisz je do tablic `TASKS`, `MOUSE` i nazwę zakładki do `TABS`.
-4. Dodaj teksty do słownika `D` (oba języki).
+2. Utwórz plik w `js/tests/` i w nim zadanie przez `mouseTask({...})` (z `core/arena.js`) z definicją kart (`specs`) i funkcjami `start`, `down`/`move`/`up`, `draw`, `analyse`, `render`, `summary`.
+3. Zaimportuj je w `js/main.js` i dopisz do tablic `TASKS`, `MOUSE` oraz nazwę zakładki do `TABS`.
+4. Dodaj teksty do `js/i18n/pl.js` i `en.js`.
+5. Uruchom `npm test` (test dymny).
 
 ## 9. Wyszukiwarki, favicon i miniatura
 
-- **`<head>` w `index.html`:** tytuł i opis (`description`), adres kanoniczny, `theme-color`, ikony, znaczniki Open Graph i Twitter (miniatura `img/og-image.png`), dane strukturalne JSON-LD typu `WebApplication`.
+- **`<head>` w `index.html`:** tytuł i opis (`description`), adres kanoniczny, `theme-color`, ikony, znaczniki Open Graph i Twitter (miniatura `assets/img/og-image.png`), dane strukturalne JSON-LD typu `WebApplication`.
 - **Treść dla robotów:** nagłówek i opis są wpisane w HTML po polsku, więc są widoczne nawet bez uruchamiania JavaScriptu; JS podmienia je po wybraniu języka. Przy zmianie języka JS aktualizuje też `document.title` i opis.
 - **`sitemap.xml`:** jeden adres. `robots.txt` nie ma sensu na stronie projektu GitHub Pages (`…github.io/behavioral-biometrics/`), bo roboty czytają go tylko z katalogu głównego domeny.
 - **Google Search Console:** żeby przyspieszyć indeksowanie, dodaj w Search Console właściwość z prefiksem URL `https://michalstankiewicz4-cell.github.io/behavioral-biometrics/`, zweryfikuj ją plikiem HTML (wrzuć go do repo) i zgłoś `sitemap.xml`.
-- **Odświeżanie miniatury:** `og-image.png` to zrzut górnej części strony 1200 × 630 w jasnym motywie. Przy większych zmianach wyglądu warto go wygenerować ponownie (np. Playwright: `page.setViewportSize({width:1200,height:630})`, `page.screenshot()`).
+- **Odświeżanie miniatury:** `og-image.png` to zrzut górnej części strony 1200 × 630 w jasnym motywie. Przy większych zmianach wyglądu warto go wygenerować ponownie (`npm run images`).

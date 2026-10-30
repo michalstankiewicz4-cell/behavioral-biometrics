@@ -1,7 +1,13 @@
 # Co nowego · Changelog
 
 Format: [Keep a Changelog](https://keepachangelog.com/pl/1.1.0/), numeracja: [SemVer](https://semver.org/lang/pl/).
-Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `app.js`).
+Ta sama lista jest na stronie w dziale „Co nowego” (stała `CHANGELOG` w `js/changelog.js`).
+
+## [0.22.0] – 2026-10-30
+- Projekt podzielony na pliki i foldery: moduły ES w js/ (core, i18n, tests, results), style w css/, czcionki i obrazy w assets/.
+- Teksty interfejsu w osobnych plikach js/i18n/pl.js i en.js.
+- Narzędzia deweloperskie: lokalny serwer (npm start), test dymny przechodzący przez wszystkie zakładki (npm test), generator ikon i miniatury (npm run images).
+- Zaktualizowane README i dokumentacja (struktura, uruchamianie lokalne przez serwer).
 
 ## [0.21.0] – 2026-10-30
 - Zakładka „Wyniki”: porównanie dwóch wyeksportowanych plików JSON obok siebie, z wyróżnieniem różnic; pliki czytane tylko lokalnie.
