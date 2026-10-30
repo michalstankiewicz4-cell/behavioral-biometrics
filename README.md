@@ -1,14 +1,38 @@
 # Odcisk klawiatury i myszki · Keyboard and mouse fingerprint
 
-Jawne demo **biometrii behawioralnej**: sześć krótkich zadań (pisanie, klikanie celów, śledzenie punktu, przeciąganie, rysowanie po śladzie, podwójne kliknięcie), po których strona pokazuje, co zmierzyła i jak to policzyła. Strona ma wersję polską i angielską; język wybiera się automatycznie według przeglądarki.
+**Wersja / version: 0.5.0** · [Co nowego / changelog](CHANGELOG.md) · [Dokumentacja / docs](docs/DOKUMENTACJA.md)
 
-An open demo of **behavioral biometrics**: six short tasks (typing, target clicking, dot tracking, dragging, tracing shapes, double click), after which the page shows what it measured and how. Available in Polish and English; the language is picked from your browser.
+▶ **https://michalstankiewicz4-cell.github.io/behavioral-biometrics/**
+
+Jawne demo **biometrii behawioralnej**. Robisz sześć krótkich zadań, a strona pokazuje, co zmierzyła i jak to policzyła. Zwykle taka biometria działa ukryta w tle (np. w bankowości); tutaj każdy może zobaczyć, jak działa.
+
+An open demo of **behavioral biometrics**. You do six short tasks and the page shows what it measured and how. This kind of biometrics usually runs hidden in the background (e.g. in banking); here anyone can see how it works.
 
 ## ⚠️ Amatorski projekt · Amateur project
 
 To hobbystyczne demo, a nie narzędzie naukowe ani medyczne. Progi w ocenach są orientacyjne, a wyniki zależą od sprzętu, zmęczenia i wprawy. **Nie sugeruj się wynikiem** i nie podejmuj na jego podstawie żadnych decyzji.
 
 This is a hobby demo, not a scientific or medical tool. Thresholds are rough and results depend on hardware, tiredness and practice. **Don't take the results seriously** or base any decisions on them.
+
+## Zadania · Tasks
+
+| # | Zadanie | Co mierzy |
+|---|---------|-----------|
+| 1 | Pisanie · Typing | prędkość, czas przytrzymania i przelotu klawiszy, rytm, błędy, poprawki, pauzy, pary liter |
+| 2 | Klikanie celów · Target clicking | czas reakcji i ruchu, prostoliniowość, przestrzelenia, przytrzymanie przycisku, pudła |
+| 3 | Śledzenie punktu · Dot tracking | odległość od kropki, czas w strefie, opóźnienie, płynność |
+| 4 | Przeciąganie · Dragging | czas, precyzja upuszczenia, drżenie, zatrzymania, ponowne chwyty |
+| 5 | Rysowanie po śladzie · Tracing | odchylenie od wzoru, drżenie, pokrycie, tempo |
+| 6 | Podwójne kliknięcie · Double click | odstęp, przytrzymanie, drgnięcie kursora, za wolne pary |
+
+Dokładne wzory: [docs/DOKUMENTACJA.md](docs/DOKUMENTACJA.md) oraz „Jak to liczę” przy każdej karcie na stronie.
+
+## Funkcje · Features
+
+- Polski i angielski, domyślnie według języka przeglądarki · Polish and English, picked from the browser language
+- Motyw dzień/noc, domyślnie według systemu · Day/night theme, follows the system by default
+- Tekst do przepisania nad polem, jako podkładka lub pod polem · Reference text above, under or below the field
+- Eksport profilu (ocena + statystyki + surowe pomiary) do JSON; w Chrome/Edge domyślnie na Pulpit · Profile export to JSON; Desktop by default in Chrome/Edge
 
 ## Gdzie trafiają dane · Where data goes
 
@@ -28,12 +52,21 @@ This is a hobby demo, not a scientific or medical tool. Thresholds are rough and
 
 ## Pliki · Files
 
-- `index.html` – struktura strony / page structure
-- `style.css` – wygląd / styles
-- `app.js` – pomiary, obliczenia, teksty PL/EN / measurements, maths, PL/EN texts
-- `fonts/` – IBM Plex Sans i Mono (SIL OFL 1.1, `fonts/OFL-LICENSE.txt`)
+```
+index.html            struktura strony
+style.css             wygląd, motywy, czcionki (@font-face)
+app.js                pomiary, obliczenia, teksty PL/EN, wersja i lista zmian
+fonts/                IBM Plex Sans i Mono (SIL OFL 1.1, fonts/OFL-LICENSE.txt)
+docs/DOKUMENTACJA.md  dokumentacja techniczna
+CHANGELOG.md          historia wersji
+.github/workflows/    automatyczne wdrożenie na GitHub Pages po pushu do main
+```
 
-Uruchomienie lokalne: otwórz `index.html` w przeglądarce. · To run locally, open `index.html` in a browser.
+## Uruchomienie · Running
+
+Otwórz `index.html` w przeglądarce, bez instalowania czegokolwiek. Każdy push do `main` publikuje stronę na GitHub Pages.
+
+Open `index.html` in a browser, nothing to install. Every push to `main` publishes the page to GitHub Pages.
 
 ---
 

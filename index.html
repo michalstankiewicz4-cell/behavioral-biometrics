@@ -13,7 +13,7 @@
       <span class="tag" data-i18n="tag"></span>
       <div class="btns"><button id="theme" type="button"></button><button id="lang" type="button"></button></div>
     </div>
-    <h1 data-i18n="title"></h1>
+    <h1><span data-i18n="title"></span> <button type="button" class="ver" id="ver" aria-describedby="news-h"></button></h1>
     <p class="lead" data-i18n="lead"></p>
   </header>
 
@@ -137,6 +137,11 @@
     </div>
     <p class="status" id="export-status" aria-live="polite"></p>
     <p class="note" data-i18n="res_note"></p>
+  </section>
+
+  <section class="panel" id="news" aria-labelledby="news-h">
+    <h2 id="news-h" data-i18n="news_h"></h2>
+    <div id="news-list" class="news"></div>
   </section>
 
   <footer>

@@ -7,6 +7,26 @@
 const $ = id => document.getElementById(id);
 const REPO = "https://github.com/michalstankiewicz4-cell/behavioral-biometrics";
 
+// ---------- wersja i lista zmian (najnowsza na górze; to samo w CHANGELOG.md) ----------
+const VERSION = "0.5.0";
+const CHANGELOG = [
+  { v:"0.5.0", date:"2026-10-30",
+    pl:["Numer wersji przy nazwie strony.","Dział „Co nowego” z listą zmian w każdej wersji.","Dokumentacja (docs/DOKUMENTACJA.md), CHANGELOG.md i rozbudowane README.","Numer wersji zapisywany w eksportowanym profilu."],
+    en:["Version number next to the page name.","“What's new” section listing the changes in every version.","Documentation (docs/DOKUMENTACJA.md), CHANGELOG.md and an expanded README.","Version number included in the exported profile."] },
+  { v:"0.4.0", date:"2026-10-30",
+    pl:["Czcionki IBM Plex hostowane w repozytorium zamiast Google Fonts: przy wczytaniu strona łączy się już tylko z GitHubem.","Eksport profilu do pliku JSON: ocena, statystyki z kart i surowe pomiary. W Chrome i Edge okno zapisu otwiera się domyślnie na Pulpicie."],
+    en:["IBM Plex fonts hosted in the repository instead of Google Fonts: the page now only connects to GitHub when loading.","Profile export to a JSON file: evaluation, card statistics and raw measurements. In Chrome and Edge the save dialog opens on the Desktop by default."] },
+  { v:"0.3.0", date:"2026-10-30",
+    pl:["Trzypozycyjny przełącznik położenia tekstu do przepisania: nad polem, jako podkładka lub pod polem."],
+    en:["Three-way switch for the reference text position: above the field, as an underlay or below the field."] },
+  { v:"0.2.0", date:"2026-10-30",
+    pl:["Przełącznik dzień/noc (domyślnie według motywu systemu)."],
+    en:["Day/night switch (follows the system theme by default)."] },
+  { v:"0.1.0", date:"2026-10-30",
+    pl:["Pierwsza wersja: test pisania i pięć zadań z myszką (klikanie celów, śledzenie punktu, przeciąganie, rysowanie po śladzie, podwójne kliknięcie).","Przy każdej mierze opis „Jak to liczę”, ocena słowna po każdym etapie i zestawienie wyników.","Wersja polska i angielska, wybierana według języka przeglądarki.","Sekcje „Gdzie trafiają dane” i „Amatorski projekt”."],
+    en:["First version: typing test and five mouse tasks (target clicking, dot tracking, dragging, tracing shapes, double click).","“How I calculate it” for every measure, a short evaluation after each stage and a results overview.","Polish and English versions, chosen from the browser language.","“Where your data goes” and “Amateur project” sections."] }
+];
+
 // ---------- język ----------
 function detectLang(){
   const list = (navigator.languages && navigator.languages.length) ? navigator.languages : [navigator.language || "en"];
@@ -44,6 +64,7 @@ pl:{
   draw_h:"5. Rysowanie po śladzie", draw_desc:"Obrysuj okrąg, a potem linię, trzymając wciśnięty przycisk. Mierzę odchylenie od wzoru i drżenie.",
   dbl_h:"6. Podwójne kliknięcie", dbl_desc:"Kliknij dwukrotnie każde z 8 kółek. Mierzę odstęp między kliknięciami, przytrzymanie i to, czy kursor przy tym drgnął.",
   next_click:"Dalej: klikanie celów →", next_track:"Dalej: śledzenie punktu →", next_drag:"Dalej: przeciąganie →", next_draw:"Dalej: rysowanie →", next_dbl:"Dalej: podwójne kliknięcie →", next_res:"Zobacz wyniki →",
+  news_h:"Co nowego", ver_label:"Wersja {v}: zobacz, co nowego",
   res_h:"Wyniki", res_empty:"Nie ukończyłeś jeszcze żadnego zadania.",
   export_btn:"Eksportuj profil (JSON)",
   export_info:"Eksport zapisuje do pliku JSON wszystkie ukończone etapy: ocenę, statystyki z kart i surowe pomiary (bez wpisanego tekstu). W Chrome i Edge okno zapisu otwiera się domyślnie na Pulpicie. Firefox i Safari nie pozwalają stronom wybrać folderu, więc tam plik trafi do folderu Pobrane.",
@@ -84,6 +105,7 @@ en:{
   draw_h:"5. Tracing shapes", draw_desc:"Trace a circle and then a line while holding the button. I measure deviation from the shape and tremor.",
   dbl_h:"6. Double click", dbl_desc:"Double-click each of 8 circles. I measure the interval between clicks, hold time and whether the cursor moved in between.",
   next_click:"Next: target clicking →", next_track:"Next: dot tracking →", next_drag:"Next: dragging →", next_draw:"Next: tracing →", next_dbl:"Next: double click →", next_res:"See results →",
+  news_h:"What's new", ver_label:"Version {v}: see what's new",
   res_h:"Results", res_empty:"You haven't finished any task yet.",
   export_btn:"Export profile (JSON)",
   export_info:"Export saves all finished stages to a JSON file: the evaluation, the card statistics and the raw measurements (without the typed text). In Chrome and Edge the save dialog opens on your Desktop by default. Firefox and Safari don't let pages choose a folder, so there the file goes to Downloads.",
@@ -746,7 +768,7 @@ async function exportProfile(){
   const stamp = `${now.getFullYear()}-${pad(now.getMonth()+1)}-${pad(now.getDate())}-${pad(now.getHours())}${pad(now.getMinutes())}`;
   const fname = (LANG==="pl" ? "profil-biometryczny-" : "biometric-profile-") + stamp + ".json";
   const data = {
-    app: D[LANG].title, source: REPO, exported: now.toISOString(), language: LANG,
+    app: D[LANG].title, version: VERSION, source: REPO, exported: now.toISOString(), language: LANG,
     note: strip(D[LANG].amateur_p),
     stages: Object.fromEntries(done.map(t => [t.tab, {
       title: L(t.title),
@@ -793,8 +815,14 @@ function applyLang(){
   MOUSE.forEach(t => { t.status(t.st); if(t.A.w) t.redraw(); });
   Typing.onLang();
   renderResults();
+  renderNews();
   renderTheme();
 }
+function renderNews(){
+  const b=$("ver"); b.textContent = "v"+VERSION; b.setAttribute("aria-label", D[LANG].ver_label.replace("{v}",VERSION));
+  $("news-list").innerHTML = CHANGELOG.map(c => `<article><h3>v${c.v} <time datetime="${c.date}">${c.date}</time></h3><ul>${c[LANG].map(x=>`<li>${x}</li>`).join("")}</ul></article>`).join("");
+}
+$("ver").addEventListener("click", () => $("news").scrollIntoView({behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth"}));
 $("lang").addEventListener("click", () => { LANG = LANG==="pl" ? "en" : "pl"; applyLang(); });
 
 // dzień / noc: domyślnie motyw systemu, przycisk przełącza ręcznie (bez zapisywania)

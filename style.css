@@ -143,3 +143,12 @@ code{font-family:var(--font-mono);font-size:.82em;background:var(--surface);padd
 .results article{display:grid;gap:6px}
 footer{font-size:.82rem;color:var(--muted);max-width:72ch}
 @media (prefers-reduced-motion: reduce){*{transition:none!important}}
+
+.ver{font-family:var(--font-mono);font-size:.8rem;font-weight:500;vertical-align:middle;padding:2px 8px;border-radius:999px;
+  border:1px solid var(--accent);color:var(--accent);background:transparent}
+.news{display:grid;gap:14px}
+.news article{display:grid;gap:4px;padding-left:14px;border-left:2px solid var(--line)}
+.news article:first-child{border-left-color:var(--accent)}
+.news h3{display:flex;gap:10px;align-items:baseline;font-family:var(--font-mono);font-size:.95rem}
+.news time{font-family:var(--font-mono);font-size:.78rem;color:var(--muted);font-weight:400}
+.news ul{color:var(--muted);font-size:.9rem}
