@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Odcisk klawiatury i myszki</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <header>
+    <div class="bar">
+      <span class="tag" data-i18n="tag"></span>
+      <button id="lang" type="button"></button>
+    </div>
+    <h1 data-i18n="title"></h1>
+    <p class="lead" data-i18n="lead"></p>
+  </header>
+
+  <div class="notices">
+    <section class="notice amateur" aria-labelledby="amateur-h">
+      <h2 id="amateur-h" data-i18n="amateur_h"></h2>
+      <p data-i18n="amateur_p"></p>
+    </section>
+    <section class="notice data" aria-labelledby="data-h">
+      <h2 id="data-h" data-i18n="data_h"></h2>
+      <ul data-i18n="data_list"></ul>
+    </section>
+  </div>
+
+  <nav class="tabs" aria-label="Etapy" id="tabs">
+    <a href="#pisanie" data-tab="pisanie"><span class="n">1</span><span data-i18n="tab_type"></span></a>
+    <a href="#klikanie" data-tab="klikanie"><span class="n">2</span><span data-i18n="tab_click"></span></a>
+    <a href="#sledzenie" data-tab="sledzenie"><span class="n">3</span><span data-i18n="tab_track"></span></a>
+    <a href="#przeciaganie" data-tab="przeciaganie"><span class="n">4</span><span data-i18n="tab_drag"></span></a>
+    <a href="#rysowanie" data-tab="rysowanie"><span class="n">5</span><span data-i18n="tab_draw"></span></a>
+    <a href="#dwuklik" data-tab="dwuklik"><span class="n">6</span><span data-i18n="tab_dbl"></span></a>
+    <a href="#wyniki" data-tab="wyniki"><span class="n">∑</span><span data-i18n="tab_res"></span></a>
+  </nav>
+
+  <!-- 1. Pisanie -->
+  <section class="panel" id="tab-pisanie" data-panel="pisanie">
+    <h2 data-i18n="type_h"></h2>
+    <p class="lead" data-i18n="type_desc"></p>
+    <label class="toggle"><input type="checkbox" id="underlay"> <span data-i18n="underlay"></span></label>
+    <div id="target" class="target"></div>
+    <label for="input" data-i18n="type_label"></label>
+    <div class="typebox" id="typebox">
+      <div class="ghost" id="ghost" aria-hidden="true"></div>
+      <textarea id="input" spellcheck="false" autocomplete="off" autocapitalize="off" autocorrect="off"></textarea>
+    </div>
+    <p id="mobile" class="note hidden" data-i18n="mobile"></p>
+    <div class="bar">
+      <div class="live">
+        <span><span data-i18n="live_time"></span> <b id="l-time">0,0 s</b></span>
+        <span><span data-i18n="live_chars"></span> <b id="l-chars">0</b></span>
+        <span><span data-i18n="live_err"></span> <b id="l-err">0</b></span>
+      </div>
+      <div class="btns">
+        <button id="finish" type="button" disabled data-i18n="finish"></button>
+        <button id="reset" type="button" class="primary" data-i18n="restart"></button>
+      </div>
+    </div>
+    <p id="hint" class="note hidden" data-i18n="hint"></p>
+    <div id="sum-type" class="summary empty"></div>
+    <div class="grid" id="cards-type"></div>
+    <div class="next"><a class="btn" href="#klikanie" data-i18n="next_click"></a></div>
+  </section>
+
+  <!-- 2. Klikanie celów -->
+  <section class="panel" id="tab-klikanie" data-panel="klikanie" hidden>
+    <h2 data-i18n="click_h"></h2>
+    <p class="lead" data-i18n="click_desc"></p>
+    <div class="bar"><span class="status" id="st-click"></span><div class="btns"><button id="go-click" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-click" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-click" class="summary empty"></div>
+    <div class="grid" id="cards-click"></div>
+    <div class="next"><a class="btn" href="#sledzenie" data-i18n="next_track"></a></div>
+  </section>
+
+  <!-- 3. Śledzenie -->
+  <section class="panel" id="tab-sledzenie" data-panel="sledzenie" hidden>
+    <h2 data-i18n="track_h"></h2>
+    <p class="lead" data-i18n="track_desc"></p>
+    <div class="bar"><span class="status" id="st-track"></span><div class="btns"><button id="go-track" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-track" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-track" class="summary empty"></div>
+    <div class="grid" id="cards-track"></div>
+    <div class="next"><a class="btn" href="#przeciaganie" data-i18n="next_drag"></a></div>
+  </section>
+
+  <!-- 4. Przeciąganie -->
+  <section class="panel" id="tab-przeciaganie" data-panel="przeciaganie" hidden>
+    <h2 data-i18n="drag_h"></h2>
+    <p class="lead" data-i18n="drag_desc"></p>
+    <div class="bar"><span class="status" id="st-drag"></span><div class="btns"><button id="go-drag" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-drag" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-drag" class="summary empty"></div>
+    <div class="grid" id="cards-drag"></div>
+    <div class="next"><a class="btn" href="#rysowanie" data-i18n="next_draw"></a></div>
+  </section>
+
+  <!-- 5. Rysowanie -->
+  <section class="panel" id="tab-rysowanie" data-panel="rysowanie" hidden>
+    <h2 data-i18n="draw_h"></h2>
+    <p class="lead" data-i18n="draw_desc"></p>
+    <div class="bar"><span class="status" id="st-draw"></span><div class="btns"><button id="go-draw" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-draw" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-draw" class="summary empty"></div>
+    <div class="grid" id="cards-draw"></div>
+    <div class="next"><a class="btn" href="#dwuklik" data-i18n="next_dbl"></a></div>
+  </section>
+
+  <!-- 6. Podwójne kliknięcie -->
+  <section class="panel" id="tab-dwuklik" data-panel="dwuklik" hidden>
+    <h2 data-i18n="dbl_h"></h2>
+    <p class="lead" data-i18n="dbl_desc"></p>
+    <div class="bar"><span class="status" id="st-dbl"></span><div class="btns"><button id="go-dbl" type="button" class="primary" data-i18n="start"></button></div></div>
+    <canvas id="cv-dbl" class="arena" aria-label="Pole zadania"></canvas>
+    <div id="sum-dbl" class="summary empty"></div>
+    <div class="grid" id="cards-dbl"></div>
+    <div class="next"><a class="btn" href="#wyniki" data-i18n="next_res"></a></div>
+  </section>
+
+  <!-- Wyniki -->
+  <section class="panel" id="tab-wyniki" data-panel="wyniki" hidden>
+    <h2 data-i18n="res_h"></h2>
+    <div id="results" class="results"></div>
+    <p class="note" data-i18n="res_note"></p>
+  </section>
+
+  <footer>
+    <p data-i18n="footer_code"></p>
+    <p style="margin-top:8px;font-size:.75rem;text-transform:lowercase" data-i18n="author"></p>
+  </footer>
+</main>
+<script src="app.js"></script>
+</body>
+</html>
