@@ -40,6 +40,10 @@ Zakładki są podzielone na grupy. Grupa z wynikami, które mogą być nieprawdz
 21. ☑ **Oko dominujące** – test „okienka z dłoni” z instrukcją, w zakładce Wzrok (v0.29.0)
 22. ☑ **Chronotyp** – skowronek czy sowa: własne pytania o godziny snu, wynik metodą punktu środka snu w dni wolne (bez kopiowania kwestionariuszy MEQ/MCTQ, które wymagają zgody) (v0.30.0)
 23. ☑ **Rotacja umysłowa** – czy obrócona figura to ta sama, czy odbicie lustrzane; czas i trafność zależnie od kąta (v0.31.0)
+24. ☑ **Osobowość: wersja skrócona** IPIP-NEO-120 (120 pytań) do wyboru obok pełnej (v0.32.0)
+25. ☑ **Interpretacje łączone dla nowych testów**: „Lateralizacja: ręka i oko”, „Osobowość i rytm dnia”, rotacja umysłowa w zestawieniu o pamięci (v0.32.0)
+26. ☑ **Karta PNG dla wszystkich testów** (do 28, do 4 kolumn) (v0.32.0)
+27. ☑ **Karta PNG: wybór testów**, odcisk przeglądarki domyślnie odznaczony; przyciski „Zaznacz / Odznacz wszystkie” (v0.33.0, v0.33.1)
 
 ## Odrzucone
 
